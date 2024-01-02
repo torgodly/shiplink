@@ -21,6 +21,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'phone',
+        'type',
+        'branch_id',
     ];
 
     /**
@@ -43,13 +46,21 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+    //belongs to branch
     public function branch()
     {
         return $this->belongsTo(Branch::class);
     }
-    public function managedBranch()
+
+    public function mangedbrance(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
         return $this->hasOne(Branch::class, 'manager_id');
+    }
+
+    //brance name
+    public function getBranchNameAttribute()
+    {
+        return $this->branch?->name ?? $this->mangedbrance?->name;
     }
 
 }

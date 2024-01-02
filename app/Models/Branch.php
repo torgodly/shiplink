@@ -12,9 +12,8 @@ class Branch extends Model
 
     protected $fillable = [
         'name',
-        'address',
         'city',
-        'phone',
+        'country',
         'manager_id',
     ];
 
@@ -28,5 +27,11 @@ class Branch extends Model
     public function manager()
     {
         return $this->belongsTo(User::class, 'manager_id');
+    }
+
+    //manager name
+    public function getManagerNameAttribute()
+    {
+        return $this->manager->name;
     }
 }
