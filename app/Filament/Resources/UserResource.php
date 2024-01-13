@@ -10,6 +10,7 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use STS\FilamentImpersonate\Tables\Actions\Impersonate;
 
 class UserResource extends Resource
 {
@@ -43,7 +44,8 @@ class UserResource extends Resource
                 Forms\Components\select::make('branch_id')
                     ->required()
                     ->relationship('branch', 'name',)
-                    ->preload()->hidden(fn($get) => $get('type') !== 'user'),
+                    ->preload()
+                    ->hidden(fn($get) => $get('type') !== 'user'),
 
                 Forms\Components\TextInput::make('password')
                     ->password()
@@ -72,6 +74,7 @@ class UserResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Impersonate::make()->visible(fn ($record) => $record->type === 'manager')
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
