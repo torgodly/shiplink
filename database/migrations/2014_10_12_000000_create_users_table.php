@@ -20,6 +20,8 @@ return new class extends Migration
             $table->foreignId('branch_id')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('sender_code')->nullable();
+            $table->string('receiver_code')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

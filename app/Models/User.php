@@ -24,6 +24,8 @@ class User extends Authenticatable
         'phone',
         'type',
         'branch_id',
+        'sender_code',
+        'receiver_code',
     ];
 
     /**
@@ -62,5 +64,8 @@ class User extends Authenticatable
     {
         return $this->branch?->name ?? $this->mangedbrance?->name;
     }
-
+    public function getIsAdminAttribute()
+    {
+        return $this->type == 'admin';
+    }
 }

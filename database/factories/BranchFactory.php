@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,10 @@ class BranchFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'name' => fake()->name(),
+            'city' => fake()->city(),
+            'country' => fake()->country(),
+            'manager_id' => User::factory()->create(['type'=>'manager'])->id
         ];
     }
 }

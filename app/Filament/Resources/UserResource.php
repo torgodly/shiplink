@@ -49,7 +49,7 @@ class UserResource extends Resource
 
                 Forms\Components\TextInput::make('password')
                     ->password()
-                    ->required(),
+                    ->required()->hiddenOn('edit'),
             ]);
     }
 
@@ -74,7 +74,7 @@ class UserResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
-                Impersonate::make()->visible(fn ($record) => $record->type === 'manager')
+                Impersonate::make()->visible(fn ($record) => $record->type === 'manager')->redirectTo('/office')
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

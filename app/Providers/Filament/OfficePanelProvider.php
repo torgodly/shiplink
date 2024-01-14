@@ -25,8 +25,11 @@ class OfficePanelProvider extends PanelProvider
         return $panel
             ->id('office')
             ->path('office')
+            ->login()
             ->colors([
                 'primary' => Color::Amber,
+                'sky' => Color::Sky,
+                'sun' => Color::Gray,
             ])
             ->discoverResources(in: app_path('Filament/Office/Resources'), for: 'App\\Filament\\Office\\Resources')
             ->discoverPages(in: app_path('Filament/Office/Pages'), for: 'App\\Filament\\Office\\Pages')
