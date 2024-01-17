@@ -10,6 +10,7 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 use STS\FilamentImpersonate\Tables\Actions\Impersonate;
 
 class UserResource extends Resource
@@ -39,15 +40,11 @@ class UserResource extends Resource
                         'admin' => 'Admin',
                         'user' => 'User',
                         'manager' => 'Manager',
-                    ])->live(),
-
-                Forms\Components\select::make('branch_id')
-                    ->required()
-                    ->relationship('branch', 'name',)
-                    ->preload()
-                    ->hidden(fn($get) => $get('type') !== 'user'),
-
+                    ]),
                 Forms\Components\TextInput::make('password')
+                    ->password()
+                    ->required()->hiddenOn('edit'),
+                Forms\Components\TextInput::make('password_confirmation')
                     ->password()
                     ->required()->hiddenOn('edit'),
             ]);
@@ -65,16 +62,19 @@ class UserResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('type')
                     ->searchable(),
-
-                Tables\Columns\TextColumn::make('Branch_name')
-                    ->sortable()
+                //sender code
+                Tables\Columns\TextColumn::make('sender_code')
+                    ->searchable(),
+                //receiver code
+                Tables\Columns\TextColumn::make('receiver_code')
+                    ->searchable(),
             ])
             ->filters([
                 //
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
-                Impersonate::make()->visible(fn ($record) => $record->type === 'manager')->redirectTo('/office')
+                Impersonate::make()->visible(fn($record) => $record->type === 'manager')->redirectTo('/office')
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -90,6 +90,11 @@ class UserResource extends Resource
         ];
     }
 
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()->where('id', '!=', auth()->id());
+    }
+
     public static function getPages(): array
     {
         return [
@@ -98,4 +103,6 @@ class UserResource extends Resource
 //            'edit' => Pages\EditUser::route('/{record}/edit'),
         ];
     }
+
+
 }

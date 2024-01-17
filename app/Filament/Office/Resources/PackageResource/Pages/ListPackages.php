@@ -13,7 +13,7 @@ class ListPackages extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make()->requiresConfirmation(true),
+            Actions\CreateAction::make(),
         ];
     }
 }

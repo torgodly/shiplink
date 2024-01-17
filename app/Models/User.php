@@ -23,7 +23,6 @@ class User extends Authenticatable
         'password',
         'phone',
         'type',
-        'branch_id',
         'sender_code',
         'receiver_code',
     ];
@@ -49,10 +48,7 @@ class User extends Authenticatable
     ];
 
     //belongs to branch
-    public function branch()
-    {
-        return $this->belongsTo(Branch::class);
-    }
+
 
     public function mangedbrance(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
@@ -62,10 +58,14 @@ class User extends Authenticatable
     //brance name
     public function getBranchNameAttribute()
     {
-        return $this->branch?->name ?? $this->mangedbrance?->name;
+        return $this->mangedbrance?->name;
     }
     public function getIsAdminAttribute()
     {
         return $this->type == 'admin';
     }
+
+
+
+
 }

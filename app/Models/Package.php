@@ -34,13 +34,13 @@ class Package extends Model
     //sender
     public function sender()
     {
-        return $this->belongsTo(User::class, 'sender_code', 'sender_code');
+        return $this->belongsTo(User::class, 'sender_code', 'sender_code')->where('type','user');
     }
 
     //receiver
     public function receiver()
     {
-        return $this->belongsTo(User::class, 'receiver_code', 'receiver_code');
+        return $this->belongsTo(User::class, 'receiver_code', 'receiver_code')->where('type','user');
     }
 
     //sender branch

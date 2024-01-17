@@ -11,7 +11,8 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\Eloquent\Builder;
+
 
 class PackageResource extends Resource
 {
@@ -23,21 +24,34 @@ class PackageResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Hidden::make('sender_branch_id')
-                    ->default(auth()->user()->mangedbrance?->id)->disabled(fn() => auth()->user()->is_admin),
+
                 Forms\Components\Group::make()
                     ->schema([Forms\Components\Section::make('Label')
                         ->schema([
+
                             Forms\Components\Select::make('sender_code')
-                                ->relationship('sender', 'sender_code')
+                                ->label('Sender')
+                                ->translateLabel()
+                                ->relationship('sender', 'sender_code', function ($get, Builder $query) {
+                                    $receiverCode = $get('receiver_code');
+                                    return $query->when($receiverCode, fn($q) => $q->where('receiver_code', '!=', $receiverCode));
+                                })
                                 ->preload()
                                 ->searchable()
+                                ->reactive()
                                 ->required(),
+
                             Forms\Components\Select::make('receiver_code')
+                                ->label('Receiver')
+                                ->translateLabel()
                                 ->required()
-                                ->relationship('receiver', 'receiver_code')
+                                ->relationship('receiver', 'receiver_code', function ($get, Builder $query) {
+                                    $senderCode = $get('sender_code');
+                                    return $query->when($senderCode, fn($q) => $q->where('sender_code', '!=', $senderCode));
+                                })
                                 ->preload()
-                                ->searchable(),
+                                ->searchable()
+                                ->reactive(),
                             Forms\Components\MarkdownEditor::make('description')
                                 ->columnSpanFull(),
 
@@ -45,22 +59,31 @@ class PackageResource extends Resource
 
                         Forms\Components\Section::make('Label')
                             ->schema([
-                                Forms\Components\Select::make('receiver_branch_id')
-                                    ->label('Receiver Branch')
-                                    ->required()
-                                    ->relationship('senderBranch', 'name')
-                                    ->searchable()
-                                    ->preload()
-                                    ->searchable(),
                                 Forms\Components\Select::make('sender_branch_id')
                                     ->label('Sender Branch')
                                     ->required()
-                                    ->relationship('receiverBranch', 'name')
+                                    ->relationship('senderBranch', 'name', function ($get, Builder $query) {
+                                        $receiverBranch = $get('receiver_branch_id');
+                                        return $query->when($receiverBranch, fn($q) => $q->where('id', '!=', $receiverBranch));
+                                    })
+                                    ->default(fn() => !auth()->user()->is_admin ? auth()->user()->mangedbrance->id : null)
                                     ->searchable()
                                     ->preload()
                                     ->searchable()
-                                    ->disabled(fn() => auth()->user()->is_admin)
-                                    ->hidden(fn() => auth()->user()->is_admin),
+                                    ->disabled(fn() => !auth()->user()->is_admin)
+                                    ->dehydrated(),
+
+                                Forms\Components\Select::make('receiver_branch_id')
+                                    ->label('Receiver Branch')
+                                    ->required()
+                                    ->relationship('receiverBranch', 'name', function ($get, Builder $query) {
+                                        $senderBranch = $get('sender_branch_id');
+                                        return $query->when($senderBranch, fn($q) => $q->where('id', '!=', $senderBranch));
+                                    })
+                                    ->searchable()
+                                    ->preload()
+                                    ->searchable(),
+
                                 Forms\Components\Select::make('payment_method')
                                     ->options(collect(['cash' => 'Cash', 'credit' => 'Credit'])->map(fn($value, $key) => __($value))->toArray())
                                     ->required(),
