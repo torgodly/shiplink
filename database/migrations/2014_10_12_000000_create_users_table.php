@@ -19,8 +19,8 @@ return new class extends Migration
             $table->string('type')->default('user');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string('sender_code')->nullable();
-            $table->string('receiver_code')->nullable();
+            $table->string('sender_code')->nullable()->unique();
+            $table->string('receiver_code')->nullable()->unique();
             $table->rememberToken();
             $table->timestamps();
         });

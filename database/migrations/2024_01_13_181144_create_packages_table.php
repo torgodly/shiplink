@@ -12,6 +12,7 @@ return new class extends Migration {
     {
         Schema::create('packages', function (Blueprint $table) {
             $table->id();
+            $table->string('code')->unique();
             $table->string('sender_code');
             $table->string('receiver_code');
             $table->foreignId('sender_branch_id');

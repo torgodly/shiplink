@@ -18,10 +18,21 @@ class BranchFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->name(),
+            'name' => fake()->randomElement([
+                'طرابلس',
+                'بنغازي',
+                'مصراتة',
+                'صبراتة',
+                'زليتن',
+                'طبرق',
+                'الزاوية',
+                'غات',
+                'الخمس',
+                'غدامس',
+            ]),
             'city' => fake()->city(),
             'country' => fake()->country(),
-            'manager_id' => User::factory()->create(['type'=>'manager'])->id
+            'manager_id' => User::factory()->create(['type' => 'manager'])->id
         ];
     }
 }
