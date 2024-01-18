@@ -6,6 +6,7 @@ use App\Enums\ShippingMethods;
 use App\Filament\Office\Resources\PackageResource\Pages;
 use App\Filament\Office\Resources\PackageResource\RelationManagers;
 use App\Models\Package;
+use App\Tables\Actions\InvoiceAction;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -170,36 +171,36 @@ class PackageResource extends Resource
                 Tables\Columns\TextColumn::make('senderBranch.name')
                     ->numeric()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('receiverBranch.name')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('dimensions')
-                    ->numeric(),
-                Tables\Columns\TextColumn::make('weight')
-                    ->suffix(' kg')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\IconColumn::make('is_refrigerated')
-                    ->searchable()
-                    ->boolean(),
-                Tables\Columns\IconColumn::make('fragile')
-                    ->searchable()
-                    ->boolean(),
-                Tables\Columns\IconColumn::make('hazardous')
-                    ->searchable()
-                    ->boolean(),
-                Tables\Columns\IconColumn::make('insurance')
-                    ->boolean(),
-                Tables\Columns\TextColumn::make('status')
-                    ->badge()
-                    ->color(fn(string $state): string => match ($state) {
-                        'pending' => 'gray',
-                        'Out for Delivery' => 'warning',
-                        'Delivered' => 'success',
-                    })
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('shipping_method')
-                    ->searchable(),
+//                Tables\Columns\TextColumn::make('receiverBranch.name')
+//                    ->numeric()
+//                    ->sortable(),
+//                Tables\Columns\TextColumn::make('dimensions')
+//                    ->numeric(),
+//                Tables\Columns\TextColumn::make('weight')
+//                    ->suffix(' kg')
+//                    ->numeric()
+//                    ->sortable(),
+//                Tables\Columns\IconColumn::make('is_refrigerated')
+//                    ->searchable()
+//                    ->boolean(),
+//                Tables\Columns\IconColumn::make('fragile')
+//                    ->searchable()
+//                    ->boolean(),
+//                Tables\Columns\IconColumn::make('hazardous')
+//                    ->searchable()
+//                    ->boolean(),
+//                Tables\Columns\IconColumn::make('insurance')
+//                    ->boolean(),
+//                Tables\Columns\TextColumn::make('status')
+//                    ->badge()
+//                    ->color(fn(string $state): string => match ($state) {
+//                        'pending' => 'gray',
+//                        'Out for Delivery' => 'warning',
+//                        'Delivered' => 'success',
+//                    })
+//                    ->searchable(),
+//                Tables\Columns\TextColumn::make('shipping_method')
+//                    ->searchable(),
             ])
             ->filters([
                 //
@@ -207,6 +208,13 @@ class PackageResource extends Resource
             ->actions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\ViewAction::make()->requiresConfirmation(true),
+                InvoiceAction::make('print')->icon('tabler-printer')
+                    ->firstParty('seller')
+                    ->secondParty('byer')
+//                    ->download()
+//                or
+                    ->stream()
+                ,
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
