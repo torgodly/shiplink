@@ -209,9 +209,29 @@ class PackageResource extends Resource
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\ViewAction::make()->requiresConfirmation(true),
                 InvoiceAction::make('print')->icon('tabler-printer')
-                    ->firstParty('seller')
-                    ->secondParty('byer')
-//                    ->download()
+                    ->firstParty('seller', [
+                        'name' => 'Ashley Medina',
+                        'address' => 'The Green Street 12',
+                        'code' => '#22663214',
+                        'custom_fields' => [
+                            'order number' => '> 654321 <',
+                        ],
+                    ])
+                    ->secondParty('buyer', [
+                        'name' => 'Ashley Medina',
+                        'address' => 'The Green Street 12',
+                        'code' => '#22663214',
+                        'custom_fields' => [
+                            'order number' => '> 654321 <',
+                        ],
+                    ])
+                    ->status('pending')
+                    ->serialNumber('215478')
+                    ->date(now()->format('Y-m-d'))
+                    ->logo(asset('images/prozrachniy-logo-1-800x575.png'))
+                    ->invoiceItems(fn(Package $record) => $record)
+//                    ->download('test')
+
 //                or
                     ->stream()
                 ,
