@@ -172,36 +172,36 @@ class PackageResource extends Resource
                 Tables\Columns\TextColumn::make('senderBranch.name')
                     ->numeric()
                     ->sortable(),
-//                Tables\Columns\TextColumn::make('receiverBranch.name')
-//                    ->numeric()
-//                    ->sortable(),
-//                Tables\Columns\TextColumn::make('dimensions')
-//                    ->numeric(),
-//                Tables\Columns\TextColumn::make('weight')
-//                    ->suffix(' kg')
-//                    ->numeric()
-//                    ->sortable(),
-//                Tables\Columns\IconColumn::make('is_refrigerated')
-//                    ->searchable()
-//                    ->boolean(),
-//                Tables\Columns\IconColumn::make('fragile')
-//                    ->searchable()
-//                    ->boolean(),
-//                Tables\Columns\IconColumn::make('hazardous')
-//                    ->searchable()
-//                    ->boolean(),
-//                Tables\Columns\IconColumn::make('insurance')
-//                    ->boolean(),
-//                Tables\Columns\TextColumn::make('status')
-//                    ->badge()
-//                    ->color(fn(string $state): string => match ($state) {
-//                        'pending' => 'gray',
-//                        'Out for Delivery' => 'warning',
-//                        'Delivered' => 'success',
-//                    })
-//                    ->searchable(),
-//                Tables\Columns\TextColumn::make('shipping_method')
-//                    ->searchable(),
+                Tables\Columns\TextColumn::make('receiverBranch.name')
+                    ->numeric()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('dimensions')
+                    ->numeric(),
+                Tables\Columns\TextColumn::make('weight')
+                    ->suffix(' kg')
+                    ->numeric()
+                    ->sortable(),
+                Tables\Columns\IconColumn::make('is_refrigerated')
+                    ->searchable()
+                    ->boolean(),
+                Tables\Columns\IconColumn::make('fragile')
+                    ->searchable()
+                    ->boolean(),
+                Tables\Columns\IconColumn::make('hazardous')
+                    ->searchable()
+                    ->boolean(),
+                Tables\Columns\IconColumn::make('insurance')
+                    ->boolean(),
+                Tables\Columns\TextColumn::make('status')
+                    ->badge()
+                    ->color(fn(string $state): string => match ($state) {
+                        'pending' => 'gray',
+                        'Out for Delivery' => 'warning',
+                        'Delivered' => 'success',
+                    })
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('shipping_method')
+                    ->searchable(),
             ])
             ->filters([
                 //
@@ -224,7 +224,6 @@ class PackageResource extends Resource
                     ->amountPaid(fn(Package $record) => $record->price)
                     ->balanceDue('0')
                     ->total(fn(Package $record) => $record->price)
-
 //                or
                     ->stream()
 //                    ->download('test')
@@ -236,6 +235,11 @@ class PackageResource extends Resource
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ]);
+    }
+
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()->where('sender_branch_id', \Auth::user()->mangedbrance?->id);
     }
 
     public static function getRelations(): array

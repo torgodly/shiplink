@@ -3,14 +3,16 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Filament\Models\Contracts\FilamentUser;
+use Filament\Panel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
+class User extends Authenticatable implements FilamentUser
 {
-    use HasApiTokens, HasFactory, Notifiable;
+
 
     /**
      * The attributes that are mass assignable.
@@ -27,6 +29,8 @@ class User extends Authenticatable
         'receiver_code',
     ];
 
+    use HasApiTokens, HasFactory, Notifiable;
+
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -36,7 +40,6 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
-
     /**
      * The attributes that should be cast.
      *
@@ -47,8 +50,17 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    //belongs to branch
+    public function canAccessPanel(Panel $panel): bool
+    {
+        if ($panel->getId() == 'admin' ) {
+            return $this->type == 'admin';
+        } elseif ($panel->getId() == 'office') {
+            return $this->type == 'manager';
+        }
+        return false;
+    }
 
+    //belongs to branch
 
     public function mangedbrance(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
@@ -60,12 +72,11 @@ class User extends Authenticatable
     {
         return $this->mangedbrance?->name;
     }
+
     public function getIsAdminAttribute()
     {
         return $this->type == 'admin';
     }
-
-
 
 
 }

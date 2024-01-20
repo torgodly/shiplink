@@ -25,6 +25,6 @@ class DatabaseSeeder extends Seeder
             'type' => 'admin',
         ]);
 
-        Package::factory(100)->create();
+//        Package::factory(100)->create();
     }
 }
