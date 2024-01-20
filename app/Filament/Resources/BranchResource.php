@@ -33,7 +33,7 @@ class BranchResource extends Resource
                     ->maxLength(255),
                 Forms\Components\select::make('manager_id')
                     ->required()
-                    ->relationship('manager', 'name', modifyQueryUsing: fn (Builder $query) => $query->where('type', 'manager'))
+                    ->relationship('manager', 'name', modifyQueryUsing: fn (Builder $query) => $query->where('type', 'manager')->whereDoesntHave('mangedbrance'))
                     ->preload(),
             ]);
     }

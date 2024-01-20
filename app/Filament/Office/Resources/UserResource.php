@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Filament\Resources;
+namespace App\Filament\Office\Resources;
 
-use App\Filament\Resources\UserResource\Pages;
-use App\Filament\Resources\UserResource\RelationManagers;
+use App\Filament\Office\Resources\UserResource\Pages;
+use App\Filament\Office\Resources\UserResource\RelationManagers;
 use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -11,7 +11,6 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
-use STS\FilamentImpersonate\Tables\Actions\Impersonate;
 
 class UserResource extends Resource
 {
@@ -40,7 +39,7 @@ class UserResource extends Resource
                         'admin' => 'Admin',
                         'user' => 'User',
                         'manager' => 'Manager',
-                    ]),
+                    ])->default('user')->disabled()->dehydrated(),
                 Forms\Components\TextInput::make('password')
                     ->password()
                     ->required()->hiddenOn('edit'),
@@ -74,7 +73,6 @@ class UserResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make()->requiresConfirmation(true)->modalWidth('2xl')->modalIcon('heroicon-o-users'),
-                Impersonate::make()->visible(fn($record) => $record->type === 'manager')->redirectTo('/office')
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -92,7 +90,7 @@ class UserResource extends Resource
 
     public static function getEloquentQuery(): Builder
     {
-        return parent::getEloquentQuery()->where('id', '!=', auth()->id());
+        return parent::getEloquentQuery()->where('type', 'user');
     }
 
     public static function getPages(): array
@@ -103,6 +101,4 @@ class UserResource extends Resource
 //            'edit' => Pages\EditUser::route('/{record}/edit'),
         ];
     }
-
-
 }

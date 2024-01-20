@@ -5,6 +5,7 @@ namespace App\Filament\Office\Resources\PackageResource\Pages;
 use App\Filament\Office\Resources\PackageResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
+use Illuminate\Support\Str;
 
 class ListPackages extends ListRecords
 {
@@ -13,7 +14,8 @@ class ListPackages extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make(),
+            Actions\CreateAction::make()
         ];
     }
+
 }

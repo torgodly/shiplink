@@ -11,6 +11,7 @@ class Package extends Model
     use HasFactory;
 
     protected $fillable = [
+        'code',
         'sender_code',
         'receiver_code',
         'sender_branch_id',
@@ -116,6 +117,7 @@ class Package extends Model
             'phone' => $this->sender->phone,
             'custom_fields' => [
                 'sender code' => $this->sender->sender_code,
+                'sender branch' => $this->senderBranch->name
             ],
         ];
     }
@@ -128,6 +130,7 @@ class Package extends Model
             'phone' => $this->receiver->phone,
             'custom_fields' => [
                 'receiver code' => $this->receiver->receiver_code,
+                'receiver branch' => $this->receiverBranch->name
             ],
         ];
     }

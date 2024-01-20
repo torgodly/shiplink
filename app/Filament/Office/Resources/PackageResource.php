@@ -219,7 +219,7 @@ class PackageResource extends Resource
                     ->date(now()->format('Y-m-d'))
                     ->logo(asset('images/prozrachniy-logo-1-800x575.png'))
                     ->invoiceItems(fn(Package $record) => $record)
-                        ->setHeadersAndColumns(['code' => 'Package Code', 'weight' => 'Weight', 'price' => 'Price', 'SenderBranchName' => 'Sender Branch', 'ReceiverBranchName' => 'Receiver Branch', 'sender_code'=>'Sender Code' , 'receiver_code' => 'Receiver Code' ])
+                        ->setHeadersAndColumns(['code' => 'Package Code', 'weight' => 'Weight', 'price' => 'Price', ])
                     ->subTotal(fn(Package $record) => $record->price)
                     ->amountPaid(fn(Package $record) => $record->price)
                     ->balanceDue('0')
@@ -258,4 +258,6 @@ class PackageResource extends Resource
             'view' => Pages\ViewPackage::route('/{record}'),
         ];
     }
+
+
 }
