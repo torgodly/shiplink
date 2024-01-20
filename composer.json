@@ -9,7 +9,6 @@
     "license": "MIT",
     "require": {
         "php": "^8.1",
-        "barryvdh/laravel-dompdf": "^2.0",
         "bezhansalleh/filament-language-switch": "^3.0",
         "codeat3/blade-carbon-icons": "^2.17",
         "filament/filament": "3.1",
@@ -18,6 +17,7 @@
         "laravel/sanctum": "^3.3",
         "laravel/tinker": "^2.8",
         "ryangjchandler/blade-tabler-icons": "^2.2",
+        "spatie/laravel-pdf": "^1.1",
         "stechstudio/filament-impersonate": "^3.5"
     },
     "require-dev": {

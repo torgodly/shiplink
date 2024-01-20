@@ -2,12 +2,11 @@
 
 namespace App\Tables\Actions;
 
-use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\CarbonInterface;
 use Closure;
-use Filament\Support\View\Components\Modal;
+use Filament\Forms\Components\ViewField;
 use Filament\Tables\Actions\Action;
-use Symfony\Component\HttpFoundation\StreamedResponse;
+use Spatie\LaravelPdf\Facades\Pdf;
 
 class InvoiceAction extends Action
 {
@@ -25,8 +24,74 @@ class InvoiceAction extends Action
     protected string|\Closure|null $serialNumber = 'AA.00001';
 
     protected string|CarbonInterface|\Closure|null $date = null;
+    protected string|CarbonInterface|\Closure|null $dueDate = null;
     protected array|\Closure|null $invoiceItems = [];
+    //HeadersAndColumns
+    protected array|Closure|null $headersAndColumns = [];
     protected string $responseMode = self::MODE_DOWNLOAD;
+
+    //Subtotal
+    protected string|\Closure|null $subtotal = null;
+    //Discount
+    protected string|\Closure|null $discount = null;
+    //TAX
+    protected string|\Closure|null $tax = null;
+    //Total
+    protected string|\Closure|null $total = null;
+    //Amount paid
+    protected string|\Closure|null $amountPaid = null;
+    //Balance due
+    protected string|\Closure|null $balanceDue = null;
+
+
+    public function subTotal(string|\Closure|null $subTotal): static
+    {
+        $this->subtotal = $subTotal;
+        return $this;
+    }
+
+    public function discount(string|\Closure|null $discount): static
+    {
+        $this->discount = $discount;
+        return $this;
+    }
+
+    public function tax(string|\Closure|null $tax): static
+    {
+        $this->tax = $tax;
+        return $this;
+    }
+
+    public function total(string|\Closure|null $total): static
+    {
+        $this->total = $total;
+        return $this;
+    }
+
+    public function amountPaid(string|\Closure|null $amountPaid): static
+    {
+        $this->amountPaid = $amountPaid;
+        return $this;
+    }
+
+    public function balanceDue(string|\Closure|null $balanceDue): static
+    {
+        $this->balanceDue = $balanceDue;
+        return $this;
+    }
+
+    public function setHeadersAndColumns(array|Closure|null $headersAndColumns): static
+    {
+        $this->headersAndColumns = $headersAndColumns;
+        return $this;
+    }
+
+    //Due date
+    public function dueDate(string|CarbonInterface|\Closure|null $dueDate = null): static
+    {
+        $this->dueDate = $dueDate;
+        return $this;
+    }
 
     public function invoiceItems(array|Closure|null $invoiceItems): static
     {
@@ -34,7 +99,7 @@ class InvoiceAction extends Action
         return $this;
     }
 
-    public function date(string|CarbonInterface|\Closure|Modal|null $date = null): static
+    public function date(string|CarbonInterface|\Closure|null $date = null): static
     {
         $this->date = $date;
         return $this;
@@ -67,14 +132,14 @@ class InvoiceAction extends Action
         return $this;
     }
 
-    public function firstParty(string|\Closure|null $identifier, array $details = []): static
+    public function firstParty(string|\Closure|null $identifier, array|Closure $details = []): static
     {
         $this->firstParty = $identifier; // Store the identifier (e.g., 'seller')
         $this->firstPartyDetails = $details; // Store the details
         return $this;
     }
 
-    public function secondParty(string|\Closure|null $identifier, array $details = []): static
+    public function secondParty(string|\Closure|null $identifier, array|Closure $details = []): static
     {
         $this->secondParty = $identifier; // Store the identifier (e.g., 'buyer')
         $this->secondPartyDetails = $details; // Store the details
@@ -97,7 +162,30 @@ class InvoiceAction extends Action
     {
         if ($this->responseMode === self::MODE_STREAM) {
             // For stream mode, set the action to display a modal.
-            $this->modalContent($this->streamResponse());
+            $this
+                ->extraAttributes(['style' => 'h-41'])
+                ->modalFooterActions(
+                    fn($action): array => [
+                        $action->getModalCancelAction(),
+                        //download
+                        Action::make('Download')
+                            ->icon('tabler-download')
+                            ->action($this->generateInvoice()),
+
+                    ])
+                ->fillForm(function () {
+                    $invoiceObject = $this->collectInvoiceData();
+                    $body = view('welcome', ['invoice' => $invoiceObject])->render();
+
+                    return [
+                        'html_body' => $body,
+                    ];
+                })
+                ->form([
+                    ViewField::make('html_body')->hiddenLabel()
+                        ->view('forms.components.html-invoice-view')
+//                        ->view('filament-email::filament-email.emails.html')->view('filament-email::HtmlEmailView'),
+                ]);
         } else {
             // For download mode, set the action to generate and download the invoice.
             $this->action('GenerateInvoice');
@@ -105,11 +193,25 @@ class InvoiceAction extends Action
         }
     }
 
-    private function streamResponse(): Closure
+    public function action(Closure|string|null $action): static
     {
-        // Return a closure that generates the view with the invoice data.
+        if ($action !== 'GenerateInvoice') {
+            throw new \Exception('You\'re unable to override the action for this plugin');
+        }
+
+        $this->action = $this->GenerateInvoice();
+
+        return $this;
+    }
+
+    protected function generateInvoice(): Closure
+    {
         return function () {
-            return view('welcome', ['invoice' => $this->collectInvoiceData()]);
+            $invoiceObject = $this->collectInvoiceData();
+            $pdf = $this->createPdf($invoiceObject);
+
+            // For download mode, return the download response.
+            return $this->downloadResponse($pdf);
         };
     }
 
@@ -143,49 +245,32 @@ class InvoiceAction extends Action
             'status' => $this->evaluate($this->status),
             'serialNumber' => $this->evaluate($this->serialNumber),
             'date' => $this->evaluate($this->date ?? fn() => now()),
-            'items' => is_iterable($items) ? $items : [$items],
+            'dueDate' => $this->evaluate($this->dueDate),
+            'items' => is_iterable($items) ? collect($items)->chunk(17) : collect([$items])->chunk(17),
+            'currentChunkIndex' => 0, // initialize as 0
+            'totalChunks' => is_iterable($items) ? ceil(count($items) / 17) : 1,
+            'headersAndColumns' => $this->evaluate($this->headersAndColumns) ?? ['Description', 'Units', 'Qty', 'Price', 'Discount', 'Sub total'],
+            'subtotal' => $this->evaluate($this->subtotal),
+            'discount' => $this->evaluate($this->discount),
+            'tax' => $this->evaluate($this->tax),
+            'total' => $this->evaluate($this->total),
+            'amountPaid' => $this->evaluate($this->amountPaid),
+            'balanceDue' => $this->evaluate($this->balanceDue),
         ];
 
         return (object)$invoiceData;
     }
 
-
-    public function action(Closure|string|null $action): static
+    private function createPdf($invoiceObject)
     {
-        if ($action !== 'GenerateInvoice') {
-            throw new \Exception('You\'re unable to override the action for this plugin');
-        }
-
-        $this->action = $this->GenerateInvoice();
-
-        return $this;
+        return Pdf::view('welcome', ['invoice' => $invoiceObject])->paperSize(210, 296);
     }
 
-    protected function generateInvoice(): Closure
-    {
-        return function () {
-            $invoiceObject = $this->collectInvoiceData();
-            $pdf = $this->createPdf($invoiceObject);
-
-            // For download mode, return the download response.
-            return $this->downloadResponse($pdf);
-        };
-    }
-
-    private function createPdf($invoiceObject): \Barryvdh\DomPDF\PDF
-    {
-        return Pdf::loadView('welcome', ['invoice' => $invoiceObject]);
-    }
-
-    private function downloadResponse($pdf): StreamedResponse
+    private function downloadResponse($pdf)
     {
         $filename = $this->evaluate($this->downloadName) . '.pdf'; // Evaluate the name, which could be a Closure or string.
-        return new StreamedResponse(function () use ($pdf) {
-            echo $pdf->output();
-        }, 200, [
-            'Content-Type' => 'application/pdf',
-            'Content-Disposition' => 'attachment; filename="' . $filename . '"',
-        ]);
+        $pdf->save($filename);
+        return response()->download($filename)->deleteFileAfterSend(true);
     }
 
     public function stream(): static
@@ -193,6 +278,14 @@ class InvoiceAction extends Action
         $this->responseMode = self::MODE_STREAM;
         $this->configureAction(); // Configure the action after setting the mode.
         return $this;
+    }
+
+    private function streamResponse(): Closure
+    {
+        // Return a closure that generates the view with the invoice data.
+        return function () {
+            return view('welcome', ['invoice' => $this->collectInvoiceData()]);
+        };
     }
 
 //    protected function setUp(): void

@@ -7,7 +7,5 @@ enum ShippingMethods: string
     case Air = 'air';
     case Sea = 'sea';
     case Land = 'land';
-    case Rail = 'rail';
-    case Courier = 'courier';
     case Other = 'other';
 }

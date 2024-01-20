@@ -1,365 +1,374 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}"
+      dir="{{ config('locales')[app()->getLocale()]['dir'] ?? 'ltr' }}"">
 <head>
-    <title>{{ $invoice->name }}</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta charset="UTF-8">
+    {{--    <meta name="viewport"--}}
+    {{--          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">--}}
+    {{--    <meta http-equiv="X-UA-Compatible" content="ie=edge">--}}
+    <title>Document</title>
+    <style>
 
-    <style type="text/css" media="screen">
-        html {
-            font-family: sans-serif;
-            line-height: 1.15;
+        @page {
+            {{--size: {{ $attributes->has('size') ? $attributes->get('size') : $size }};--}}
+                                        size: A4;
             margin: 0;
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-            font-weight: 400;
-            line-height: 1.5;
-            color: #212529;
-            text-align: left;
-            background-color: #fff;
-            font-size: 10px;
-            margin: 36pt;
+            margin: 0;
+            min-width: initial !important
         }
 
-        h4 {
-            margin-top: 0;
-            margin-bottom: 0.5rem;
+        .sheet {
+            margin: 0;
+            overflow: hidden;
+            position: relative;
+            box-sizing: border-box;
+            /*page-break-after: always*/
         }
 
-        p {
-            margin-top: 0;
-            margin-bottom: 1rem;
+        /** Paper sizes **/
+        body.A3 .sheet {
+            width: 297mm;
+            height: 419mm
         }
 
-        strong {
-            font-weight: bolder;
+        body.A3_landscape .sheet {
+            width: 420mm;
+            height: 296mm
         }
 
-        img {
-            vertical-align: middle;
-            border-style: none;
+        body.A4 .sheet {
+            /*width: 210mm;*/
+            height: 296mm
         }
 
-        table {
-            border-collapse: collapse;
+        body.A4_landscape .sheet {
+            width: 297mm;
+            height: 209mm
         }
 
-        th {
-            text-align: inherit;
+        body.A5 .sheet {
+            width: 148mm;
+            height: 209mm
         }
 
-        h4, .h4 {
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-            line-height: 1.2;
+        body.A5_landscape .sheet {
+            width: 210mm;
+            height: 147mm
         }
 
-        h4, .h4 {
-            font-size: 1.5rem;
+        body.card .sheet {
+            width: 86mm;
+            height: 54mm
         }
 
-        .table {
-            width: 100%;
-            margin-bottom: 1rem;
-            color: #212529;
+        /** Fix Chrome Issue **/
+        @media print {
+            body.A3 {
+                width: 297mm
+            }
+
+            body.A3_landscape {
+                width: 420mm
+            }
+
+            body.A4 {
+                width: 210mm
+            }
+
+            body.A4_landscape {
+                width: 297mm
+            }
+
+            body.A5 {
+                width: 148mm
+            }
+
+            body.A5_landscape {
+                width: 210mm
+            }
+
+            body.card {
+                width: 86mm
+            }
         }
 
-        .table th,
-        .table td {
-            padding: 0.75rem;
-            vertical-align: top;
+        /** Padding area **/
+        .sheet.padding-0mm {
+            padding: 0mm
         }
 
-        .table.table-items td {
-            border-top: 1px solid #dee2e6;
+        .sheet.padding-5mm {
+            padding: 5mm
         }
 
-        .table thead th {
-            vertical-align: bottom;
-            border-bottom: 2px solid #dee2e6;
+        .sheet.padding-10mm {
+            padding: 10mm
         }
 
-        .mt-5 {
-            margin-top: 3rem !important;
+        .sheet.padding-15mm {
+            padding: 15mm
         }
 
-        .pr-0,
-        .px-0 {
-            padding-right: 0 !important;
+        .sheet.padding-20mm {
+            padding: 20mm
         }
 
-        .pl-0,
-        .px-0 {
-            padding-left: 0 !important;
+        .sheet.padding-25mm {
+            padding: 25mm
         }
 
-        .text-right {
-            text-align: right !important;
-        }
+        /** For screen preview **/
+        @media screen {
+            body {
+                background: #e0e0e0
+            }
 
-        .text-center {
-            text-align: center !important;
-        }
-
-        .text-uppercase {
-            text-transform: uppercase !important;
-        }
-
-        * {
-            font-family: "DejaVu Sans";
-        }
-
-        body, h1, h2, h3, h4, h5, h6, table, th, tr, td, p, div {
-            line-height: 1.1;
-        }
-
-        .party-header {
-            font-size: 1.5rem;
-            font-weight: 400;
-        }
-
-        .total-amount {
-            font-size: 12px;
-            font-weight: 700;
-        }
-
-        .border-0 {
-            border: none !important;
-        }
-
-        .cool-gray {
-            color: #6B7280;
+            .sheet {
+                background: white;
+                box-shadow: 0 .5mm 2mm rgba(0, 0, 0, .3);
+                margin: 5mm;
+            }
         }
     </style>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
 </head>
+<body class="bg-gray-50 A4">
+<!-- Invoice -->
 
-<body>
-{{-- Header --}}
-@if($invoice->logo)
-    <img src="{{ $invoice->logo }}" alt="logo" height="100">
-@endif
+<div class="max-w-[85rem]">
+    <div class="lg:w-3/4 mx-auto">
+        <!-- Card -->
+        @foreach($invoice->items as $items)
+            <div class="flex flex-col p-4 sm:p-10 bg-white shadow-md rounded-xl  sheet">
+                <!-- Grid -->
+                <div class="flex justify-between">
+                    <h2 class="text-2xl md:text-3xl font-semibold text-gray-800 ">{{__('Invoice #')}}</h2>
 
-<table class="table mt-5">
-    <tbody>
-    <tr>
-        <td class="border-0 pl-0" width="70%">
-            <h4 class="text-uppercase">
-                <strong>{{ $invoice->name }}</strong>
-            </h4>
-        </td>
-        <td class="border-0 pl-0">
-            @if($invoice->status)
-                <h4 class="text-uppercase cool-gray">
-                    <strong>{{ $invoice->status }}</strong>
-                </h4>
-            @endif
-            <p>{{ __('Serial No.') }} <strong>{{ $invoice->serialNumber }}</strong></p>
-            <p>{{ __('Date') }}: <strong>{{ $invoice->date }}</strong></p>
-        </td>
-    </tr>
-    </tbody>
-</table>
+                    <h4 class="uppercase text-gray-400 text-2xl">
+                        <strong>{{ $invoice->status }}</strong>
+                    </h4>
+                </div>
+                <div class="flex justify-between">
+                    <div class="mt-3">
+                        @if($invoice->logo)
+                            <svg class="w-10 h-10" width="26" height="26" viewBox="0 0 26 26" fill="none"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M1 26V13C1 6.37258 6.37258 1 13 1C19.6274 1 25 6.37258 25 13C25 19.6274 19.6274 25 13 25H12"
+                                    class="stroke-blue-600 dark:stroke-white" stroke="currentColor" stroke-width="2"/>
+                                <path
+                                    d="M5 26V13.16C5 8.65336 8.58172 5 13 5C17.4183 5 21 8.65336 21 13.16C21 17.6666 17.4183 21.32 13 21.32H12"
+                                    class="stroke-blue-600 dark:stroke-white" stroke="currentColor" stroke-width="2"/>
+                                <circle cx="13" cy="13.0214" r="5" fill="currentColor"
+                                        class="fill-blue-600 dark:fill-white"/>
+                            </svg>
+                            {{--                        <img class="w-10 h-10" width="26" height="26" src="{{$invoice->logo}}" alt="logo">--}}
+                        @endif
 
-<table class="table">
-    <thead>
-    <tr>
-        <th class="border-0 pl-0 party-header" width="48.5%">
-            {{ $invoice->firstParty }}
-        </th>
-        <th class="border-0" width="3%"></th>
-        <th class="border-0 pl-0 party-header">
-            {{ $invoice->secondParty }}
-        </th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <td class="px-0">
-            @if($invoice->firstPartyDetails->name)
-                <p class="firstParty-name">
-                    <strong>{{ $invoice->firstPartyDetails->name }}</strong>
-                </p>
-            @endif
+                    </div>
+                    <!-- Col -->
 
-            @if($invoice->firstPartyDetails->address)
-                <p class="firstParty-address">
-                    {{ __('invoices::invoice.address') }}: {{ $invoice->firstPartyDetails->address }}
-                </p>
-            @endif
+                    <div class="text-end">
 
-            @if($invoice->firstPartyDetails->code)
-                <p class="firstParty-code">
-                    {{ __('invoices::invoice.code') }}: {{ $invoice->firstPartyDetails->code }}
-                </p>
-            @endif
+                        @if($invoice->status)
+                        @endif
+                        <span class="mt-1 block text-gray-800">{{__('Serial No.')}} {{ $invoice->serialNumber }}</span>
+                        <span class="mt-1 block text-gray-800">{{__('Invoice date:')}} {{ $invoice->date }}</span>
+                        @if($invoice->dueDate)
+                            <span class="mt-1 block text-gray-800">{{__('Due date:')}} {{ $invoice->dueDate }}</span>
+                        @endif
+                    </div>
+                    <!-- Col -->
+                </div>
+                <!-- End Grid -->
 
-            @if($invoice->firstPartyDetails->vat)
-                <p class="firstParty-vat">
-                    {{ __('invoices::invoice.vat') }}: {{ $invoice->firstPartyDetails->vat }}
-                </p>
-            @endif
+                <!-- Grid -->
+                <div class="mt-8 grid sm:grid-cols-2 gap-3">
+                    <div>
+                        <h3 class="text-lg font-semibold text-gray-800 ">{{$invoice->firstParty}}</h3>
+                        @if($invoice->firstPartyDetails->name)
+                            @if($invoice->firstPartyDetails->name instanceof Closure)
+                                <h3 class="text-base font-semibold text-gray-800 ">{{ $invoice->firstPartyDetails->name() }}</h3>
+                            @else
+                                <h3 class="text-base font-semibold text-gray-800 ">{{ $invoice->firstPartyDetails->name }}</h3>
+                            @endif
+                        @endif
+                        @if($invoice->firstPartyDetails->address)
+                            <p class="seller-address">
+                                {{ __('Address') }}: {{ $invoice->firstPartyDetails->address }}
+                            </p>
+                        @endif
+                        @if($invoice->firstPartyDetails->code)
+                            <p class="firstPartyDetails-code">
+                                {{ __('Code') }}: {{ $invoice->firstPartyDetails->code }}
+                            </p>
+                        @endif
 
-            @if($invoice->firstPartyDetails->phone)
-                <p class="firstParty-phone">
-                    {{ __('invoices::invoice.phone') }}: {{ $invoice->firstPartyDetails->phone }}
-                </p>
-            @endif
+                        @if($invoice->firstPartyDetails->vat)
+                            <p class="firstPartyDetails-vat">
+                                {{ __('Vat') }}: {{ $invoice->firstPartyDetails->vat }}
+                            </p>
+                        @endif
 
-            @foreach($invoice->firstPartyDetails->custom_fields as $key => $value)
-                <p class="firstParty-custom-field">
-                    {{ ucfirst($key) }}: {{ $value }}
-                </p>
-            @endforeach
-        </td>
-        <td class="border-0"></td>
-        <td class="px-0">
-            @if($invoice->secondPartyDetails->name)
-                <p class="secondParty-name">
-                    <strong>{{ $invoice->secondPartyDetails->name }}</strong>
-                </p>
-            @endif
+                        @if($invoice->firstPartyDetails->phone)
+                            <p class="firstPartyDetails-phone">
+                                {{ __('Phone') }}: {{ $invoice->firstPartyDetails->phone }}
+                            </p>
+                        @endif
 
-            @if($invoice->secondPartyDetails->address)
-                <p class="secondParty-address">
-                    {{ __('invoices::invoice.address') }}: {{ $invoice->secondPartyDetails->address }}
-                </p>
-            @endif
+                        @foreach($invoice->firstPartyDetails->custom_fields as $key => $value)
+                            <p class="firstPartyDetails-custom-field">
+                                {{ ucfirst($key) }}: {{ $value }}
+                            </p>
+                        @endforeach
+                    </div>
+                    <!-- Col -->
 
-            @if($invoice->secondPartyDetails->code)
-                <p class="secondParty-code">
-                    {{ __('invoices::invoice.code') }}: {{ $invoice->secondPartyDetails->code }}
-                </p>
-            @endif
+                    <div class="sm:text-end space-y-2">
+                        <!-- Grid -->
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-800 ">{{$invoice->secondParty}}</h3>
+                            @if($invoice->secondPartyDetails->name)
+                                <h3 class="text-base font-semibold text-gray-800 ">{{$invoice->secondPartyDetails->name}}</h3>
+                            @endif
+                            @if($invoice->secondPartyDetails->address)
+                                <p class="seller-address">
+                                    {{ __('Address') }}: {{ $invoice->secondPartyDetails->address }}
+                                </p>
+                            @endif
+                            @if($invoice->secondPartyDetails->code)
+                                <p class="secondPartyDetails-code">
+                                    {{ __('Code') }}: {{ $invoice->secondPartyDetails->code }}
+                                </p>
+                            @endif
 
-            @if($invoice->secondPartyDetails->vat)
-                <p class="secondParty-vat">
-                    {{ __('invoices::invoice.vat') }}: {{ $invoice->secondPartyDetails->vat }}
-                </p>
-            @endif
+                            @if($invoice->secondPartyDetails->vat)
+                                <p class="secondPartyDetails-vat">
+                                    {{ __('Vat') }}: {{ $invoice->secondPartyDetails->vat }}
+                                </p>
+                            @endif
 
-            @if($invoice->secondPartyDetails->phone)
-                <p class="secondParty-phone">
-                    {{ __('invoices::invoice.phone') }}: {{ $invoice->secondPartyDetails->phone }}
-                </p>
-            @endif
+                            @if($invoice->secondPartyDetails->phone)
+                                <p class="secondPartyDetails-phone">
+                                    {{ __('Phone') }}: {{ $invoice->secondPartyDetails->phone }}
+                                </p>
+                            @endif
 
-            @foreach($invoice->secondPartyDetails->custom_fields as $key => $value)
-                <p class="secondParty-custom-field">
-                    {{ ucfirst($key) }}: {{ $value }}
-                </p>
-            @endforeach
-        </td>
-    </tr>
-    </tbody>
+                            @foreach($invoice->secondPartyDetails->custom_fields as $key => $value)
+                                <p class="secondPartyDetails-custom-field">
+                                    {{ ucfirst($key) }}: {{ $value }}
+                                </p>
+                            @endforeach
+                        </div>
+                        <!-- End Grid -->
+                    </div>
+                    <!-- Col -->
+                </div>
+                <!-- End Grid -->
 
-    <table class="table table-items">
-        <thead>
-        <tr>
-            <th scope="col" class="border-0 pl-0">{{ __('invoices::invoice.description') }}</th>
-            @if($invoice->hasItemUnits)
-                <th scope="col" class="text-center border-0">{{ __('invoices::invoice.units') }}</th>
-            @endif
-            <th scope="col" class="text-center border-0">{{ __('invoices::invoice.quantity') }}</th>
-            <th scope="col" class="text-right border-0">{{ __('invoices::invoice.price') }}</th>
-            @if($invoice->hasItemDiscount)
-                <th scope="col" class="text-right border-0">{{ __('invoices::invoice.discount') }}</th>
-            @endif
-            @if($invoice->hasItemTax)
-                <th scope="col" class="text-right border-0">{{ __('invoices::invoice.tax') }}</th>
-            @endif
-            <th scope="col" class="text-right border-0 pr-0">{{ __('invoices::invoice.sub_total') }}</th>
-        </tr>
-        </thead>
-        <tbody>
-        {{-- Items --}}
-        @foreach($invoice->items as $item)
-            <tr>
-                <td class="pl-0">
-                    {{ $item->title }}
+                <!-- Table -->
+                <div class="mt-6">
+                    <div class="border border-gray-200 p-4 rounded-lg space-y-4">
+                        <table class="min-w-full">
+                            <thead class="hidden sm:table-header-group">
+                            <tr class="border-b border-gray-200">
+                                @foreach($invoice->headersAndColumns as $column => $header)
+                                    <th class="p-2 text-xs font-medium text-gray-500 uppercase text-start">{{ __($header) }}</th>
+                                @endforeach
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($items as $item)
+                                <tr class="border-b border-gray-200 sm:border-none">
+                                    @foreach($invoice->headersAndColumns as $column => $header)
+                                        <td class="p-2">
+                                            <h5 class="sm:hidden text-xs font-medium text-gray-500 uppercase">{{$header}}</h5>
+                                            <p class="font-medium text-gray-800">{{$item->{$column} }}</p>
+                                        </td>
+                                    @endforeach
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
 
-                    @if($item->description)
-                        <p class="cool-gray">{{ $item->description }}</p>
-                    @endif
-                </td>
-                @if($invoice->hasItemUnits)
-                    <td class="text-center">{{ $item->units }}</td>
-                @endif
-                <td class="text-center">{{ $item->quantity }}</td>
-                <td class="text-right">
-                    {{ $invoice->formatCurrency($item->price_per_unit) }}
-                </td>
-                @if($invoice->hasItemDiscount)
-                    <td class="text-right">
-                        {{ $invoice->formatCurrency($item->discount) }}
-                    </td>
-                @endif
-                @if($invoice->hasItemTax)
-                    <td class="text-right">
-                        {{ $invoice->formatCurrency($item->tax) }}
-                    </td>
-                @endif
+                <!-- End Table -->
 
-                <td class="text-right pr-0">
-                    {{ $invoice->formatCurrency($item->sub_total_price) }}
-                </td>
-            </tr>
+
+                <!-- Flex -->
+                <div class="mt-8 flex sm:justify-end">
+                    <div class="w-full max-w-2xl sm:text-end space-y-2">
+                        <!-- Grid -->
+                        <div class="grid grid-cols-2 sm:grid-cols-1 gap-3 sm:gap-2">
+                            <dl class="grid sm:grid-cols-5 gap-x-3">
+                                @if($invoice->subtotal)
+                                    <dt class="col-span-3 font-semibold text-gray-800 ">{{__('Subtotal:')}}</dt>
+                                    <dd class="col-span-2 text-gray-500">{{$invoice->subtotal}}</dd>
+                                @endif
+                            </dl>
+
+                            <dl class="grid sm:grid-cols-5 gap-x-3">
+                                @if($invoice->discount)
+                                    <dt class="col-span-3 font-semibold text-gray-800 ">{{__('Discount:')}}</dt>
+                                    <dd class="col-span-2 text-gray-500">{{$invoice->discount}}</dd>
+                                @endif
+                            </dl>
+
+                            <dl class="grid sm:grid-cols-5 gap-x-3">
+                                @if($invoice->tax)
+                                    <dt class="col-span-3 font-semibold text-gray-800 ">{{__('Tax:')}}</dt>
+                                    <dd class="col-span-2 text-gray-500">{{$invoice->tax}}</dd>
+                                @endif
+                            </dl>
+
+                            <dl class="grid sm:grid-cols-5 gap-x-3">
+                                @if($invoice->total)
+                                    <dt class="col-span-3 font-semibold text-gray-800 ">{{__('Total:')}}</dt>
+                                    <dd class="col-span-2 text-gray-500">{{$invoice->total}}</dd>
+                                @endif
+                            </dl>
+                            <dl class="grid sm:grid-cols-5 gap-x-3">
+                                @if($invoice->amountPaid)
+                                    <dt class="col-span-3 font-semibold text-gray-800 ">{{__('Amount Paid:')}}</dt>
+                                    <dd class="col-span-2 text-gray-500">{{$invoice->amountPaid}}</dd>
+                                @endif
+                            </dl>
+                            <dl class="grid sm:grid-cols-5 gap-x-3">
+                                @if($invoice->balanceDue)
+                                    <dt class="col-span-3 font-semibold text-gray-800 ">{{__('Due balance:')}}</dt>
+                                    <dd class="col-span-2 text-gray-500">{{$invoice->balanceDue}}</dd>
+                                @endif
+                            </dl>
+                        </div>
+                        <!-- End Grid -->
+                    </div>
+                </div>
+                <!-- End Flex -->
+
+                <div class="mt-8 sm:mt-12">
+                    <h4 class="text-lg font-semibold text-gray-800 ">Thank you!</h4>
+                    <p class="text-gray-500">If you have any questions concerning this invoice, use the following contact information:</p>
+                    <div class="mt-2">
+                        <p class="block text-sm font-medium text-gray-800 ">example@site.com</p>
+                        <p class="block text-sm font-medium text-gray-800 ">+1 (062) 109-9222</p>
+                    </div>
+                </div>
+
+                <p class="mt-5 text-sm text-gray-500">© 2022 Preline.</p>
+
+            </div>
+
         @endforeach
-        {{-- Summary --}}
-        @if($invoice->hasItemOrInvoiceDiscount())
-            <tr>
-                <td colspan="{{ $invoice->table_columns - 2 }}" class="border-0"></td>
-                <td class="text-right pl-0">{{ __('invoices::invoice.total_discount') }}</td>
-                <td class="text-right pr-0">
-                    {{ $invoice->formatCurrency($invoice->total_discount) }}
-                </td>
-            </tr>
-        @endif
-        @if($invoice->taxable_amount)
-            <tr>
-                <td colspan="{{ $invoice->table_columns - 2 }}" class="border-0"></td>
-                <td class="text-right pl-0">{{ __('invoices::invoice.taxable_amount') }}</td>
-                <td class="text-right pr-0">
-                    {{ $invoice->formatCurrency($invoice->taxable_amount) }}
-                </td>
-            </tr>
-        @endif
-        @if($invoice->tax_rate)
-            <tr>
-                <td colspan="{{ $invoice->table_columns - 2 }}" class="border-0"></td>
-                <td class="text-right pl-0">{{ __('invoices::invoice.tax_rate') }}</td>
-                <td class="text-right pr-0">
-                    {{ $invoice->tax_rate }}%
-                </td>
-            </tr>
-        @endif
-        @if($invoice->hasItemOrInvoiceTax())
-            <tr>
-                <td colspan="{{ $invoice->table_columns - 2 }}" class="border-0"></td>
-                <td class="text-right pl-0">{{ __('invoices::invoice.total_taxes') }}</td>
-                <td class="text-right pr-0">
-                    {{ $invoice->formatCurrency($invoice->total_taxes) }}
-                </td>
-            </tr>
-        @endif
-        @if($invoice->shipping_amount)
-            <tr>
-                <td colspan="{{ $invoice->table_columns - 2 }}" class="border-0"></td>
-                <td class="text-right pl-0">{{ __('invoices::invoice.shipping') }}</td>
-                <td class="text-right pr-0">
-                    {{ $invoice->formatCurrency($invoice->shipping_amount) }}
-                </td>
-            </tr>
-        @endif
-        <tr>
-            <td colspan="{{ $invoice->table_columns - 2 }}" class="border-0"></td>
-            <td class="text-right pl-0">{{ __('invoices::invoice.total_amount') }}</td>
-            <td class="text-right pr-0 total-amount">
-                {{ $invoice->formatCurrency($invoice->total_amount) }}
-            </td>
-        </tr>
-        </tbody>
-    </table>
-</table>
+        <!-- End Card -->
+    </div>
+</div>
+<!-- End Invoice -->
+
 </body>
 </html>

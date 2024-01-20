@@ -21,7 +21,7 @@ class PackageFactory extends Factory
         $sender = User::factory()->create(['type' => 'user']);
         $receiver = User::factory()->create(['type' => 'user']);
         return [
-            'code' => 'PKG-' . time(),
+            'code' => 'PKG-' . $this->faker->unique()->numberBetween(100000, 999999),
             'sender_code' => $sender->sender_code,
             'receiver_code' => $receiver->sender_code,
             'sender_branch_id' => Branch::factory()->create()->id,
