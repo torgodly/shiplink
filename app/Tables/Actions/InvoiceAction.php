@@ -169,6 +169,7 @@ class InvoiceAction extends Action
                         $action->getModalCancelAction(),
                         //download
                         Action::make('Download')
+                            ->translateLabel()
                             ->icon('tabler-download')
                             ->action($this->generateInvoice()),
 
