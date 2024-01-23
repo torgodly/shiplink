@@ -264,7 +264,7 @@ class InvoiceAction extends Action
 
     private function createPdf($invoiceObject)
     {
-        return Pdf::view('welcome', ['invoice' => $invoiceObject])->paperSize(210, 296);
+        return Pdf::view('templates.default', ['invoice' => $invoiceObject])->paperSize(210, 296);
     }
 
     private function downloadResponse($pdf)
@@ -285,7 +285,7 @@ class InvoiceAction extends Action
     {
         // Return a closure that generates the view with the invoice data.
         return function () {
-            return view('welcome', ['invoice' => $this->collectInvoiceData()]);
+            return view('templates.default', ['invoice' => $this->collectInvoiceData()]);
         };
     }
 
