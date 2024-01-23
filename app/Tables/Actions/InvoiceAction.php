@@ -176,7 +176,7 @@ class InvoiceAction extends Action
                     ])
                 ->fillForm(function () {
                     $invoiceObject = $this->collectInvoiceData();
-                    $body = view('welcome', ['invoice' => $invoiceObject])->render();
+                    $body = view('templates.default', ['invoice' => $invoiceObject])->render();
 
                     return [
                         'html_body' => $body,
