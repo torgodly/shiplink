@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\ShippingStatus;
 use App\Models\Branch;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -20,12 +21,14 @@ class PackageFactory extends Factory
     {
         $sender = User::factory()->create(['type' => 'user']);
         $receiver = User::factory()->create(['type' => 'user']);
+        $senderBranch = Branch::factory()->create()->id;
+        $receiverBranch = Branch::factory()->create()->id;
         return [
             'code' => 'PKG-' . $this->faker->unique()->numberBetween(100000, 999999),
             'sender_code' => $sender->sender_code,
-            'receiver_code' => $receiver->sender_code,
-            'sender_branch_id' => Branch::factory()->create()->id,
-            'receiver_branch_id' => Branch::factory()->create()->id,
+            'receiver_code' => $receiver->receiver_code,
+            'sender_branch_id' => $senderBranch,
+            'receiver_branch_id' => $receiverBranch,
             'weight' => $this->faker->randomFloat(2, 0, 100),
             'height' => $this->faker->randomFloat(2, 0, 100),
             'width' => $this->faker->randomFloat(2, 0, 100),
@@ -36,7 +39,7 @@ class PackageFactory extends Factory
             'insurance' => $this->faker->boolean,
             'is_refrigerated' => $this->faker->boolean,
             'description' => $this->faker->sentence,
-            'status' => $this->faker->randomElement(['pending', 'Out for Delivery', 'delivered']),
+            'status' => $this->faker->randomElement(ShippingStatus::array()),
             'payment_method' => $this->faker->randomElement(['cash', 'credit_card', 'paypal']),
 
 

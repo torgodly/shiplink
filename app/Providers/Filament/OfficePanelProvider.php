@@ -34,11 +34,19 @@ class OfficePanelProvider extends PanelProvider
                     hasAvatars: true, // Enables the avatar upload form component (default = false)
                     slug: 'my-profile' // Sets the slug for the profile page (default = 'my-profile')
                 ))
+            ->brandLogo(asset('images/logo.png'))
+            ->brandLogoHeight('3rem')
             ->login()
+            ->viteTheme('resources/css/filament/office/theme.css')
             ->colors([
-                'primary' => Color::Amber,
+                'primary' => '#247DFF',
+                'secondary' => '#FADD02',
                 'sky' => Color::Sky,
                 'sun' => Color::Gray,
+                'green' => Color::Green,
+                'blue' => Color::Blue,
+                'yellow' => '#FADD02',
+                'orange' => Color::Orange,
             ])
             ->discoverResources(in: app_path('Filament/Office/Resources'), for: 'App\\Filament\\Office\\Resources')
             ->discoverPages(in: app_path('Filament/Office/Pages'), for: 'App\\Filament\\Office\\Pages')

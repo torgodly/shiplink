@@ -13,13 +13,16 @@
         "codeat3/blade-carbon-icons": "^2.17",
         "filament/filament": "3.1",
         "guzzlehttp/guzzle": "^7.2",
+        "jaocero/activity-timeline": "^1.2",
         "jeffgreco13/filament-breezy": "^2.2",
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.3",
         "laravel/tinker": "^2.8",
         "ryangjchandler/blade-tabler-icons": "^2.2",
+        "saade/filament-autograph": "^3.0",
         "spatie/laravel-pdf": "^1.1",
-        "stechstudio/filament-impersonate": "^3.5"
+        "stechstudio/filament-impersonate": "^3.5",
+        "thiktak/filament-simple-list-entry": "^1.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

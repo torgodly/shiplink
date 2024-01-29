@@ -28,6 +28,7 @@ class Package extends Model
         'description',
         'requires_signature',
         'is_refrigerated',
+        'signature',
         'payment_method'
 
 

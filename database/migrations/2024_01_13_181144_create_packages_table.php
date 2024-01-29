@@ -27,7 +27,8 @@ return new class extends Migration {
             $table->boolean('insurance')->default(false);
             $table->boolean('is_refrigerated')->default(false);
             $table->text('description')->nullable();
-            $table->string('status')->default('pending');
+            $table->text('signature')->nullable();
+            $table->enum('status', \App\Enums\ShippingStatus::array())->default('Pending');
             $table->string('payment_method')->nullable();
 
             $table->timestamps();

@@ -11,7 +11,6 @@ use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
-use Filament\Tables\Actions\Action;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -69,9 +68,12 @@ class PackageResource extends Resource
                 Tables\Columns\TextColumn::make('status')
                     ->badge()
                     ->color(fn(string $state): string => match ($state) {
-                        'pending' => 'gray',
-                        'Out for Delivery' => 'warning',
-                        'Delivered' => 'success',
+                        'Pending' => 'green',
+                        'InTransit' => 'blue',
+                        'OutForDelivery' => 'yellow',
+                        'WaitingForPickup' => 'orange',
+                        'Delivered' => 'green',
+                        default => 'gray',
                     })
                     ->searchable(),
 
@@ -86,7 +88,11 @@ class PackageResource extends Resource
                     ])
             ])
             ->actions([
-
+                Tables\Actions\Action::make('view_activities')
+                    ->label('Activities')
+                    ->icon('heroicon-m-bolt')
+                    ->color('purple')
+                    ->url(fn ($record) => PackageResource::getUrl('show', ['record' => $record])),
                 Tables\Actions\ActionGroup::make([
                     Tables\Actions\EditAction::make(),
                     Tables\Actions\ViewAction::make()->requiresConfirmation(true),
@@ -273,6 +279,7 @@ class PackageResource extends Resource
         ];
     }
 
+
     public static function getPages(): array
     {
         return [
@@ -280,6 +287,7 @@ class PackageResource extends Resource
             'create' => Pages\CreatePackage::route('/create'),
             'edit' => Pages\EditPackage::route('/{record}/edit'),
             'view' => Pages\ViewPackage::route('/{record}'),
+            'show' => Pages\ShowProgress::route('/{record}/show'),
         ];
     }
 

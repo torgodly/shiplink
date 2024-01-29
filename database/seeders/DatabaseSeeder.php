@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
 //         \App\Models\User::factory(10)->create();
 
 
-//         Branch::factory(10)->create();
+//         Branch::factory(10)->create();/
 
         \App\Models\User::factory()->create([
             'name' => 'Test User',
@@ -25,6 +25,6 @@ class DatabaseSeeder extends Seeder
             'type' => 'admin',
         ]);
 
-//        Package::factory(100)->create();
+        Package::factory(1)->create();
     }
 }
