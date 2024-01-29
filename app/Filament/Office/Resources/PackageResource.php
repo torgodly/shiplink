@@ -11,6 +11,7 @@ use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Actions\Action;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -21,6 +22,105 @@ class PackageResource extends Resource
     protected static ?string $model = Package::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+
+    public static function table(Table $table): Table
+    {
+        return $table
+            ->columns([
+                Tables\Columns\TextColumn::make('code')
+                    ->searchable()
+                    ->copyable()
+                    ->copyMessage('Color code copied')
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('sender_code')
+                    ->searchable()
+                    ->copyable()
+                    ->copyMessage('Color code copied')
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('receiver_code')
+                    ->searchable()
+                    ->copyable()
+                    ->copyMessage('Color code copied')
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('receiverBranch.name')
+                    ->searchable()
+                    ->copyable()
+                    ->copyMessage('Color code copied')
+                    ->numeric()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('dimensions')
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('weight')
+                    ->suffix(' kg')
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('shipping_method')
+                    ->searchable(),
+                Tables\Columns\IconColumn::make('is_refrigerated')
+                    ->boolean()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\IconColumn::make('fragile')
+                    ->boolean()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\IconColumn::make('hazardous')
+                    ->boolean()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\IconColumn::make('insurance')
+                    ->boolean(),
+                Tables\Columns\TextColumn::make('status')
+                    ->badge()
+                    ->color(fn(string $state): string => match ($state) {
+                        'pending' => 'gray',
+                        'Out for Delivery' => 'warning',
+                        'Delivered' => 'success',
+                    })
+                    ->searchable(),
+
+            ])
+            ->filters([
+                //select status
+                SelectFilter::make('status')
+                    ->options([
+                        'pending' => 'pending',
+                        'Out for Delivery' => 'Out for Delivery',
+                        'Delivered' => 'Delivered',
+                    ])
+            ])
+            ->actions([
+
+                Tables\Actions\ActionGroup::make([
+                    Tables\Actions\EditAction::make(),
+                    Tables\Actions\ViewAction::make()->requiresConfirmation(true),
+
+                    InvoiceAction::make('Invoice')
+                        ->translateLabel()
+                        ->icon('tabler-file-invoice')
+                        ->firstParty('Sender', fn(Package $record) => $record->SenderInfo)
+                        ->secondParty('Recipient', fn(Package $record) => $record->ReceiverInfo)
+                        ->status('Paid')
+                        ->serialNumber('215478')
+                        ->date(now()->format('Y-m-d'))
+                        ->logo(asset('images/prozrachniy-logo-1-800x575.png'))
+                        ->invoiceItems(fn(Package $record) => $record)
+                        ->setHeadersAndColumns(['code' => 'Package Code', 'weight' => 'Weight', 'price' => 'Price',])
+                        ->subTotal(fn(Package $record) => $record->price)
+                        ->amountPaid(fn(Package $record) => $record->price)
+                        ->balanceDue('0')
+                        ->total(fn(Package $record) => $record->price)
+//                or
+                        ->stream()
+//                    ->download('test')
+                    ,
+                ]),
+
+                //change status action
+
+            ])
+            ->bulkActions([
+                Tables\Actions\BulkActionGroup::make([
+                    Tables\Actions\DeleteBulkAction::make(),
+                ]),
+            ]);
+    }
 
     public static function form(Form $form): Form
     {
@@ -159,102 +259,6 @@ class PackageResource extends Resource
                     ])->columnSpan(['lg' => 1]),
             ])
             ->columns(3);
-    }
-
-    public static function table(Table $table): Table
-    {
-        return $table
-            ->columns([
-                Tables\Columns\TextColumn::make('code')
-                    ->searchable()
-                    ->copyable()
-                    ->copyMessage('Color code copied')
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('sender_code')
-                    ->searchable()
-                    ->copyable()
-                    ->copyMessage('Color code copied')
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('receiver_code')
-                    ->searchable()
-                    ->copyable()
-                    ->copyMessage('Color code copied')
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('receiverBranch.name')
-                    ->searchable()
-                    ->copyable()
-                    ->copyMessage('Color code copied')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('dimensions')
-                    ->toggleable(true),
-                Tables\Columns\TextColumn::make('weight')
-                    ->suffix(' kg')
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('shipping_method')
-                    ->searchable(),
-                Tables\Columns\IconColumn::make('is_refrigerated')
-                    ->boolean()
-                    ->toggleable(true),
-                Tables\Columns\IconColumn::make('fragile')
-                    ->boolean()
-                    ->toggleable(true),
-                Tables\Columns\IconColumn::make('hazardous')
-                    ->boolean()
-                    ->toggleable(true),
-                Tables\Columns\IconColumn::make('insurance')
-                    ->boolean(),
-                Tables\Columns\TextColumn::make('status')
-                    ->badge()
-                    ->color(fn(string $state): string => match ($state) {
-                        'pending' => 'gray',
-                        'Out for Delivery' => 'warning',
-                        'Delivered' => 'success',
-                    })
-                    ->searchable(),
-
-            ])
-            ->filters([
-                //select status
-                SelectFilter::make('status')
-                    ->options([
-                        'pending' => 'pending',
-                        'Out for Delivery' => 'Out for Delivery',
-                        'Delivered' => 'Delivered',
-                    ])
-            ])
-            ->actions([
-                Tables\Actions\ActionGroup::make([
-                    Tables\Actions\EditAction::make(),
-                    Tables\Actions\ViewAction::make()->requiresConfirmation(true),
-
-                    InvoiceAction::make('Invoice')
-                        ->translateLabel()
-                        ->icon('tabler-file-invoice')
-                        ->firstParty('Sender', fn(Package $record) => $record->SenderInfo)
-                        ->secondParty('Recipient', fn(Package $record) => $record->ReceiverInfo)
-                        ->status('Paid')
-                        ->serialNumber('215478')
-                        ->date(now()->format('Y-m-d'))
-                        ->logo(asset('images/prozrachniy-logo-1-800x575.png'))
-                        ->invoiceItems(fn(Package $record) => $record)
-                        ->setHeadersAndColumns(['code' => 'Package Code', 'weight' => 'Weight', 'price' => 'Price',])
-                        ->subTotal(fn(Package $record) => $record->price)
-                        ->amountPaid(fn(Package $record) => $record->price)
-                        ->balanceDue('0')
-                        ->total(fn(Package $record) => $record->price)
-//                or
-                        ->stream()
-//                    ->download('test')
-                    ,
-                ]),
-
-            ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
-            ]);
     }
 
     public static function getEloquentQuery(): Builder

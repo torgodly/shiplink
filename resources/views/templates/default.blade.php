@@ -11,7 +11,7 @@
 
         @page {
             {{--size: {{ $attributes->has('size') ? $attributes->get('size') : $size }};--}}
-                                          size: A4;
+                                             size: A4;
             margin: 0;
         }
 
@@ -369,6 +369,5 @@
     </div>
 </div>
 <!-- End Invoice -->
-
 </body>
 </html>
