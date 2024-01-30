@@ -3,8 +3,10 @@
 namespace App\Models;
 
 use App\Enums\ShippingMethods;
+use App\Enums\ShippingStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Package extends Model
 {
@@ -136,4 +138,21 @@ class Package extends Model
         ];
     }
 
+
+    //statusOptions
+    public function getCustomStatusOptionsAttribute(): array
+    {
+        // Check if the package's sender branch is the same as the authenticated user's branch
+        $isFromAuthUserBranch = $this->sender_branch_id === Auth::user()->mangedbrance->id;
+        // Get all status options
+        $allStatusOptions = ShippingStatus::array();
+
+        if ($isFromAuthUserBranch) {
+            // If the package is from the authenticated user's branch, return the first 3 status options
+            return array_slice($allStatusOptions, 0, 3);
+        } else {
+            // If the package is not from the authenticated user's branch, return the last 2 status options
+            return array_slice($allStatusOptions, -2, 2);
+        }
+    }
 }

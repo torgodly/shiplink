@@ -43,15 +43,13 @@ class ShowProgress extends Page implements HasInfolists, HasActions, HasForms
             ->record($this->record)
             ->form([
                 Select::make('status')
-                    ->options(ShippingStatus::array())
+                    ->options($this->record->CustomStatusOptions)
                     ->default(fn(Package $record) => $record->status)
                     ->live()
                     ->required(),
                 SignaturePad::make('signature')
-                    ->filename(fn() => $this->record->receiver->name . '-signature' . '.png')
                     ->default(fn(Package $record) => $record->signature)
-                    ->required(fn($get) => $get('status') === 'Delivered')
-                    ->confirmable()
+                    ->requiredIf('status', 'Delivered')
                     ->backgroundColor('transparent')
                     ->visible(fn($get) => $get('status') === 'Delivered')
 
@@ -59,14 +57,18 @@ class ShowProgress extends Page implements HasInfolists, HasActions, HasForms
             // ...
             ->action(function (array $data): void {
                 $selectedOption = $data['status'];
-                $this->record->update(['status' => $selectedOption, 'signature' => $data['signature']]);
-            })->requiresConfirmation();
+                $signature = $data['signature'] ?? null; // Provide a default value (null) if 'signature' is not set
+                $this->record->update(['status' => $selectedOption, 'signature' => $signature]);
+            })->requiresConfirmation()
+            ->icon('tabler-package')
+            ->modalIcon('tabler-package')
+            ->modalDescription('Change the status of this package.');
     }
 
     public function activityTimelineInfolist(Infolist $infolist): Infolist
     {
         $currentStatus = $this->record->status;
-        $activities = [
+        $PackageStatus = [
             [
                 'title' => 'Order Placed - Awaiting Processing',
                 'description' => 'Your order has been placed and is awaiting processing.',
@@ -101,11 +103,11 @@ class ShowProgress extends Page implements HasInfolists, HasActions, HasForms
         $statusOrder = ShippingStatus::values();
 
         $currentStatusIndex = array_search($currentStatus, $statusOrder);
-        $activities = array_filter($activities, fn($activity) => array_search($activity['status'], $statusOrder) <= $currentStatusIndex);
+        $PackageStatus = array_filter($PackageStatus, fn($activity) => array_search($activity['status'], $statusOrder) <= $currentStatusIndex);
 
         return $infolist
             ->name('somethingss')
-            ->state(['activities' => array_values($activities)])
+            ->state(['PackageStatus' => array_values($PackageStatus)])
             ->schema([
 
                 /*
@@ -113,8 +115,8 @@ class ShowProgress extends Page implements HasInfolists, HasActions, HasForms
                    This section functions identically to the repeater entry; you simply have to provide the array state's key.
                 */
 
-                ActivitySection::make('activities')
-                    ->label('My Activities')
+                ActivitySection::make('PackageStatus')
+                    ->label('Package Status' . ' (' . $this->record->code . ')')
                     ->description('These are the activities that have been recorded.')
                     ->schema([
                         ActivityTitle::make('title')
