@@ -14,7 +14,7 @@ class ListPackages extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make()->label('Sent New Package'),
+            Actions\CreateAction::make()->label('Send New Package')->translateLabel(),
         ];
     }
 

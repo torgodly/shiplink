@@ -145,14 +145,26 @@ class Package extends Model
         // Check if the package's sender branch is the same as the authenticated user's branch
         $isFromAuthUserBranch = $this->sender_branch_id === Auth::user()->mangedbrance->id;
         // Get all status options
-        $allStatusOptions = ShippingStatus::array();
+        $allStatusOptions = ShippingStatus::values();
+
+        // Initialize an empty array for the localized status options
+        $localizedStatusOptions = [];
 
         if ($isFromAuthUserBranch) {
-            // If the package is from the authenticated user's branch, return the first 3 status options
-            return array_slice($allStatusOptions, 0, 3);
+            // If the package is from the authenticated user's branch, get the first 3 status options
+            $statusOptions = array_slice($allStatusOptions, 0, 2);
         } else {
-            // If the package is not from the authenticated user's branch, return the last 2 status options
-            return array_slice($allStatusOptions, -2, 2);
+            // If the package is not from the authenticated user's branch, get the last 2 status options
+            $statusOptions = array_slice($allStatusOptions, -2, 2);
         }
+
+        // Iterate over the status options and localize each one
+        foreach ($statusOptions as $statusOption) {
+            // Use the __() function for localization, assuming you have corresponding entries in your localization files
+            $localizedStatusOptions[$statusOption] = __($statusOption);
+        }
+
+        return $localizedStatusOptions;
     }
+
 }

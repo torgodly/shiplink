@@ -3,6 +3,7 @@
 namespace App\Filament\Office\Resources;
 
 use App\Enums\ShippingMethods;
+use App\Enums\ShippingStatus;
 use App\Filament\Office\Resources\PackageResource\Pages;
 use App\Filament\Office\Resources\PackageResource\RelationManagers;
 use App\Models\Package;
@@ -30,53 +31,73 @@ class PackageResource extends Resource
         return __('Sent Packages');
     }
 
+    public static function getPluralLabel(): ?string
+    {
+        return __('Sent Packages');
+    }
+
     public static function table(Table $table): Table
     {
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('code')
+                    ->label('Package Code')
+                    ->translateLabel()
                     ->searchable()
                     ->copyable()
                     ->copyMessage('Color code copied')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('sender_code')
+                    ->translateLabel()
                     ->searchable()
                     ->copyable()
                     ->copyMessage('Color code copied')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('receiver_code')
+                    ->translateLabel()
                     ->searchable()
                     ->copyable()
                     ->copyMessage('Color code copied')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('receiverBranch.name')
+                    ->translateLabel()
                     ->searchable()
                     ->copyable()
                     ->copyMessage('Color code copied')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('dimensions')
+                    ->translateLabel()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('weight')
+                    ->translateLabel()
                     ->suffix(' kg')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('shipping_method')
+                    ->translateLabel()
+                    ->label('Shipping Method')
                     ->searchable(),
                 Tables\Columns\IconColumn::make('is_refrigerated')
+                    ->translateLabel()
                     ->boolean()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\IconColumn::make('fragile')
+                    ->translateLabel()
                     ->boolean()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\IconColumn::make('hazardous')
+                    ->translateLabel()
                     ->boolean()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\IconColumn::make('insurance')
+                    ->translateLabel()
                     ->boolean(),
                 Tables\Columns\TextColumn::make('status')
+                    ->translateLabel()
                     ->badge()
+                    ->formatStateUsing(fn (string $state): string => __($state))
                     ->color(fn(string $state): string => match ($state) {
-                        'Pending' => 'green',
+                        __('Pending') => 'green',
                         'InTransit' => 'blue',
                         'OutForDelivery' => 'yellow',
                         'WaitingForPickup' => 'orange',
@@ -89,17 +110,14 @@ class PackageResource extends Resource
             ->filters([
                 //select status
                 SelectFilter::make('status')
-                    ->options([
-                        'pending' => 'pending',
-                        'Out for Delivery' => 'Out for Delivery',
-                        'Delivered' => 'Delivered',
-                    ])
+                    ->options(ShippingStatus::array())
             ])
             ->actions([
-                Tables\Actions\Action::make('view_activities')
-                    ->label('Activities')
-                    ->icon('heroicon-m-bolt')
-                    ->color('purple')
+                Tables\Actions\Action::make('Package Status')
+                    ->label('Status')
+                    ->translateLabel()
+                    ->icon('tabler-settings-cog')
+                    ->color('primary')
                     ->url(fn($record) => PackageResource::getUrl('show', ['record' => $record])),
                 Tables\Actions\ActionGroup::make([
                     Tables\Actions\EditAction::make(),

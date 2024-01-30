@@ -3,14 +3,14 @@
     "Height": "الطول",
     "Width": "العرض",
     "Length": "الطول",
-    "Air" : "جوي",
-    "Sea" : "بحري",
-    "Land" : "بري",
-    "Shipping Method" : "طريقة الشحن",
+    "Air": "جوي",
+    "Sea": "بحري",
+    "Land": "بري",
+    "Shipping Method": "طريقة الشحن",
     "Package Code": "كود الشحنة",
     "Price": "السعر",
-    "Sender Branch": "فرع المرسل",
-    "Receiver Branch": "فرع المستلم",
+    "Sender branch": "فرع المرسل",
+    "Receiver branch": "فرع المستلم",
     "Sender": "المرسل",
     "Receiver": "المستلم",
     "Status": "الحالة",
@@ -19,8 +19,8 @@
     "Branch": "الفرع",
     "Branches": "الفروع",
     "Branch Name": "اسم الفرع",
-    "Sender Code": "كود المرسل",
-    "Receiver Code": "كود المستلم",
+    "Sender code": "كود المرسل",
+    "Receiver code": "كود المستلم",
     "Subtotal:": "المجموع الفرعي:",
     "Tax:": "الضريبة:",
     "Total:": "المجموع:",
@@ -28,5 +28,29 @@
     "Amount Paid:": "المبلغ المدفوع:",
     "Discount:": "الخصم:",
     "Invoice": "الفاتورة",
-    "Download": "تحميل"
+    "Download": "تحميل",
+    "Code": "الكود",
+    "Insurance": "التأمين",
+    "🎉 Order Confirmed - We're On It!": "🎉 تم تأكيد طلبك - نحن بالخدمة!",
+    "Great news! We have received your order and are working on it with utmost priority. Stay tuned for updates!": "أخبار سعيدة! تم استلام طلبك ونحن نعمل عليه بكل اهتمام. ترقبوا المزيد من التفاصيل قريبًا!",
+    "✈️ Your Package is Flying High - In Transit!": "✈️ طردك مسافر بين السحاب - في الطريق!",
+    "Your package is on the move and making swift progress towards you. It won’t be long now!": "طردك يقطع المسافات بسرعة نحوك. اللقاء قريب!",
+    "📍 Package Ready for Pickup - Almost Yours!": "📍 طردك جاهز للاستلام - كاد أن يكون بين يديك!",
+    "Exciting news! Your package awaits you at the designated pickup point. It’s almost in your hands!": "أخبار ممتعة! طردك ينتظرك في نقطة الاستلام. سيكون بين يديك في لحظات!",
+    "🚚 Package Delivered - Enjoy Your Item!": "🚚 طردك بين يديك - استمتع بما فيه!",
+    "Hooray! Your package has safely arrived. We hope it brings you joy. Thanks for choosing us!": "تهانينا! وصل طردك بسلامة. نتمنى أن يحمل لك الفرحة. شكرًا لثقتكم بنا!",
+    "Package Status": "حالة الشحنة",
+    "Follow the progress of your package.": "تابع تقدم طردك.",
+    "Package Progress": "تقدم الشحنة",
+    "Sent Packages": "الشحنات المرسلة",
+    "Send New Package": "إرسال شحنة جديدة",
+    "Pending": "قيد الانتظار",
+    "OutForDelivery": "خارج للتوصيل",
+    "Delivered": "تم التوصيل",
+    "Change Status": "تغيير الحالة",
+    "Change the status of this package.": "تغيير حالة هذه الشحنة.",
+    "Hazardous": "مواد خطرة",
+    "Fragile": "قابل للكسر",
+    "Is refrigerated": "يحتاج تبريد",
+    "Dimensions": "الأبعاد"
 }

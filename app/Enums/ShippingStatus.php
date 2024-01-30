@@ -6,7 +6,6 @@ enum ShippingStatus: string
     use \App\Traits\Enum;
 
     case Pending = 'Pending';
-    case InTransit = 'InTransit';
     case OutForDelivery = 'OutForDelivery';
     case WaitingForPickup = 'WaitingForPickup';
     case Delivered = 'Delivered';

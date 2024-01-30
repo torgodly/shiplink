@@ -16,6 +16,7 @@ use Filament\Infolists\Contracts\HasInfolists;
 use Filament\Infolists\Infolist;
 use Filament\Resources\Pages\Page;
 use Filament\Support\Concerns\HasBadge;
+use Illuminate\Contracts\Support\Htmlable;
 use JaOcero\ActivityTimeline\Components\ActivityDate;
 use JaOcero\ActivityTimeline\Components\ActivityDescription;
 use JaOcero\ActivityTimeline\Components\ActivityIcon;
@@ -36,17 +37,26 @@ class ShowProgress extends Page implements HasInfolists, HasActions, HasForms
     protected static string $view = 'filament.office.resources.package-resource.pages.show-progress';
     public Package $record;
 
+    public function getTitle(): string|Htmlable
+    {
+        return __('Package Progress');
+    }
+
+
     public function ChangeStatusAction(): Action
     {
         return Action::make('ChangeStatus')
             ->label('Change Status')
+            ->translateLabel()
             ->record($this->record)
             ->form([
                 Select::make('status')
+                    ->translateLabel()
                     ->options($this->record->CustomStatusOptions)
                     ->default(fn(Package $record) => $record->status)
                     ->live()
-                    ->required(),
+                    ->required()
+                    ->native(false),
                 SignaturePad::make('signature')
                     ->default(fn(Package $record) => $record->signature)
                     ->requiredIf('status', 'Delivered')
@@ -62,7 +72,7 @@ class ShowProgress extends Page implements HasInfolists, HasActions, HasForms
             })->requiresConfirmation()
             ->icon('tabler-package')
             ->modalIcon('tabler-package')
-            ->modalDescription('Change the status of this package.');
+            ->modalDescription(__('Change the status of this package.'));
     }
 
     public function activityTimelineInfolist(Infolist $infolist): Infolist
@@ -70,35 +80,30 @@ class ShowProgress extends Page implements HasInfolists, HasActions, HasForms
         $currentStatus = $this->record->status;
         $PackageStatus = [
             [
-                'title' => 'Order Placed - Awaiting Processing',
-                'description' => 'Your order has been placed and is awaiting processing.',
+                'title' => __("🎉 Order Confirmed - We're On It!"),
+                'description' => __('Great news! We have received your order and are working on it with utmost priority. Stay tuned for updates!'),
                 'status' => 'Pending',
                 'created_at' => now(), // Adjust the date accordingly
             ],
             [
-                'title' => 'Shipment In Transit - On its Way',
-                'description' => 'Your order is on its way.',
-                'status' => 'InTransit',
-                'created_at' => now()->addDays(2), // Adjust the date accordingly
-            ],
-            [
-                'title' => 'Shipment Out for Delivery',
-                'description' => 'Your order is out for delivery and will arrive soon.',
+                'title' => __('✈️ Your Package is Flying High - In Transit!'),
+                'description' => __('Your package is on the move and making swift progress towards you. It won’t be long now!'),
                 'status' => 'OutForDelivery',
                 'created_at' => now()->addDays(4), // Adjust the date accordingly
             ],
             [
-                'title' => 'Shipment Ready for Pickup',
-                'description' => 'Your order is ready for pickup.',
+                'title' => __('📍 Package Ready for Pickup - Almost Yours!'),
+                'description' => __('Exciting news! Your package awaits you at the designated pickup point. It’s almost in your hands!'),
                 'status' => 'WaitingForPickup',
                 'created_at' => now()->addDays(5), // Adjust the date accordingly
             ],
             [
-                'title' => 'Order Delivered - Completed',
-                'description' => 'Your order has been delivered.',
+                'title' => __('🚚 Package Delivered - Enjoy Your Item!'),
+                'description' => __('Hooray! Your package has safely arrived. We hope it brings you joy. Thanks for choosing us!'),
                 'status' => 'Delivered',
                 'created_at' => now()->addDays(6), // Adjust the date accordingly
             ],
+
         ];
         $statusOrder = ShippingStatus::values();
 
@@ -116,8 +121,8 @@ class ShowProgress extends Page implements HasInfolists, HasActions, HasForms
                 */
 
                 ActivitySection::make('PackageStatus')
-                    ->label('Package Status' . ' (' . $this->record->code . ')')
-                    ->description('These are the activities that have been recorded.')
+                    ->label(__('Package Status') . ' (' . $this->record->code . ')')
+                    ->description(__('Follow the progress of your package.'))
                     ->schema([
                         ActivityTitle::make('title')
                             ->placeholder('No title is set'),
