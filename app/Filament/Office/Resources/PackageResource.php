@@ -20,7 +20,15 @@ class PackageResource extends Resource
 {
     protected static ?string $model = Package::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'tabler-package-export';
+
+    /**
+     * @return string
+     */
+    public static function getModelLabel(): string
+    {
+        return __('Sent Packages');
+    }
 
     public static function table(Table $table): Table
     {
@@ -92,7 +100,7 @@ class PackageResource extends Resource
                     ->label('Activities')
                     ->icon('heroicon-m-bolt')
                     ->color('purple')
-                    ->url(fn ($record) => PackageResource::getUrl('show', ['record' => $record])),
+                    ->url(fn($record) => PackageResource::getUrl('show', ['record' => $record])),
                 Tables\Actions\ActionGroup::make([
                     Tables\Actions\EditAction::make(),
                     Tables\Actions\ViewAction::make()->requiresConfirmation(true),
