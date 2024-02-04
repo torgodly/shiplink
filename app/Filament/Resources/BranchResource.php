@@ -18,6 +18,17 @@ class BranchResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-building-office';
 
+
+    public static function getModelLabel(): string
+    {
+        return __(parent::getModelLabel());
+    }
+
+    public static function getPluralLabel(): ?string
+    {
+        return __('Branches');
+    }
+
     public static function form(Form $form): Form
     {
         return $form
@@ -33,7 +44,7 @@ class BranchResource extends Resource
                     ->maxLength(255),
                 Forms\Components\select::make('manager_id')
                     ->required()
-                    ->relationship('manager', 'name', modifyQueryUsing: fn (Builder $query) => $query->where('type', 'manager')->whereDoesntHave('mangedbrance'))
+                    ->relationship('manager', 'name', modifyQueryUsing: fn(Builder $query) => $query->where('type', 'manager')->whereDoesntHave('mangedbrance'))
                     ->preload(),
             ]);
     }
