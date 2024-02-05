@@ -46,11 +46,13 @@
     "Send New Package": "إرسال شحنة جديدة",
     "Pending": "قيد الانتظار",
     "OutForDelivery": "خارج للتوصيل",
-    "Delivered": "تم التوصيل",
+    "Delivered": "تم التوصيل والاستلام",
     "Change Status": "تغيير الحالة",
     "Change the status of this package.": "تغيير حالة هذه الشحنة.",
     "Hazardous": "مواد خطرة",
     "Fragile": "قابل للكسر",
     "Is refrigerated": "يحتاج تبريد",
-    "Dimensions": "الأبعاد"
+    "Dimensions": "الأبعاد",
+    "Received Packages": "الشحنات المستلمة",
+    "WaitingForPickup": "في انتظار الاستلام"
 }
