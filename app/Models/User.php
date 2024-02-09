@@ -8,6 +8,7 @@ use Filament\Panel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Str;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable implements FilamentUser
@@ -50,28 +51,48 @@ class User extends Authenticatable implements FilamentUser
         'password' => 'hashed',
     ];
 
+    protected static function booted()
+    {
+        static::creating(function ($user) {
+            if ($user->type === null) {
+                $user->sender_code = 'Send-' . Str::random(10);
+                $user->receiver_code = 'Reserve-' . Str::random(10);
+            }
+        });
+    }
+
+    //belongs to branch
+
     public function canAccessPanel(Panel $panel): bool
     {
-        if ($panel->getId() == 'admin' ) {
-            return $this->type == 'admin';
-        } elseif ($panel->getId() == 'office') {
-            return $this->type == 'manager';
+        if ($panel->getId() === 'admin') {
+            return $this->type === 'admin';
+        }
+
+        if ($panel->getId() === 'office') {
+            return $this->type === 'manager';
+        }
+
+        if ($panel->getId() === 'user') {
+            return $this->type === 'user';
         }
         return false;
     }
 
-    //belongs to branch
+    //brance name
 
     public function mangedbrance(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
         return $this->hasOne(Branch::class, 'manager_id');
     }
 
-    //brance name
     public function getBranchNameAttribute()
     {
         return $this->mangedbrance?->name;
     }
+
+
+    // booted method if created user type is user then add sender code and receiver code
 
     public function getIsAdminAttribute()
     {
