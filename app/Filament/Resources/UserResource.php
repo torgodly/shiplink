@@ -97,7 +97,7 @@ class UserResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make()->requiresConfirmation(true)->modalWidth('2xl')->modalIcon('heroicon-o-users'),
-                Impersonate::make()->visible(fn($record) => $record->type === 'manager')->redirectTo('/office')
+//                Impersonate::make()->visible(fn($record) => $record->type === 'manager')->redirectTo('/office')
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
