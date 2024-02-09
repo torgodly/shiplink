@@ -4,7 +4,6 @@ namespace App\Filament\User\Resources;
 
 use App\Enums\ShippingMethods;
 use App\Enums\ShippingStatus;
-use App\Filament\Office\Resources\PackageResource;
 use App\Filament\User\Resources\SentPackagesResource\Pages;
 use App\Filament\User\Resources\SentPackagesResource\RelationManagers;
 use App\Models\Package;
@@ -17,7 +16,6 @@ use Filament\Tables;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class SentPackagesResource extends Resource
 {
@@ -110,21 +108,13 @@ class SentPackagesResource extends Resource
 
             ])
             ->filters([
-                //select status
                 SelectFilter::make('status')
-                    ->options(ShippingStatus::array())
+                    ->translateLabel()
+                    ->options(collect(ShippingStatus::array())->map(fn($value, $key) => __($key))->toArray())
             ])
             ->actions([
-                Tables\Actions\Action::make('Package Status')
-                    ->label('Status')
-                    ->translateLabel()
-                    ->icon('tabler-settings-cog')
-                    ->color('primary')
-                    ->url(fn($record) => PackageResource::getUrl('show', ['record' => $record])),
                 Tables\Actions\ActionGroup::make([
-                    Tables\Actions\EditAction::make(),
                     Tables\Actions\ViewAction::make()->requiresConfirmation(true),
-
                     InvoiceAction::make('Invoice')
                         ->translateLabel()
                         ->icon('tabler-file-invoice')
@@ -150,9 +140,7 @@ class SentPackagesResource extends Resource
 
             ])
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
+
             ]);
     }
 
@@ -312,8 +300,9 @@ class SentPackagesResource extends Resource
     {
         return [
             'index' => Pages\ListSentPackages::route('/'),
-            'create' => Pages\CreateSentPackages::route('/create'),
-            'edit' => Pages\EditSentPackages::route('/{record}/edit'),
+//            'create' => Pages\CreateSentPackages::route('/create'),
+//            'edit' => Pages\EditSentPackages::route('/{record}/edit'),
+            'view' => Pages\ViewPackage::route('/{record}'),
         ];
     }
 

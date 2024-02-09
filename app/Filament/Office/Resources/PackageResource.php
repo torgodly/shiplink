@@ -95,7 +95,7 @@ class PackageResource extends Resource
                 Tables\Columns\TextColumn::make('status')
                     ->translateLabel()
                     ->badge()
-                    ->formatStateUsing(fn (string $state): string => __($state))
+                    ->formatStateUsing(fn(string $state): string => __($state))
                     ->color(fn(string $state): string => match ($state) {
                         __('Pending') => 'green',
                         'InTransit' => 'blue',
@@ -110,7 +110,9 @@ class PackageResource extends Resource
             ->filters([
                 //select status
                 SelectFilter::make('status')
-                    ->options(ShippingStatus::array())
+                    ->translateLabel()
+                    ->options(collect(ShippingStatus::array())->map(fn($value, $key) => __($key))->toArray())
+
             ])
             ->actions([
                 Tables\Actions\Action::make('Package Status')

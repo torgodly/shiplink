@@ -1,81 +1,25 @@
 <?php
 
-namespace App\Filament\Office\Resources\PackageResource\Pages;
+namespace App\Filament\User\Resources\ReceivedPackagesResource\Pages;
 
 use App\Enums\ShippingStatus;
-use App\Filament\Office\Resources\PackageResource;
-use App\Models\Package;
-use Filament\Actions\Action;
-use Filament\Actions\Concerns\InteractsWithActions;
-use Filament\Actions\Contracts\HasActions;
-use Filament\Forms\Components\Select;
-use Filament\Forms\Concerns\InteractsWithForms;
-use Filament\Forms\Contracts\HasForms;
-use Filament\Infolists\Concerns\InteractsWithInfolists;
-use Filament\Infolists\Contracts\HasInfolists;
+use App\Filament\User\Resources\ReceivedPackagesResource;
+use Filament\Actions;
 use Filament\Infolists\Infolist;
-use Filament\Resources\Pages\Page;
-use Filament\Support\Concerns\HasBadge;
-use Illuminate\Contracts\Support\Htmlable;
+use Filament\Resources\Pages\ViewRecord;
 use JaOcero\ActivityTimeline\Components\ActivityDate;
 use JaOcero\ActivityTimeline\Components\ActivityDescription;
 use JaOcero\ActivityTimeline\Components\ActivityIcon;
 use JaOcero\ActivityTimeline\Components\ActivitySection;
 use JaOcero\ActivityTimeline\Components\ActivityTitle;
-use Saade\FilamentAutograph\Forms\Components\SignaturePad;
 
-class ShowProgress extends Page implements HasInfolists, HasActions, HasForms
+class ViewPackage extends ViewRecord
 {
-    use InteractsWithInfolists;
-    use InteractsWithActions;
-    use InteractsWithForms;
-
-//    use InteractsWithRecord;
-    use HasBadge;
-
-    protected static string $resource = PackageResource::class;
-    protected static string $view = 'filament.office.resources.package-resource.pages.show-progress';
-    public Package $record;
-
-    public function getTitle(): string|Htmlable
-    {
-        return __('Package Progress');
-    }
+    protected static string $resource = ReceivedPackagesResource::class;
 
 
-    public function ChangeStatusAction(): Action
-    {
-        return Action::make('ChangeStatus')
-            ->label('Change Status')
-            ->translateLabel()
-            ->record($this->record)
-            ->form([
-                Select::make('status')
-                    ->translateLabel()
-                    ->options($this->record->CustomStatusOptions)
-                    ->default(fn(Package $record) => $record->status)
-                    ->live()
-                    ->required()
-                    ->native(false),
-                SignaturePad::make('signature')
-                    ->default(fn(Package $record) => $record->signature)
-                    ->requiredIf('status', 'Delivered')
-                    ->backgroundColor('transparent')
-                    ->visible(fn($get) => $get('status') === 'Delivered')
 
-            ])
-            // ...
-            ->action(function (array $data): void {
-                $selectedOption = $data['status'];
-                $signature = $data['signature'] ?? null; // Provide a default value (null) if 'signature' is not set
-                $this->record->update(['status' => $selectedOption, 'signature' => $signature]);
-            })->requiresConfirmation()
-            ->icon('tabler-package')
-            ->modalIcon('tabler-package')
-            ->modalDescription(__('Change the status of this package.'));
-    }
-
-    public function activityTimelineInfolist(Infolist $infolist): Infolist
+    public function infolist(Infolist $infolist): Infolist
     {
         $currentStatus = $this->record->status;
         $PackageStatus = [
@@ -150,7 +94,7 @@ class ShowProgress extends Page implements HasInfolists, HasActions, HasForms
                             }),
 
 
-                    ])
+                    ])->columnSpanFull()
 //                    ->showItemsCount(2) // Show up to 2 items
 //                    ->showItemsLabel('View Old') // Show "View Old" as link label
 //                    ->showItemsIcon('heroicon-m-chevron-down') // Show button icon
@@ -160,4 +104,5 @@ class ShowProgress extends Page implements HasInfolists, HasActions, HasForms
 //                    ->extraAttributes(['class' => 'my-new-class']) // add extra class
             ]);
     }
+
 }

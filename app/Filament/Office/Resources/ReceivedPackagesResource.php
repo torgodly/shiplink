@@ -108,9 +108,9 @@ class ReceivedPackagesResource extends Resource
 
             ])
             ->filters([
-                //select status
                 SelectFilter::make('status')
-                    ->options(ShippingStatus::array())
+                    ->translateLabel()
+                    ->options(collect(ShippingStatus::array())->map(fn($value, $key) => __($key))->toArray())
             ])
             ->actions([
                 Tables\Actions\Action::make('Package Status')

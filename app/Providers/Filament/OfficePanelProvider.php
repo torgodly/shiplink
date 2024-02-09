@@ -33,7 +33,9 @@ class OfficePanelProvider extends PanelProvider
                     navigationGroup: 'Settings', // Sets the navigation group for the My Profile page (default = null)
                     hasAvatars: true, // Enables the avatar upload form component (default = false)
                     slug: 'my-profile' // Sets the slug for the profile page (default = 'my-profile')
-                ))
+                )->enableTwoFactorAuthentication()
+
+            )
             ->brandLogo(asset('images/logo.png'))
             ->brandLogoHeight('3rem')
             ->login()

@@ -38,16 +38,23 @@ class UserPanelProvider extends PanelProvider
                     navigationGroup: 'Settings', // Sets the navigation group for the My Profile page (default = null)
                     hasAvatars: true, // Enables the avatar upload form component (default = false)
                     slug: 'my-profile' // Sets the slug for the profile page (default = 'my-profile')
-                ))
+                )->enableTwoFactorAuthentication())
             ->brandLogo(asset('images/logo.png'))
             ->brandLogoHeight('3rem')
             ->colors([
                 'primary' => '#247DFF',
                 'secondary' => '#FADD02',
+                'sky' => Color::Sky,
+                'sun' => Color::Gray,
+                'green' => Color::Green,
+                'blue' => Color::Blue,
+                'yellow' => Color::Yellow,
+                'orange' => Color::Orange,
 
             ])
             ->discoverResources(in: app_path('Filament/User/Resources'), for: 'App\\Filament\\User\\Resources')
             ->discoverPages(in: app_path('Filament/User/Pages'), for: 'App\\Filament\\User\\Pages')
+            ->viteTheme('resources/css/filament/user/theme.css')
             ->pages([
                 Pages\Dashboard::class,
             ])

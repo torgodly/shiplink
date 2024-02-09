@@ -26,6 +26,6 @@ class Branch extends Model
     //manager name
     public function getManagerNameAttribute()
     {
-        return $this->manager->name;
+        return $this->manager?->name;
     }
 }

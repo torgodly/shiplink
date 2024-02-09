@@ -4,7 +4,6 @@ namespace App\Filament\User\Resources;
 
 use App\Enums\ShippingMethods;
 use App\Enums\ShippingStatus;
-use App\Filament\Office\Resources\PackageResource;
 use App\Filament\User\Resources\ReceivedPackagesResource\Pages;
 use App\Filament\User\Resources\ReceivedPackagesResource\RelationManagers;
 use App\Models\Package;
@@ -111,15 +110,11 @@ class ReceivedPackagesResource extends Resource
             ->filters([
                 //select status
                 SelectFilter::make('status')
-                    ->options(ShippingStatus::array())
+                    ->translateLabel()
+                    ->options(collect(ShippingStatus::array())->map(fn($value, $key) => __($key))->toArray())
             ])
             ->actions([
-                Tables\Actions\Action::make('Package Status')
-                    ->label('Status')
-                    ->translateLabel()
-                    ->icon('tabler-settings-cog')
-                    ->color('primary')
-                    ->url(fn($record) => PackageResource::getUrl('show', ['record' => $record])),
+
                 Tables\Actions\ActionGroup::make([
                     Tables\Actions\EditAction::make(),
                     Tables\Actions\ViewAction::make()->requiresConfirmation(true),
@@ -149,9 +144,9 @@ class ReceivedPackagesResource extends Resource
 
             ])
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
+//                Tables\Actions\BulkActionGroup::make([
+//                    Tables\Actions\DeleteBulkAction::make(),
+//                ]),
             ]);
     }
 
@@ -311,8 +306,9 @@ class ReceivedPackagesResource extends Resource
     {
         return [
             'index' => Pages\ListReceivedPackages::route('/'),
-            'create' => Pages\CreateReceivedPackages::route('/create'),
-            'edit' => Pages\EditReceivedPackages::route('/{record}/edit'),
+//            'create' => Pages\CreateReceivedPackages::route('/create'),
+//            'edit' => Pages\EditReceivedPackages::route('/{record}/edit'),
+            'view' => Pages\ViewPackage::route('/{record}/view')
         ];
     }
 
