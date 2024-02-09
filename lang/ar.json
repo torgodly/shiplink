@@ -61,5 +61,8 @@
     "Phone": "الهاتف",
     "Type": "النوع",
     "Password confirmation": "تأكيد كلمة المرور",
-    "Password": "كلمة المرور"
+    "Password": "كلمة المرور",
+    "City": "المدينة",
+    "Country": "الدولة",
+    "Manager": "المدير"
 }

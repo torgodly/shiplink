@@ -35,15 +35,19 @@ class BranchResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('name')
                     ->required()
+                    ->translateLabel()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('city')
                     ->required()
+                    ->translateLabel()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('country')
                     ->required()
+                    ->translateLabel()
                     ->maxLength(255),
                 Forms\Components\select::make('manager_id')
                     ->required()
+                    ->translateLabel()
                     ->relationship('manager', 'name', modifyQueryUsing: fn(Builder $query) => $query->where('type', 'manager')->whereDoesntHave('mangedbrance'))
                     ->preload(),
             ]);
@@ -53,13 +57,15 @@ class BranchResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')
+                Tables\Columns\TextColumn::make('name')->translateLabel()
                     ->searchable(),
-                Tables\Columns\TextColumn::make('city')
+                Tables\Columns\TextColumn::make('city')->translateLabel()
                     ->searchable(),
-                Tables\Columns\TextColumn::make('country')
+                Tables\Columns\TextColumn::make('country')->translateLabel()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('manager_name')
+                    ->label('Manager')
+                    ->translateLabel()
                     ->numeric()
                     ->sortable(),
             ])
