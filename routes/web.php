@@ -1,6 +1,5 @@
 <?php
 
-use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,6 +17,6 @@ Route::get('/', function () {
     return redirect('/user/login');
 });
 
-Route::get('test', function (){
+Route::get('test', function () {
     return view('welcome');
 });
