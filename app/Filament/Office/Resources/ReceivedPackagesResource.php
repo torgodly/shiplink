@@ -131,7 +131,7 @@ class ReceivedPackagesResource extends Resource
                         ->status('Paid')
                         ->serialNumber('215478')
                         ->date(now()->format('Y-m-d'))
-                        ->logo(asset('images/prozrachniy-logo-1-800x575.png'))
+                        ->logo(asset('images/logo.png'))
                         ->invoiceItems(fn(Package $record) => $record)
                         ->setHeadersAndColumns(['code' => 'Package Code', 'weight' => 'Weight', 'price' => 'Price',])
                         ->subTotal(fn(Package $record) => $record->price)

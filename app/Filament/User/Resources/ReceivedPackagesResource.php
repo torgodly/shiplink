@@ -15,6 +15,7 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
+use IbrahimBougaoua\FilamentRatingStar\Columns\RatingStarColumn;
 use Illuminate\Database\Eloquent\Builder;
 
 class ReceivedPackagesResource extends Resource
@@ -106,6 +107,7 @@ class ReceivedPackagesResource extends Resource
                     })
                     ->searchable(),
 
+
             ])
             ->filters([
                 //select status
@@ -127,7 +129,7 @@ class ReceivedPackagesResource extends Resource
                         ->status('Paid')
                         ->serialNumber('215478')
                         ->date(now()->format('Y-m-d'))
-                        ->logo(asset('images/prozrachniy-logo-1-800x575.png'))
+                        ->logo(asset('images/logo.png'))
                         ->invoiceItems(fn(Package $record) => $record)
                         ->setHeadersAndColumns(['code' => 'Package Code', 'weight' => 'Weight', 'price' => 'Price',])
                         ->subTotal(fn(Package $record) => $record->price)
