@@ -14,7 +14,7 @@ class ListUsers extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make()->mutateFormDataUsing(
+            Actions\CreateAction::make()->translateLabel()->mutateFormDataUsing(
                 function (array $data) {
 
                     if ($data['type'] == 'user') {

@@ -54,5 +54,12 @@
     "Is refrigerated": "يحتاج تبريد",
     "Dimensions": "الأبعاد",
     "Received Packages": "الشحنات المستلمة",
-    "WaitingForPickup": "في انتظار الاستلام"
+    "WaitingForPickup": "في انتظار الاستلام",
+    "Users": "المستخدمين",
+    "Name": "الاسم",
+    "Email": "البريد الإلكتروني",
+    "Phone": "الهاتف",
+    "Type": "النوع",
+    "Password confirmation": "تأكيد كلمة المرور",
+    "Password": "كلمة المرور"
 }

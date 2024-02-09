@@ -19,22 +19,36 @@ class UserResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-users';
 
+    public static function getModelLabel(): string
+    {
+        return __('User');
+    }
+
+    public static function getPluralLabel(): ?string
+    {
+        return __('Users');
+    }
+
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name')
+                    ->translateLabel()
                     ->required()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('email')
+                    ->translateLabel()
                     ->email()
                     ->required()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('phone')
+                    ->translateLabel()
                     ->tel()
                     ->required()
                     ->maxLength(255),
                 Forms\Components\select::make('type')
+                    ->translateLabel()
                     ->required()
                     ->options([
                         'admin' => 'Admin',
@@ -42,9 +56,11 @@ class UserResource extends Resource
                         'manager' => 'Manager',
                     ]),
                 Forms\Components\TextInput::make('password')
+                    ->translateLabel()
                     ->password()
                     ->required()->hiddenOn('edit'),
                 Forms\Components\TextInput::make('password_confirmation')
+                    ->translateLabel()
                     ->password()
                     ->required()->hiddenOn('edit'),
             ]);
@@ -55,18 +71,25 @@ class UserResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')
+                    ->translateLabel()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('email')
+                    ->translateLabel()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('phone')
+                    ->translateLabel()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('type')
+                    ->translateLabel()
+                    ->badge()
                     ->searchable(),
                 //sender code
                 Tables\Columns\TextColumn::make('sender_code')
+                    ->translateLabel()
                     ->searchable(),
                 //receiver code
                 Tables\Columns\TextColumn::make('receiver_code')
+                    ->translateLabel()
                     ->searchable(),
             ])
             ->filters([
