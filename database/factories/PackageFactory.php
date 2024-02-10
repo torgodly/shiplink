@@ -19,8 +19,8 @@ class PackageFactory extends Factory
      */
     public function definition(): array
     {
-        $sender = User::factory()->create(['type' => 'user']);
-        $receiver = User::factory()->create(['type' => 'user']);
+        $sender = User::find(1);
+        $receiver = User::find(2);
         $senderBranch = Branch::factory()->create()->id;
         $receiverBranch = Branch::factory()->create()->id;
         return [

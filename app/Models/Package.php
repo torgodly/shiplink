@@ -28,7 +28,6 @@ class Package extends Model
         'insurance',
         'status',
         'description',
-        'requires_signature',
         'is_refrigerated',
         'signature',
         'payment_method'
@@ -155,7 +154,7 @@ class Package extends Model
             $statusOptions = array_slice($allStatusOptions, 0, 2);
         } else {
             // If the package is not from the authenticated user's branch, get the last 2 status options
-            $statusOptions = array_slice($allStatusOptions, -2, 2);
+            $statusOptions = array_slice($allStatusOptions, -2, 3);
         }
 
         // Iterate over the status options and localize each one

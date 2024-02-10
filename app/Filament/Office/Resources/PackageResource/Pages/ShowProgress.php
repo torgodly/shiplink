@@ -52,7 +52,7 @@ class ShowProgress extends Page implements HasInfolists, HasActions, HasForms
             ->form([
                 Select::make('status')
                     ->translateLabel()
-                    ->options($this->record->CustomStatusOptions)
+                    ->options(ShippingStatus::array())
                     ->default(fn(Package $record) => $record->status)
                     ->live()
                     ->required()
@@ -68,7 +68,8 @@ class ShowProgress extends Page implements HasInfolists, HasActions, HasForms
             ->action(function (array $data): void {
                 $selectedOption = $data['status'];
                 $signature = $data['signature'] ?? null; // Provide a default value (null) if 'signature' is not set
-                $this->record->update(['status' => $selectedOption, 'signature' => $signature]);
+                $data = ['status' => $selectedOption, 'signature' => $signature];
+                $this->record->update($data);
             })->requiresConfirmation()
             ->icon('tabler-package')
             ->modalIcon('tabler-package')
@@ -95,6 +96,12 @@ class ShowProgress extends Page implements HasInfolists, HasActions, HasForms
                 'title' => __('📍 Package Ready for Pickup - Almost Yours!'),
                 'description' => __('Exciting news! Your package awaits you at the designated pickup point. It’s almost in your hands!'),
                 'status' => 'WaitingForPickup',
+                'created_at' => now(), // Adjust the date accordingly
+            ],
+            [
+                'title' => __('📦 Package Returned - Awaiting Pickup!'),
+                'description' => __('Your package has been returned to the sender branch and is awaiting pickup. Please contact us for further assistance.'),
+                'status' => 'Returned',
                 'created_at' => now(), // Adjust the date accordingly
             ],
             [
@@ -138,6 +145,7 @@ class ShowProgress extends Page implements HasInfolists, HasActions, HasForms
                                 'OutForDelivery' => 'tabler-location-share',
                                 'WaitingForPickup' => 'tabler-package',
                                 'Delivered' => 'tabler-discount-check-filled',
+                                'Returned' => 'tabler-refresh',
                                 default => null,
                             })
                             ->color(fn(string|null $state): string|null => match ($state) {
@@ -146,6 +154,7 @@ class ShowProgress extends Page implements HasInfolists, HasActions, HasForms
                                 'OutForDelivery' => $this->record->status === 'OutForDelivery' ? 'gray' : 'yellow',
                                 'WaitingForPickup' => $this->record->status === 'WaitingForPickup' ? 'gray' : 'orange',
                                 'Delivered' => 'green',
+                                'Returned' => 'danger',
                                 default => 'gray',
                             }),
 

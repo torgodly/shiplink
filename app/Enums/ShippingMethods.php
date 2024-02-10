@@ -7,5 +7,4 @@ enum ShippingMethods: string
     case Air = 'air';
     case Sea = 'sea';
     case Land = 'land';
-    case Other = 'other';
 }

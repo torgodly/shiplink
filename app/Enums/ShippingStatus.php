@@ -8,5 +8,8 @@ enum ShippingStatus: string
     case Pending = 'Pending';
     case OutForDelivery = 'OutForDelivery';
     case WaitingForPickup = 'WaitingForPickup';
+
+    case Returned = 'Returned';
     case Delivered = 'Delivered';
+
 }

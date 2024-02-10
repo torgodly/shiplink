@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use App\Models\Branch;
 use App\Models\Package;
 use Illuminate\Database\Seeder;
 
@@ -14,17 +13,19 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-         \App\Models\User::factory(2)->create(
-             [
-                 'type' => 'manager',
-             ]
-         );
+        \App\Models\User::factory(2)->create(
+            [
+                'type' => 'user',
+            ]
+        );
 
-            \App\Models\User::factory(2)->create(
-                [
-                    'type' => 'user',
-                ]
-            );
+//        \App\Models\User::factory(2)->create(
+//            [
+//                'type' => 'manager',
+//            ]
+//        );
+
+
 
 
 //         Branch::factory(10)->create();/
@@ -35,6 +36,6 @@ class DatabaseSeeder extends Seeder
             'type' => 'admin',
         ]);
 
-//        Package::factory(1)->create();
+        Package::factory(1)->create();
     }
 }
