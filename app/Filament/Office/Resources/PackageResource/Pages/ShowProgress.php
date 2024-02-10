@@ -52,7 +52,7 @@ class ShowProgress extends Page implements HasInfolists, HasActions, HasForms
             ->form([
                 Select::make('status')
                     ->translateLabel()
-                    ->options(ShippingStatus::array())
+                    ->options(collect($this->record->CustomStatusOptions)->mapWithKeys(fn($status) => [$status => __($status)])->toArray())
                     ->default(fn(Package $record) => $record->status)
                     ->live()
                     ->required()
