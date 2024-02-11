@@ -57,8 +57,8 @@ class User extends Authenticatable implements FilamentUser
     {
         static::creating(function ($user) {
             if ($user->type === null) {
-                $user->sender_code = 'Send-' . Str::random(10);
-                $user->receiver_code = 'Reserve-' . Str::random(10);
+                $user->sender_code = 'SND-' . Str::random(10);
+                $user->receiver_code = 'REC-' . Str::random(10);
             }
         });
     }

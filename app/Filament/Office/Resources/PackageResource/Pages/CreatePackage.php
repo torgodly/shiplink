@@ -14,7 +14,7 @@ class CreatePackage extends CreateRecord
 
     protected function mutateFormDataBeforeCreate(array $data): array
     {
-        $data['code'] = 'PKG-' . Str::random(10);
+        $data['code'] = 'ShipLink-' . Str::random(10);
         return $data;
     }
 }

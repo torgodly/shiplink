@@ -18,8 +18,8 @@ class ListUsers extends ListRecords
                 function (array $data) {
 
                     if ($data['type'] == 'user') {
-                        $data['sender_code'] = 'Send-' . Str::random(10);
-                        $data['receiver_code'] = 'Reserve-' . Str::random(10);
+                        $data['sender_code'] = 'SND-' . Str::random(10);
+                        $data['receiver_code'] = 'REC-' . Str::random(10);
                     }
 
                     return $data;
