@@ -35,6 +35,11 @@ class Package extends Model
 
     ];
 
+    protected $appends = [
+        'sender_name',
+        'receiver_name'
+    ];
+
     //sender
     public function sender()
     {
@@ -153,6 +158,18 @@ class Package extends Model
 
         // If the package is not from the authenticated user's branch, return the last two status options
         return $allStatusOptions->slice(-3)->toArray();
+    }
+
+    //sender name
+    public function getSenderNameAttribute()
+    {
+        return $this->sender->name;
+    }
+
+    //receiver name
+    public function getReceiverNameAttribute()
+    {
+        return $this->receiver->name;
     }
 
 }

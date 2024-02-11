@@ -7,9 +7,12 @@ use App\Enums\ShippingStatus;
 use App\Filament\Office\Resources\PackageResource\Pages;
 use App\Filament\Office\Resources\PackageResource\RelationManagers;
 use App\Models\Package;
+use App\Models\User;
 use App\Tables\Actions\InvoiceAction;
 use Filament\Forms;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
+use Filament\Forms\Set;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Actions\Action;
@@ -17,6 +20,7 @@ use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 use LaraZeus\Qr\Facades\Qr;
 
 
@@ -177,8 +181,11 @@ class PackageResource extends Resource
                     ->schema([Forms\Components\Section::make('Label')
                         ->schema([
 
+
+                            TextInput::make('sender_name')->label('Sender Name')->translateLabel()->disabled(),
+                            TextInput::make('receiver_name')->label('Receiver Name')->translateLabel()->disabled(),
                             Forms\Components\Select::make('sender_code')
-                                ->label('Sender')
+                                ->label('Sender Code')
                                 ->translateLabel()
                                 ->relationship('sender', 'sender_code', function ($get, Builder $query) {
                                     $receiverCode = $get('receiver_code');
@@ -186,17 +193,19 @@ class PackageResource extends Resource
                                 })
                                 ->preload()
                                 ->searchable()
+                                ->afterStateUpdated(fn(Set $set, ?string $state) => $set('sender_name', User::where('sender_code', $state)->first()->name))
                                 ->reactive()
                                 ->required(),
 
                             Forms\Components\Select::make('receiver_code')
-                                ->label('Receiver')
+                                ->label('Receiver Code')
                                 ->translateLabel()
                                 ->required()
                                 ->relationship('receiver', 'receiver_code', function ($get, Builder $query) {
                                     $senderCode = $get('sender_code');
                                     return $query->when($senderCode, fn($q) => $q->where('sender_code', '!=', $senderCode));
                                 })
+                                ->afterStateUpdated(fn(Set $set, ?string $state) => $set('receiver_name', User::where('receiver_code', $state)->first()->name))
                                 ->preload()
                                 ->searchable()
                                 ->reactive(),
