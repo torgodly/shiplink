@@ -40,11 +40,13 @@ class UserResource extends Resource
                 Forms\Components\TextInput::make('email')
                     ->translateLabel()
                     ->email()
+                    ->unique('users', 'email', ignoreRecord: true)
                     ->required()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('phone')
                     ->translateLabel()
                     ->tel()
+                    ->unique('users', 'phone', ignoreRecord: true)
                     ->required()
                     ->maxLength(255),
                 Forms\Components\select::make('type')
@@ -75,6 +77,7 @@ class UserResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('email')
                     ->translateLabel()
+
                     ->searchable(),
                 Tables\Columns\TextColumn::make('phone')
                     ->translateLabel()
@@ -91,13 +94,15 @@ class UserResource extends Resource
                 Tables\Columns\TextColumn::make('receiver_code')
                     ->translateLabel()
                     ->searchable(),
+
+                Tables\Columns\ToggleColumn::make('active')->label('Active')->translateLabel(),
             ])
             ->filters([
                 //
             ])
             ->actions([
                 Tables\Actions\EditAction::make()->requiresConfirmation(true)->modalWidth('2xl')->modalIcon('heroicon-o-users'),
-                Impersonate::make()->visible(fn($record) => $record->type === 'manager')->redirectTo('/office')
+                Impersonate::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
