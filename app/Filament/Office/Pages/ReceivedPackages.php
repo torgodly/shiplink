@@ -19,32 +19,32 @@ use Filament\Tables\Contracts\HasTable;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Contracts\Support\Htmlable;
-use Illuminate\Contracts\View\View;
 
 class ReceivedPackages extends Page implements HasTable, HasActions
 {
     use InteractsWithTable;
     use InteractsWithActions;
+
     protected static ?string $navigationIcon = 'tabler-package-import';
 
     protected static string $view = 'filament.office.pages.received-packages';
+
+    /**
+     * @return int|null
+     */
+    public static function getNavigationSort(): ?int
+    {
+        return 2;
+    }
 
     public static function getNavigationLabel(): string
     {
         return __(parent::getNavigationLabel());
     }
 
-    public function getHeading(): string|Htmlable
-    {
-        return __(parent::getHeading());
-    }
-
-
-
     public static function table(Table $table): Table
     {
         return $table
-
             ->query(Package::query()->where('receiver_branch_id', \Auth::user()->mangedbrance?->id))
             ->columns([
                 TextColumn::make('code')
@@ -102,13 +102,13 @@ class ReceivedPackages extends Page implements HasTable, HasActions
                 TextColumn::make('status')
                     ->translateLabel()
                     ->badge()
-                    ->formatStateUsing(fn (string $state): string => __($state))
+                    ->formatStateUsing(fn(string $state): string => __($state))
                     ->color(fn(string $state): string => match ($state) {
-                        __('Pending') => 'green',
                         'InTransit' => 'blue',
                         'OutForDelivery' => 'yellow',
                         'WaitingForPickup' => 'orange',
                         'Delivered' => 'green',
+                        'Returned' => 'danger',
                         default => 'gray',
                     })
                     ->searchable(),
@@ -127,7 +127,9 @@ class ReceivedPackages extends Page implements HasTable, HasActions
                     ->color('primary')
                     ->url(fn($record) => PackageResource::getUrl('show', ['record' => $record])),
                 ActionGroup::make([
-                    ViewAction::make()->requiresConfirmation(true),
+                    ViewAction::make()->requiresConfirmation(true)
+                        ->url(fn($record) => PackageResource::getUrl('view', ['record' => $record])),
+
                     InvoiceAction::make('Invoice')
                         ->translateLabel()
                         ->icon('tabler-file-invoice')
@@ -151,6 +153,11 @@ class ReceivedPackages extends Page implements HasTable, HasActions
 
 
             ]);
+    }
+
+    public function getHeading(): string|Htmlable
+    {
+        return __(parent::getHeading());
     }
 
 }

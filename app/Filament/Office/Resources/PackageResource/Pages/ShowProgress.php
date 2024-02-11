@@ -17,6 +17,7 @@ use Filament\Infolists\Infolist;
 use Filament\Resources\Pages\Page;
 use Filament\Support\Concerns\HasBadge;
 use Illuminate\Contracts\Support\Htmlable;
+use Illuminate\Support\Arr;
 use JaOcero\ActivityTimeline\Components\ActivityDate;
 use JaOcero\ActivityTimeline\Components\ActivityDescription;
 use JaOcero\ActivityTimeline\Components\ActivityIcon;
@@ -52,7 +53,7 @@ class ShowProgress extends Page implements HasInfolists, HasActions, HasForms
             ->form([
                 Select::make('status')
                     ->translateLabel()
-                    ->options(collect($this->record->CustomStatusOptions)->mapWithKeys(fn($status) => [$status => __($status)])->toArray())
+                    ->options(Arr::except(collect($this->record->CustomStatusOptions)->mapWithKeys(fn($status) => [$status => __($status)])->toArray(), [$this->record->status]))
                     ->default(fn(Package $record) => $record->status)
                     ->live()
                     ->required()
@@ -114,8 +115,19 @@ class ShowProgress extends Page implements HasInfolists, HasActions, HasForms
         ];
         $statusOrder = ShippingStatus::values();
 
-        $currentStatusIndex = array_search($currentStatus, $statusOrder);
-        $PackageStatus = array_filter($PackageStatus, fn($activity) => array_search($activity['status'], $statusOrder) <= $currentStatusIndex);
+
+        // Adjusted logic to filter PackageStatus based on currentStatus
+        if ($currentStatus === 'Returned') {
+            // If status is Returned, exclude Delivered status
+            $PackageStatus = array_filter($PackageStatus, fn($activity) => $activity['status'] !== 'Delivered');
+        } elseif ($currentStatus === 'Delivered') {
+            // If status is Delivered, exclude Returned status
+            $PackageStatus = array_filter($PackageStatus, fn($activity) => $activity['status'] !== 'Returned');
+        } else {
+            // For other statuses, show up to the current status
+            $currentStatusIndex = array_search($currentStatus, $statusOrder);
+            $PackageStatus = array_filter($PackageStatus, fn($activity) => array_search($activity['status'], $statusOrder) <= $currentStatusIndex);
+        }
 
         return $infolist
             ->name('somethingss')

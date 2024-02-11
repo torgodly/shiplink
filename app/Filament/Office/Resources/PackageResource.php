@@ -97,11 +97,11 @@ class PackageResource extends Resource
                     ->badge()
                     ->formatStateUsing(fn(string $state): string => __($state))
                     ->color(fn(string $state): string => match ($state) {
-                        __('Pending') => 'green',
                         'InTransit' => 'blue',
                         'OutForDelivery' => 'yellow',
                         'WaitingForPickup' => 'orange',
                         'Delivered' => 'green',
+                        'Returned' => 'danger',
                         default => 'gray',
                     })
                     ->searchable(),
