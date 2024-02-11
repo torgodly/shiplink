@@ -12,9 +12,12 @@ use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Actions\Action;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
+use LaraZeus\Qr\Facades\Qr;
 
 
 class PackageResource extends Resource
@@ -22,6 +25,7 @@ class PackageResource extends Resource
     protected static ?string $model = Package::class;
 
     protected static ?string $navigationIcon = 'tabler-package-export';
+
     public static function getNavigationGroup(): ?string
     {
         return __('Shipments');
@@ -127,9 +131,11 @@ class PackageResource extends Resource
                     ->icon('tabler-settings-cog')
                     ->color('primary')
                     ->url(fn($record) => PackageResource::getUrl('show', ['record' => $record])),
+                Action::make('qr')->modalContent(fn(Model $record) => Qr::render($record->code, statePath: $record->code))->icon('tabler-qrcode')->label('QR Code')->translateLabel(),
                 Tables\Actions\ActionGroup::make([
                     Tables\Actions\EditAction::make(),
                     Tables\Actions\ViewAction::make()->requiresConfirmation(true),
+
 
                     InvoiceAction::make('Invoice')
                         ->translateLabel()
@@ -300,7 +306,6 @@ class PackageResource extends Resource
             ])
             ->columns(3);
     }
-
 
 
     public static function getRelations(): array

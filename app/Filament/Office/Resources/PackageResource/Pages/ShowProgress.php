@@ -23,6 +23,7 @@ use JaOcero\ActivityTimeline\Components\ActivityDescription;
 use JaOcero\ActivityTimeline\Components\ActivityIcon;
 use JaOcero\ActivityTimeline\Components\ActivitySection;
 use JaOcero\ActivityTimeline\Components\ActivityTitle;
+use LaraZeus\Qr\Facades\Qr;
 use Saade\FilamentAutograph\Forms\Components\SignaturePad;
 
 class ShowProgress extends Page implements HasInfolists, HasActions, HasForms
@@ -175,4 +176,6 @@ class ShowProgress extends Page implements HasInfolists, HasActions, HasForms
                     ->headingVisible(true)
             ]);
     }
+
+
 }

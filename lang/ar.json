@@ -68,5 +68,6 @@
     "Returned": "تم الإرجاع",
     "\uD83D\uDCE6 Package Returned - Awaiting Pickup!": "\uD83D\uDCE6 تم إرجاع الشحنة - في انتظار الاستلام!",
     "Your package has been returned to the sender branch and is awaiting pickup. Please contact us for further assistance.": "تم إرجاع الشحنة إلى فرع المرسل وتنتظر الاستلام. يرجى الاتصال بنا للمزيد من المساعدة.",
-    "Shipments": "الشحنات"
+    "Shipments": "الشحنات",
+    "QR Code": "QR كود"
 }
