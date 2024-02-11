@@ -172,13 +172,7 @@ class ShowProgress extends Page implements HasInfolists, HasActions, HasForms
 
 
                     ])
-//                    ->showItemsCount(2) // Show up to 2 items
-//                    ->showItemsLabel('View Old') // Show "View Old" as link label
-//                    ->showItemsIcon('heroicon-m-chevron-down') // Show button icon
-//                    ->showItemsColor('gray') // Show button color and it supports all colors
-//                    ->aside(true)
-                    ->headingVisible(true) // make heading visible or not
-//                    ->extraAttributes(['class' => 'my-new-class']) // add extra class
+                    ->headingVisible(true)
             ]);
     }
 }

@@ -23,7 +23,7 @@ class Package extends Model
         'width',
         'length',
         'fragile',
-        'hazardous',
+        'fast_shipping',
         'shipping_method',
         'insurance',
         'status',
@@ -73,7 +73,7 @@ class Package extends Model
             $price += 10;
         }
 
-        if ($this->hazardous) {
+        if ($this->fast_shipping) {
             $price += 20;
         }
 

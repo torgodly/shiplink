@@ -11,7 +11,7 @@
 
         @page {
             {{--size: {{ $attributes->has('size') ? $attributes->get('size') : $size }};--}}
-                                             size: A4;
+                                                size: A4;
             margin: 0;
         }
 
@@ -156,18 +156,8 @@
                 <div class="flex justify-between">
                     <div class="mt-3">
                         @if($invoice->logo)
-                            <svg class="w-10 h-10" width="26" height="26" viewBox="0 0 26 26" fill="none"
-                                 xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M1 26V13C1 6.37258 6.37258 1 13 1C19.6274 1 25 6.37258 25 13C25 19.6274 19.6274 25 13 25H12"
-                                    class="stroke-blue-600 dark:stroke-white" stroke="currentColor" stroke-width="2"/>
-                                <path
-                                    d="M5 26V13.16C5 8.65336 8.58172 5 13 5C17.4183 5 21 8.65336 21 13.16C21 17.6666 17.4183 21.32 13 21.32H12"
-                                    class="stroke-blue-600 dark:stroke-white" stroke="currentColor" stroke-width="2"/>
-                                <circle cx="13" cy="13.0214" r="5" fill="currentColor"
-                                        class="fill-blue-600 dark:fill-white"/>
-                            </svg>
-                            {{--                        <img class="w-10 h-10" width="26" height="26" src="{{$invoice->logo}}" alt="logo">--}}
+
+                            <img class="h-[2.5rem]" src="{{$invoice->logo}}" alt="logo">
                         @endif
 
                     </div>

@@ -28,7 +28,10 @@ class ReceivedPackages extends Page implements HasTable, HasActions
     protected static ?string $navigationIcon = 'tabler-package-import';
 
     protected static string $view = 'filament.office.pages.received-packages';
-
+    public static function getNavigationGroup(): ?string
+    {
+        return __('Shipments');
+    }
     /**
      * @return int|null
      */
@@ -92,7 +95,7 @@ class ReceivedPackages extends Page implements HasTable, HasActions
                     ->translateLabel()
                     ->boolean()
                     ->toggleable(isToggledHiddenByDefault: true),
-                IconColumn::make('hazardous')
+                IconColumn::make('fast_shipping')
                     ->translateLabel()
                     ->boolean()
                     ->toggleable(isToggledHiddenByDefault: true),
@@ -154,6 +157,7 @@ class ReceivedPackages extends Page implements HasTable, HasActions
 
             ]);
     }
+
 
     public function getHeading(): string|Htmlable
     {

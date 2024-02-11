@@ -22,7 +22,7 @@ return new class extends Migration {
             $table->decimal('width', 10, 2);
             $table->decimal('length', 10, 2);
             $table->boolean('fragile')->nullable();
-            $table->boolean('hazardous')->nullable();
+            $table->boolean('fast_shipping')->nullable();
             $table->string('shipping_method')->nullable();
             $table->boolean('insurance')->default(false);
             $table->boolean('is_refrigerated')->default(false);

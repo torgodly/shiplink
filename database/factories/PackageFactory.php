@@ -34,7 +34,7 @@ class PackageFactory extends Factory
             'width' => $this->faker->randomFloat(2, 0, 100),
             'length' => $this->faker->randomFloat(2, 0, 100),
             'fragile' => $this->faker->boolean,
-            'hazardous' => $this->faker->boolean,
+            'fast_shipping' => $this->faker->boolean,
             'shipping_method' => $this->faker->randomElement(['air', 'sea', 'land']),
             'insurance' => $this->faker->boolean,
             'is_refrigerated' => $this->faker->boolean,

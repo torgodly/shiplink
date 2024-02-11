@@ -22,6 +22,11 @@ class PackageResource extends Resource
     protected static ?string $model = Package::class;
 
     protected static ?string $navigationIcon = 'tabler-package-export';
+    public static function getNavigationGroup(): ?string
+    {
+        return __('Shipments');
+    }
+
 
     /**
      * @return string
@@ -39,6 +44,7 @@ class PackageResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->query(Package::query()->where('sender_branch_id', auth()->user()->mangedbrance->id))
             ->columns([
                 Tables\Columns\TextColumn::make('code')
                     ->label('Package Code')
@@ -85,7 +91,7 @@ class PackageResource extends Resource
                     ->translateLabel()
                     ->boolean()
                     ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\IconColumn::make('hazardous')
+                Tables\Columns\IconColumn::make('fast_shipping')
                     ->translateLabel()
                     ->boolean()
                     ->toggleable(isToggledHiddenByDefault: true),
@@ -245,11 +251,11 @@ class PackageResource extends Resource
                                     ->offIcon('tabler-artboard')
                                     ->helperText('Is the package fragile?')
                                     ->required(),
-                                Forms\Components\Toggle::make('hazardous')
-                                    ->label('Hazardous')
-                                    ->onIcon('tabler-biohazard')
-                                    ->offIcon('tabler-leaf')
-                                    ->helperText('Is the package hazardous?')
+                                Forms\Components\Toggle::make('fast_shipping')
+                                    ->label('Fast Shipping')
+                                    ->onIcon('tabler-brand-speedtest')
+                                    ->offIcon('tabler-brand-speedtest')
+                                    ->helperText('Do you want to ship the package fast?')
                                     ->required(),
                                 Forms\Components\Toggle::make('insurance')
                                     ->label('Insurance')
@@ -295,10 +301,7 @@ class PackageResource extends Resource
             ->columns(3);
     }
 
-    public static function getEloquentQuery(): Builder
-    {
-        return parent::getEloquentQuery()->where('sender_branch_id', \Auth::user()->mangedbrance?->id);
-    }
+
 
     public static function getRelations(): array
     {

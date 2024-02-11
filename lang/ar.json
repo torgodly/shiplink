@@ -49,7 +49,7 @@
     "Delivered": "تم التوصيل والاستلام",
     "Change Status": "تغيير الحالة",
     "Change the status of this package.": "تغيير حالة هذه الشحنة.",
-    "Hazardous": "مواد خطرة",
+    "fast_shipping": "شحن سريع",
     "Fragile": "قابل للكسر",
     "Is refrigerated": "يحتاج تبريد",
     "Dimensions": "الأبعاد",
@@ -67,5 +67,6 @@
     "Manager": "المدير",
     "Returned": "تم الإرجاع",
     "\uD83D\uDCE6 Package Returned - Awaiting Pickup!": "\uD83D\uDCE6 تم إرجاع الشحنة - في انتظار الاستلام!",
-    "Your package has been returned to the sender branch and is awaiting pickup. Please contact us for further assistance.": "تم إرجاع الشحنة إلى فرع المرسل وتنتظر الاستلام. يرجى الاتصال بنا للمزيد من المساعدة."
+    "Your package has been returned to the sender branch and is awaiting pickup. Please contact us for further assistance.": "تم إرجاع الشحنة إلى فرع المرسل وتنتظر الاستلام. يرجى الاتصال بنا للمزيد من المساعدة.",
+    "Shipments": "الشحنات"
 }
