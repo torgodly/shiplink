@@ -1,9 +1,8 @@
 <x-filament-panels::page>
     <div>
-        {{ $this->ChangeStatusAction }}
+        {{ $this->RatingAction }}
 
-        <x-filament-actions::modals  />
+        <x-filament-actions::modals />
     </div>
     {{$this->activityTimelineInfolist}}
-
 </x-filament-panels::page>

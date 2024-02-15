@@ -1,39 +1,69 @@
 <?php
 
-namespace App\Filament\Resources\PackageResource\Pages;
+namespace App\Filament\User\Pages;
 
 use App\Enums\ShippingStatus;
-use App\Filament\Resources\PackageResource;
 use App\Models\Package;
+use Filament\Actions\Action;
 use Filament\Actions\Concerns\InteractsWithActions;
 use Filament\Actions\Contracts\HasActions;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Infolists\Concerns\InteractsWithInfolists;
 use Filament\Infolists\Contracts\HasInfolists;
 use Filament\Infolists\Infolist;
-use Filament\Resources\Pages\Page;
-use Filament\Support\Concerns\HasBadge;
-use Illuminate\Contracts\Support\Htmlable;
-use JaOcero\ActivityTimeline\Components\ActivityDate;
+use Filament\Pages\Page;
+use IbrahimBougaoua\FilamentRatingStar\Actions\RatingStar;
+use Illuminate\Support\Arr;
 use JaOcero\ActivityTimeline\Components\ActivityDescription;
 use JaOcero\ActivityTimeline\Components\ActivityIcon;
 use JaOcero\ActivityTimeline\Components\ActivitySection;
 use JaOcero\ActivityTimeline\Components\ActivityTitle;
+use Saade\FilamentAutograph\Forms\Components\SignaturePad;
 
-class ShowProgress extends Page implements HasInfolists
+class ShowProgress extends Page implements HasInfolists, HasActions, HasForms
 {
+    use InteractsWithActions;
+    use InteractsWithForms;
     use InteractsWithInfolists;
 
-    use HasBadge;
+    protected static ?string $navigationIcon = 'heroicon-o-document-text';
+    protected static ?string $slug = 'show-progress/{record}/show';
+    protected static bool $shouldRegisterNavigation = false;
+    protected static string $view = 'filament.user.pages.show-progress';
 
-    protected static string $resource = PackageResource::class;
-    protected static string $view = 'filament.resources.package-resource.pages.show-progress';
-    public Package $record;
+    public $record;
 
-    public function getTitle(): string|Htmlable
+    public function mount(Package $record)
     {
-        return __('Package Progress');
+        $this->record = $record;
+            //mountAction('Rating')
+    }
+
+    public function RatingAction(): Action
+    {
+        return Action::make('Rating')
+            ->label('Rating')
+            ->translateLabel()
+            ->record($this->record)
+            ->form([
+//                TODO: crete star rating field and remove teh old pakage
+                RatingStar::make('rating')
+                    ->label('Rating')
+
+
+            ])
+            // ...
+            ->action(function (array $data): void {
+
+              dd($data);
+                $this->record->update($data);
+            })->requiresConfirmation()
+            ->icon('tabler-star')
+            ->modalIcon('tabler-package')
+            ->color('yellow')
+            ->modalDescription(__('Change the status of this package.'));
     }
 
     public function activityTimelineInfolist(Infolist $infolist): Infolist
@@ -44,7 +74,7 @@ class ShowProgress extends Page implements HasInfolists
                 'title' => __("🎉 Order Confirmed - We're On It!"),
                 'description' => __('Great news! We have received your order and are working on it with utmost priority. Stay tuned for updates!'),
                 'status' => 'Pending',
-                'created_at' => now(), // Adjust the date accordingly
+//                'created_at' => '-', // Adjust the date accordingly
             ],
             [
                 'title' => __('✈️ Your Package is Flying High - In Transit!'),
@@ -132,6 +162,5 @@ class ShowProgress extends Page implements HasInfolists
                     ->headingVisible(true)
             ]);
     }
-
 
 }

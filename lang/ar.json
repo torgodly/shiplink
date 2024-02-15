@@ -84,5 +84,6 @@
     "sea": "بحري",
     "land": "بري",
     "The branch you are assigned to is inactive, please contact the admin": "الفرع الذي تم تعيينك إليه غير نشط، يرجى الاتصال بالمدير",
-    "You are not assigned to any branch, please contact the admin": "لم يتم تعيينك إلى أي فرع، يرجى الاتصال بالمدير"
+    "You are not assigned to any branch, please contact the admin": "لم يتم تعيينك إلى أي فرع، يرجى الاتصال بالمدير",
+    "View": "عرض"
 }

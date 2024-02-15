@@ -49,6 +49,7 @@ class ShowProgress extends Page implements HasInfolists, HasActions, HasForms
             ->label('Change Status')
             ->translateLabel()
             ->record($this->record)
+
             ->form([
                 Select::make('status')
                     ->translateLabel()
@@ -72,6 +73,7 @@ class ShowProgress extends Page implements HasInfolists, HasActions, HasForms
             })->requiresConfirmation()
             ->icon('tabler-package')
             ->modalIcon('tabler-package')
+
             ->modalDescription(__('Change the status of this package.'));
     }
 
