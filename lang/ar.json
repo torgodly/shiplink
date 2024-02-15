@@ -73,5 +73,14 @@
     "Sender Name": "اسم المرسل",
     "Receiver Name": "اسم المستلم",
     "Sender Code": "كود المرسل",
-    "Receiver Code": "كود المستلم"
+    "Receiver Code": "كود المستلم",
+    "Packages": "الشحنات",
+    "Fast shipping": "شحن سريع",
+    "Management": "الإدارة",
+    "Shipping method": "طريقة الشحن",
+    "Sender Branch": "فرع المرسل",
+    "Receiver Branch": "فرع المستلم",
+    "air": "جوي",
+    "sea": "بحري",
+    "land": "بري"
 }
