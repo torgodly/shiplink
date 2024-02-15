@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Enums\BranchStatus;
 use App\Filament\Resources\BranchResource\Pages;
 use App\Filament\Resources\BranchResource\RelationManagers;
 use App\Models\Branch;
@@ -22,6 +23,7 @@ class BranchResource extends Resource
     {
         return __('Management');
     }
+
     public static function getModelLabel(): string
     {
         return __(parent::getModelLabel());
@@ -71,6 +73,11 @@ class BranchResource extends Resource
                     ->translateLabel()
                     ->numeric()
                     ->sortable(),
+                Tables\Columns\ToggleColumn::make('status')
+                    ->translateLabel()
+                    ->label('Status')
+                    ->sortable(),
+
             ])
             ->filters([
                 //

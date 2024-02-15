@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\BranchStatus;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -16,6 +17,7 @@ return new class extends Migration {
             $table->string('city');
             $table->string('country');
             $table->foreignId('manager_id');
+            $table->boolean('status')->default(true);
             $table->timestamps();
         });
     }

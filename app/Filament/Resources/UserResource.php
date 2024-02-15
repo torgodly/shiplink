@@ -99,6 +99,7 @@ class UserResource extends Resource
                 Tables\Columns\TextColumn::make('receiver_code')
                     ->translateLabel()
                     ->searchable(),
+
             ])
             ->filters([
                 //

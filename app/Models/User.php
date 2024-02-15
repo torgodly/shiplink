@@ -88,6 +88,9 @@ class User extends Authenticatable implements FilamentUser
         return $this->hasOne(Branch::class, 'manager_id');
     }
 
+    //has a mangedbrance
+
+
     public function getBranchNameAttribute()
     {
         return $this->mangedbrance?->name;

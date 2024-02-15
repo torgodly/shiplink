@@ -2,6 +2,7 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\Office\Pages\Login;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
@@ -38,7 +39,7 @@ class OfficePanelProvider extends PanelProvider
             )
             ->brandLogo(asset('images/logo.png'))
             ->brandLogoHeight('3rem')
-            ->login()
+            ->login(Login::class)
             ->viteTheme('resources/css/filament/office/theme.css')
             ->colors([
                 'primary' => '#247DFF',

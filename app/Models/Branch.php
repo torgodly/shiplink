@@ -15,6 +15,7 @@ class Branch extends Model
         'city',
         'country',
         'manager_id',
+        'status',
     ];
 
 
@@ -28,4 +29,5 @@ class Branch extends Model
     {
         return $this->manager?->name;
     }
+
 }
