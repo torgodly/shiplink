@@ -18,12 +18,10 @@ use Filament\Resources\Pages\Page;
 use Filament\Support\Concerns\HasBadge;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Support\Arr;
-use JaOcero\ActivityTimeline\Components\ActivityDate;
 use JaOcero\ActivityTimeline\Components\ActivityDescription;
 use JaOcero\ActivityTimeline\Components\ActivityIcon;
 use JaOcero\ActivityTimeline\Components\ActivitySection;
 use JaOcero\ActivityTimeline\Components\ActivityTitle;
-use LaraZeus\Qr\Facades\Qr;
 use Saade\FilamentAutograph\Forms\Components\SignaturePad;
 
 class ShowProgress extends Page implements HasInfolists, HasActions, HasForms
@@ -55,7 +53,6 @@ class ShowProgress extends Page implements HasInfolists, HasActions, HasForms
                 Select::make('status')
                     ->translateLabel()
                     ->options(Arr::except(collect($this->record->CustomStatusOptions)->mapWithKeys(fn($status) => [$status => __($status)])->toArray(), [$this->record->status]))
-                    ->default(fn(Package $record) => $record->status)
                     ->live()
                     ->required()
                     ->native(false),
@@ -86,7 +83,7 @@ class ShowProgress extends Page implements HasInfolists, HasActions, HasForms
                 'title' => __("🎉 Order Confirmed - We're On It!"),
                 'description' => __('Great news! We have received your order and are working on it with utmost priority. Stay tuned for updates!'),
                 'status' => 'Pending',
-                'created_at' => now(), // Adjust the date accordingly
+//                'created_at' => '-', // Adjust the date accordingly
             ],
             [
                 'title' => __('✈️ Your Package is Flying High - In Transit!'),
@@ -148,9 +145,7 @@ class ShowProgress extends Page implements HasInfolists, HasActions, HasForms
                             ->placeholder('No title is set'),
                         ActivityDescription::make('description')
                             ->placeholder('No description is set'),
-                        ActivityDate::make('created_at')
-                            ->date('F j, Y', 'Asia/Manila')
-                            ->placeholder('No date is set.'),
+
                         ActivityIcon::make('status')
                             ->icon(fn(string|null $state): string|null => match ($state) {
                                 'Pending' => 'tabler-clock',

@@ -109,9 +109,7 @@ class ShowProgress extends Page implements HasInfolists, HasActions, HasForms
                             ->placeholder('No title is set'),
                         ActivityDescription::make('description')
                             ->placeholder('No description is set'),
-                        ActivityDate::make('created_at')
-                            ->date('F j, Y', 'Asia/Manila')
-                            ->placeholder('No date is set.'),
+
                         ActivityIcon::make('status')
                             ->icon(fn(string|null $state): string|null => match ($state) {
                                 'Pending' => 'tabler-clock',
