@@ -85,5 +85,14 @@
     "land": "بري",
     "The branch you are assigned to is inactive, please contact the admin": "الفرع الذي تم تعيينك إليه غير نشط، يرجى الاتصال بالمدير",
     "You are not assigned to any branch, please contact the admin": "لم يتم تعيينك إلى أي فرع، يرجى الاتصال بالمدير",
-    "View": "عرض"
+    "View": "عرض",
+    "Shipping Price": "سعر الشحن",
+    "receiver branch": "الفرع المستلم",
+    "sender branch": "الفرع المرسل",
+    "receiver code": "كود المستلم",
+    "sender code": "كود المرسل",
+    "Recipient": "المستلم",
+    "Thank you!": "شكرًا لك!",
+    "If you have any questions concerning this invoice, use the following contact information:": "إذا كان لديك أي استفسارات بخصوص هذه الفاتورة، استخدم المعلومات التالية للتواصل:",
+    "Signature:": "التوقيع:"
 }

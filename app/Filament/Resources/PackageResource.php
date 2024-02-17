@@ -6,6 +6,8 @@ use App\Enums\ShippingMethods;
 use App\Enums\ShippingStatus;
 use App\Filament\Resources\PackageResource\Pages;
 use App\Filament\Resources\PackageResource\RelationManagers;
+use App\Helper\InvoiceActionHelper;
+use App\Helper\PackageFilterHelper;
 use App\Models\Package;
 use App\Models\User;
 use Filament\Forms\Components\Group;
@@ -270,29 +272,7 @@ class PackageResource extends Resource
                     ->searchable(),
 
             ])
-            ->filters([
-
-                SelectFilter::make('status')
-                    ->translateLabel()
-                    ->options(collect(ShippingStatus::array())->map(fn($value, $key) => __($key))->toArray()),
-                SelectFilter::make('shipping_method')
-                    ->translateLabel()
-                    ->options(collect(ShippingMethods::array())->map(fn($value, $key) => __($value))->toArray()),
-                SelectFilter::make('sender_branch_id')
-                    ->label('Sender Branch')
-                    ->translateLabel()
-                    ->relationship('senderBranch', 'name')
-                    ->preload()
-                    ->searchable(),
-                SelectFilter::make('receiver_branch_id')
-                    ->label('Receiver Branch')
-                    ->translateLabel()
-                    ->relationship('receiverBranch', 'name')
-                    ->preload()
-                    ->searchable(),
-
-
-            ])
+            ->filters(PackageFilterHelper::setPackageFilter())
             ->actions([
                 Tables\Actions\Action::make('Package Status')
                     ->label('Status')
@@ -301,7 +281,7 @@ class PackageResource extends Resource
                     ->color('primary')
                     ->url(fn($record) => \App\Filament\Office\Resources\PackageResource::getUrl('show', ['record' => $record])),
                 Tables\Actions\ViewAction::make()->requiresConfirmation(true)->color('primary'),
-
+                InvoiceActionHelper::setupInvoiceAction()->stream()
                 //change status action
 
             ]);

@@ -4,8 +4,9 @@ namespace App\Filament\Office\Pages;
 
 use App\Enums\ShippingStatus;
 use App\Filament\Office\Resources\PackageResource;
+use App\Helper\InvoiceActionHelper;
+use App\Helper\PackageFilterHelper;
 use App\Models\Package;
-use App\Tables\Actions\InvoiceAction;
 use Filament\Actions\Concerns\InteractsWithActions;
 use Filament\Actions\Contracts\HasActions;
 use Filament\Actions\ViewAction;
@@ -28,10 +29,12 @@ class ReceivedPackages extends Page implements HasTable, HasActions
     protected static ?string $navigationIcon = 'tabler-package-import';
 
     protected static string $view = 'filament.office.pages.received-packages';
+
     public static function getNavigationGroup(): ?string
     {
         return __('Shipments');
     }
+
     /**
      * @return int|null
      */
@@ -117,11 +120,7 @@ class ReceivedPackages extends Page implements HasTable, HasActions
                     ->searchable(),
 
             ])
-            ->filters([
-                SelectFilter::make('status')
-                    ->translateLabel()
-                    ->options(collect(ShippingStatus::array())->map(fn($value, $key) => __($key))->toArray())
-            ])
+            ->filters(PackageFilterHelper::setPackageFilter())
             ->actions([
                 Action::make('Package Status')
                     ->label('Status')
@@ -133,25 +132,8 @@ class ReceivedPackages extends Page implements HasTable, HasActions
                     ViewAction::make()->requiresConfirmation(true)
                         ->url(fn($record) => PackageResource::getUrl('view', ['record' => $record])),
 
-                    InvoiceAction::make('Invoice')
-                        ->translateLabel()
-                        ->icon('tabler-file-invoice')
-                        ->firstParty('Sender', fn(Package $record) => $record->SenderInfo)
-                        ->secondParty('Recipient', fn(Package $record) => $record->ReceiverInfo)
-                        ->status('Paid')
-                        ->serialNumber('215478')
-                        ->date(now()->format('Y-m-d'))
-                        ->logo(asset('images/logo.png'))
-                        ->invoiceItems(fn(Package $record) => $record)
-                        ->setHeadersAndColumns(['code' => 'Package Code', 'weight' => 'Weight', 'price' => 'Price',])
-                        ->subTotal(fn(Package $record) => $record->price)
-                        ->amountPaid(fn(Package $record) => $record->price)
-                        ->balanceDue('0')
-                        ->total(fn(Package $record) => $record->price)
-//                or
-                        ->stream()
-//                    ->download('test')
-                    ,
+                    InvoiceActionHelper::setupInvoiceAction()->stream()
+
                 ]),
 
 

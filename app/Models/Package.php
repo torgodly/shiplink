@@ -72,36 +72,45 @@ class Package extends Model
 
     public function getPriceAttribute()
     {
-        $price = $this->weight * 0.5 + $this->height * $this->width * $this->length * 0.002;
+        // Assuming dimensions are in centimeters and weight is in kilograms
+        $volumetricWeight = ($this->height * $this->width * $this->length) / 5000; // Volumetric weight calculation
+        $actualWeight = max($this->weight, $volumetricWeight); // Take the maximum of actual weight and volumetric weight
 
+        $price = 0;
+
+        // Base price calculation based on weight and dimensions
+        $price += $actualWeight * 20; // Base price per kg
+
+        // Additional charges
         if ($this->fragile) {
-            $price += 10;
+            $price += 20; // Additional charge for fragile items
         }
 
         if ($this->fast_shipping) {
-            $price += 20;
+            $price += 50; // Additional charge for fast shipping
         }
 
+        // Shipping method charges
         switch ($this->shipping_method) {
             case ShippingMethods::Air->value:
-                $price += 15;
+                $price += 100; // Air shipping charge
                 break;
             case ShippingMethods::Sea->value:
-                $price += 10;
+                $price += 50; // Sea shipping charge
                 break;
             case ShippingMethods::Land->value:
-                $price += 5;
-                break;
-            case ShippingMethods::Other->value:
-                $price += 7;
+                $price += 30; // Land shipping charge
                 break;
         }
 
         if ($this->insurance) {
-            $price += $this->weight * 0.1;
+            // Assuming insurance costs 1% of the declared value of the item
+            $insuranceCost = 0.01 * ($this->weight * 20); // Assuming $20 per kg for declared value
+            $price += $insuranceCost;
         }
 
-        return round($price) . ' LYD';
+        // Rounding the price to two decimal places and appending currency
+        return number_format($price, 2) . ' د.ل';
     }
 
     //attributes sender branch name

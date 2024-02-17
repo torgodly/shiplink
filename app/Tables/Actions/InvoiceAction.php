@@ -43,6 +43,18 @@ class InvoiceAction extends Action
     //Balance due
     protected string|\Closure|null $balanceDue = null;
 
+    //signature
+    protected string|\Closure|null $signature = null;
+
+
+    public function signature(string|\Closure|null $signature): static
+    {
+        $this->signature = $signature;
+        return $this;
+    }
+
+
+
 
     public function subTotal(string|\Closure|null $subTotal): static
     {
@@ -257,6 +269,7 @@ class InvoiceAction extends Action
             'total' => $this->evaluate($this->total),
             'amountPaid' => $this->evaluate($this->amountPaid),
             'balanceDue' => $this->evaluate($this->balanceDue),
+            'signature' => $this->evaluate($this->signature),
         ];
 
         return (object)$invoiceData;

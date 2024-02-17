@@ -1,17 +1,17 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}"
-      dir="{{ config('locales')[app()->getLocale()]['dir'] ?? 'ltr' }}"">
+      dir="{{ config('locales')[app()->getLocale()]['dir'] ?? 'ltr' }}">
 <head>
     <meta charset="UTF-8">
     {{--    <meta name="viewport"--}}
-    {{--          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">--}}
+    <meta name="viewport" content="width=1024">
     {{--    <meta http-equiv="X-UA-Compatible" content="ie=edge">--}}
-    <title>Document</title>
+    <title>{{__('Invoice')}}</title>
     <style>
 
         @page {
             {{--size: {{ $attributes->has('size') ? $attributes->get('size') : $size }};--}}
-                                                size: A4;
+                                                            size: A4;
             margin: 0;
         }
 
@@ -180,7 +180,7 @@
                 <!-- Grid -->
                 <div class="mt-8 grid sm:grid-cols-2 gap-3">
                     <div>
-                        <h3 class="text-lg font-semibold text-gray-800 ">{{$invoice->firstParty}}</h3>
+                        <h3 class="text-lg font-semibold text-gray-800 ">{{__($invoice->firstParty)}}</h3>
                         @if($invoice->firstPartyDetails->name)
                             @if($invoice->firstPartyDetails->name instanceof Closure)
                                 <h3 class="text-base font-semibold text-gray-800 ">{{ $invoice->firstPartyDetails->name() }}</h3>
@@ -212,8 +212,8 @@
                         @endif
 
                         @foreach($invoice->firstPartyDetails->custom_fields as $key => $value)
-                            <p class="firstPartyDetails-custom-field">
-                                {{ ucfirst($key) }}: {{ $value }}
+                            <p class="firstPartyDetails-custom-field uppercase">
+                                {{ __($key) }}: {{ $value }}
                             </p>
                         @endforeach
                     </div>
@@ -222,7 +222,7 @@
                     <div class="sm:text-end space-y-2">
                         <!-- Grid -->
                         <div>
-                            <h3 class="text-lg font-semibold text-gray-800 ">{{$invoice->secondParty}}</h3>
+                            <h3 class="text-lg font-semibold text-gray-800 ">{{__($invoice->secondParty)}}</h3>
                             @if($invoice->secondPartyDetails->name)
                                 <h3 class="text-base font-semibold text-gray-800 ">{{$invoice->secondPartyDetails->name}}</h3>
                             @endif
@@ -250,8 +250,8 @@
                             @endif
 
                             @foreach($invoice->secondPartyDetails->custom_fields as $key => $value)
-                                <p class="secondPartyDetails-custom-field">
-                                    {{ ucfirst($key) }}: {{ $value }}
+                                <p class="secondPartyDetails-custom-field capitalize">
+                                    {{ __($key) }}: {{ $value }}
                                 </p>
                             @endforeach
                         </div>
@@ -296,62 +296,90 @@
                     <div class="w-full max-w-2xl sm:text-end space-y-2">
                         <!-- Grid -->
                         <div class="grid grid-cols-2 sm:grid-cols-1 gap-3 sm:gap-2">
-                            <dl class="grid sm:grid-cols-5 gap-x-3">
-                                @if($invoice->subtotal)
+                            @if($invoice->subtotal)
+
+                                <dl class="grid sm:grid-cols-5 gap-x-3">
                                     <dt class="col-span-3 font-semibold text-gray-800 ">{{__('Subtotal:')}}</dt>
                                     <dd class="col-span-2 text-gray-500">{{$invoice->subtotal}}</dd>
-                                @endif
-                            </dl>
+                                </dl>
+                            @endif
 
-                            <dl class="grid sm:grid-cols-5 gap-x-3">
-                                @if($invoice->discount)
+                            @if($invoice->discount)
+
+                                <dl class="grid sm:grid-cols-5 gap-x-3">
                                     <dt class="col-span-3 font-semibold text-gray-800 ">{{__('Discount:')}}</dt>
                                     <dd class="col-span-2 text-gray-500">{{$invoice->discount}}</dd>
-                                @endif
-                            </dl>
+                                </dl>
+                            @endif
 
-                            <dl class="grid sm:grid-cols-5 gap-x-3">
-                                @if($invoice->tax)
+                            @if($invoice->tax)
+
+                                <dl class="grid sm:grid-cols-5 gap-x-3">
                                     <dt class="col-span-3 font-semibold text-gray-800 ">{{__('Tax:')}}</dt>
                                     <dd class="col-span-2 text-gray-500">{{$invoice->tax}}</dd>
-                                @endif
-                            </dl>
+                                </dl>
 
-                            <dl class="grid sm:grid-cols-5 gap-x-3">
-                                @if($invoice->total)
+                            @endif
+
+                            @if($invoice->total)
+
+                                <dl class="grid sm:grid-cols-5 gap-x-3">
                                     <dt class="col-span-3 font-semibold text-gray-800 ">{{__('Total:')}}</dt>
                                     <dd class="col-span-2 text-gray-500">{{$invoice->total}}</dd>
-                                @endif
-                            </dl>
-                            <dl class="grid sm:grid-cols-5 gap-x-3">
-                                @if($invoice->amountPaid)
+                                </dl>
+
+                            @endif
+                            @if($invoice->amountPaid)
+
+                                <dl class="grid sm:grid-cols-5 gap-x-3">
                                     <dt class="col-span-3 font-semibold text-gray-800 ">{{__('Amount Paid:')}}</dt>
                                     <dd class="col-span-2 text-gray-500">{{$invoice->amountPaid}}</dd>
-                                @endif
-                            </dl>
-                            <dl class="grid sm:grid-cols-5 gap-x-3">
-                                @if($invoice->balanceDue)
+                                </dl>
+                            @endif
+
+                            @if($invoice->balanceDue)
+
+                                <dl class="grid sm:grid-cols-5 gap-x-3">
                                     <dt class="col-span-3 font-semibold text-gray-800 ">{{__('Due balance:')}}</dt>
                                     <dd class="col-span-2 text-gray-500">{{$invoice->balanceDue}}</dd>
-                                @endif
-                            </dl>
+                                </dl>
+                            @endif
+
                         </div>
                         <!-- End Grid -->
                     </div>
                 </div>
                 <!-- End Flex -->
 
+
                 <div class="mt-8 sm:mt-12">
-                    <h4 class="text-lg font-semibold text-gray-800 ">Thank you!</h4>
-                    <p class="text-gray-500">If you have any questions concerning this invoice, use the following contact information:</p>
+
+
+                    <h4 class="text-lg font-semibold text-gray-800 ">{{__('Thank you!')}}</h4>
+                    <p class="text-gray-500">{{__("If you have any questions concerning this invoice, use the following contact information:")}}</p>
                     <div class="mt-2">
-                        <p class="block text-sm font-medium text-gray-800 ">example@site.com</p>
-                        <p class="block text-sm font-medium text-gray-800 ">+1 (062) 109-9222</p>
+                        <p class="block text-sm font-medium text-gray-800 ">info@Shiplink.ly</p>
+                        <p class="block text-sm font-medium text-gray-800 ">091-111-1111</p>
                     </div>
                 </div>
 
-                <p class="mt-5 text-sm text-gray-500">© 2022 Preline.</p>
+                <div class="flex justify-between md:flex-row flex-col gap-10 md:gap-0">
+                    <p class="mt-5 text-sm text-gray-500">© {{now()->year}} ShipLink.</p>
 
+                    @if($invoice->signature)
+                        <div class="signature-area flex items-center">
+                            <p class="relative" style="line-height: 1;">
+                                {{__('Signature:')}} _______________________
+                                <img class="absolute w-96 ml-2 bottom-[-32px] right-[25px]"
+                                     src="{{$invoice->signature}}"
+                                     style="vertical-align: middle;">
+                            </p>
+
+                        </div>
+                    @endif
+
+
+                </div>
             </div>
 
         @endforeach

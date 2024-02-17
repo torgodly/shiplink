@@ -6,9 +6,10 @@ use App\Enums\ShippingMethods;
 use App\Enums\ShippingStatus;
 use App\Filament\Office\Resources\PackageResource\Pages;
 use App\Filament\Office\Resources\PackageResource\RelationManagers;
+use App\Helper\InvoiceActionHelper;
+use App\Helper\PackageFilterHelper;
 use App\Models\Package;
 use App\Models\User;
-use App\Tables\Actions\InvoiceAction;
 use Filament\Forms;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
@@ -20,7 +21,6 @@ use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Str;
 use LaraZeus\Qr\Facades\Qr;
 
 
@@ -121,13 +121,7 @@ class PackageResource extends Resource
                     ->searchable(),
 
             ])
-            ->filters([
-                //select status
-                SelectFilter::make('status')
-                    ->translateLabel()
-                    ->options(collect(ShippingStatus::array())->map(fn($value, $key) => __($key))->toArray())
-
-            ])
+            ->filters(PackageFilterHelper::setPackageFilter())
             ->actions([
                 Tables\Actions\Action::make('Package Status')
                     ->label('Status')
@@ -141,25 +135,8 @@ class PackageResource extends Resource
                     Tables\Actions\ViewAction::make()->requiresConfirmation(true),
 
 
-                    InvoiceAction::make('Invoice')
-                        ->translateLabel()
-                        ->icon('tabler-file-invoice')
-                        ->firstParty('Sender', fn(Package $record) => $record->SenderInfo)
-                        ->secondParty('Recipient', fn(Package $record) => $record->ReceiverInfo)
-                        ->status('Paid')
-                        ->serialNumber('215478')
-                        ->date(now()->format('Y-m-d'))
-                        ->logo(asset('images/logo.png'))
-                        ->invoiceItems(fn(Package $record) => $record)
-                        ->setHeadersAndColumns(['code' => 'Package Code', 'weight' => 'Weight', 'price' => 'Price',])
-                        ->subTotal(fn(Package $record) => $record->price)
-                        ->amountPaid(fn(Package $record) => $record->price)
-                        ->balanceDue('0')
-                        ->total(fn(Package $record) => $record->price)
-//                or
-                        ->stream()
-//                    ->download('test')
-                    ,
+                    InvoiceActionHelper::setupInvoiceAction()->stream()
+
                 ]),
 
                 //change status action

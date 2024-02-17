@@ -3,6 +3,7 @@
 namespace App\Filament\User\Pages;
 
 use App\Enums\ShippingStatus;
+use App\Forms\Components\Rating;
 use App\Models\Package;
 use Filament\Actions\Action;
 use Filament\Actions\Concerns\InteractsWithActions;
@@ -48,9 +49,10 @@ class ShowProgress extends Page implements HasInfolists, HasActions, HasForms
             ->translateLabel()
             ->record($this->record)
             ->form([
-//                TODO: crete star rating field and remove teh old pakage
-                RatingStar::make('rating')
-                    ->label('Rating')
+////                TODO: crete star rating field and remove teh old pakage
+//                Rating::make('rating')
+//                    ->label('Rating')
+//                    ->required()
 
 
             ])
