@@ -3,9 +3,7 @@
 namespace App\Filament\Office\Resources;
 
 use App\Enums\ShippingMethods;
-use App\Enums\ShippingStatus;
 use App\Filament\Office\Resources\PackageResource\Pages;
-use App\Filament\Office\Resources\PackageResource\RelationManagers;
 use App\Helper\InvoiceActionHelper;
 use App\Helper\PackageFilterHelper;
 use App\Models\Package;
@@ -17,7 +15,6 @@ use Filament\Forms\Set;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Actions\Action;
-use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -129,7 +126,21 @@ class PackageResource extends Resource
                     ->icon('tabler-settings-cog')
                     ->color('primary')
                     ->url(fn($record) => PackageResource::getUrl('show', ['record' => $record])),
-                Action::make('qr')->modalContent(fn(Model $record) => Qr::render($record->code, statePath: $record->code))->icon('tabler-qrcode')->label('QR Code')->translateLabel(),
+                Action::make('qr')->modalContent(fn(Model $record) => Qr::render($record->code, options: [
+                    'size' => '300',
+                    'margin' => '1',
+                    'color' => 'rgba(27, 61, 212, 1)',
+                    'back_color' => 'rgba(252, 252, 252, 1)',
+                    'style' => 'round',
+                    'hasGradient' => false,
+                    'gradient_form' => 'rgb(69, 179, 157)',
+                    'gradient_to' => 'rgb(241, 148, 138)',
+                    'gradient_type' => 'vertical',
+                    'hasEyeColor' => true,
+                    'eye_color_inner' => 'rgb(255, 234, 41)',
+                    'eye_color_outer' => 'rgb(255, 234, 41)',
+                    'eye_style' => 'circle',
+                ], statePath: $record->code))->icon('tabler-qrcode')->label('QR Code')->translateLabel(),
                 Tables\Actions\ActionGroup::make([
                     Tables\Actions\EditAction::make(),
                     Tables\Actions\ViewAction::make()->requiresConfirmation(true),
