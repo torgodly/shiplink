@@ -19,12 +19,12 @@ class PackageFactory extends Factory
      */
     public function definition(): array
     {
-        $sender = User::find(1);
-        $receiver = User::find(2);
-        $senderBranch = Branch::factory()->create()->id;
-        $receiverBranch = Branch::factory()->create()->id;
+        $sender = User::where('type', 'user')->inRandomOrder()->first();
+        $receiver = User::where('type', 'user')->where('id', '!=', $sender->id)->inRandomOrder()->first();
+        $senderBranch = Branch::inRandomOrder()->first()->id;
+        $receiverBranch = Branch::where('id', '!=', $senderBranch)->inRandomOrder()->first()->id;
         return [
-            'code' => 'PKG-' . $this->faker->unique()->numberBetween(100000, 999999),
+            'code' => 'ShipLink-' . $this->faker->unique()->numberBetween(100000, 999999),
             'sender_code' => $sender->sender_code,
             'receiver_code' => $receiver->receiver_code,
             'sender_branch_id' => $senderBranch,

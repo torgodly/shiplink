@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Branch;
 use App\Models\Package;
 use Illuminate\Database\Seeder;
 
@@ -18,6 +19,8 @@ class DatabaseSeeder extends Seeder
                 'type' => 'user',
             ]
         );
+
+        Branch::factory(2)->create();
 
 //        \App\Models\User::factory(2)->create(
 //            [
@@ -36,6 +39,6 @@ class DatabaseSeeder extends Seeder
             'type' => 'admin',
         ]);
 
-        Package::factory(1)->create();
+        Package::factory(100)->create();
     }
 }
