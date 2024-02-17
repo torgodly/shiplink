@@ -110,7 +110,8 @@ class SentPackages extends Page implements HasTable, HasForms
                 IconColumn::make('insurance')
                     ->translateLabel()
                     ->boolean(),
-                TextColumn::make('status')
+                TextColumn::make('status')->sortable()
+                    ->sortable()
                     ->translateLabel()
                     ->badge()
                     ->formatStateUsing(fn(string $state): string => __($state))

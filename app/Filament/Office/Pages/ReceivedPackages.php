@@ -105,7 +105,7 @@ class ReceivedPackages extends Page implements HasTable, HasActions
                 IconColumn::make('insurance')
                     ->translateLabel()
                     ->boolean(),
-                TextColumn::make('status')
+                TextColumn::make('status')->sortable()
                     ->translateLabel()
                     ->badge()
                     ->formatStateUsing(fn(string $state): string => __($state))

@@ -74,7 +74,7 @@ class ReceivedPackages extends SentPackages
                 IconColumn::make('insurance')
                     ->translateLabel()
                     ->boolean(),
-                TextColumn::make('status')
+                TextColumn::make('status')->sortable()
                     ->translateLabel()
                     ->badge()
                     ->formatStateUsing(fn(string $state): string => __($state))

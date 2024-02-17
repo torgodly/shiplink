@@ -257,7 +257,7 @@ class PackageResource extends Resource
                     ->boolean()
                     ->toggleable(isToggledHiddenByDefault: true),
 
-                Tables\Columns\TextColumn::make('status')
+                Tables\Columns\TextColumn::make('status')->sortable()
                     ->translateLabel()
                     ->badge()
                     ->formatStateUsing(fn(string $state): string => __($state))

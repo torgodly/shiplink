@@ -103,7 +103,7 @@ class PackageResource extends Resource
                 Tables\Columns\IconColumn::make('insurance')
                     ->translateLabel()
                     ->boolean(),
-                Tables\Columns\TextColumn::make('status')
+                Tables\Columns\TextColumn::make('status')->sortable()
                     ->translateLabel()
                     ->badge()
                     ->formatStateUsing(fn(string $state): string => __($state))
