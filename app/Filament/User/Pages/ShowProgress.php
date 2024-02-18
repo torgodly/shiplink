@@ -5,6 +5,7 @@ namespace App\Filament\User\Pages;
 use App\Enums\ShippingStatus;
 use App\Forms\Components\Rating;
 use App\Models\Package;
+use App\Traits\HasRatingAction;
 use App\Traits\hasTimelineInfolist;
 use Filament\Actions\Action;
 use Filament\Actions\Concerns\InteractsWithActions;
@@ -30,7 +31,7 @@ class ShowProgress extends Page implements HasInfolists, HasActions, HasForms
     use InteractsWithForms;
     use InteractsWithInfolists;
     use HasTimelineInfolist;
-
+    use HasRatingAction;
     protected static ?string $navigationIcon = 'heroicon-o-document-text';
     protected static ?string $slug = 'show-progress/{record}/show';
     protected static bool $shouldRegisterNavigation = false;
