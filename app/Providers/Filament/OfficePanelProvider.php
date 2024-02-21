@@ -6,6 +6,8 @@ use App\Filament\Office\Pages\Login;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
+use Filament\Navigation\NavigationBuilder;
+use Filament\Navigation\NavigationItem;
 use Filament\Pages;
 use Filament\Panel;
 use Filament\PanelProvider;
@@ -29,16 +31,17 @@ class OfficePanelProvider extends PanelProvider
             ->path('office')
             ->plugin(BreezyCore::make()
                 ->myProfile(
-                    shouldRegisterUserMenu: true, // Sets the 'account' link in the panel User Menu (default = true)
-                    shouldRegisterNavigation: false, // Adds a main navigation item for the My Profile page (default = false)
-                    navigationGroup: 'Settings', // Sets the navigation group for the My Profile page (default = null)
-                    hasAvatars: true, // Enables the avatar upload form component (default = false)
-                    slug: 'my-profile' // Sets the slug for the profile page (default = 'my-profile')
+                    shouldRegisterUserMenu: true,
+                    shouldRegisterNavigation: false,
+                    hasAvatars: true,
+                    slug: 'my-profile'
                 )->enableTwoFactorAuthentication()
 
             )
             ->brandLogo(asset('images/logo.png'))
+
             ->brandLogoHeight('3rem')
+            ->brandName('ShipLink')
             ->login(Login::class)
             ->viteTheme('resources/css/filament/office/theme.css')
             ->colors([

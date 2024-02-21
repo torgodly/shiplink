@@ -50,7 +50,6 @@ class UserPanelProvider extends PanelProvider
                 'blue' => Color::Blue,
                 'yellow' => Color::Yellow,
                 'orange' => Color::Orange,
-
             ])
             ->discoverResources(in: app_path('Filament/User/Resources'), for: 'App\\Filament\\User\\Resources')
             ->discoverPages(in: app_path('Filament/User/Pages'), for: 'App\\Filament\\User\\Pages')

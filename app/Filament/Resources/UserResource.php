@@ -53,7 +53,7 @@ class UserResource extends Resource
                     ->tel()
                     ->unique('users', 'phone', ignoreRecord: true)
                     ->required()
-                    ->maxLength(255),
+                    ->maxLength(10),
                 Forms\Components\select::make('type')
                     ->translateLabel()
                     ->required()
@@ -65,11 +65,14 @@ class UserResource extends Resource
                 Forms\Components\TextInput::make('password')
                     ->translateLabel()
                     ->password()
-                    ->required()->hiddenOn('edit'),
+                    ->required()
+                    ->minLength(8)
+                    ->hiddenOn('edit'),
                 Forms\Components\TextInput::make('password_confirmation')
                     ->translateLabel()
                     ->password()
-                    ->required()->hiddenOn('edit'),
+                    ->required()
+                    ->hiddenOn('edit'),
             ]);
     }
 
@@ -82,7 +85,6 @@ class UserResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('email')
                     ->translateLabel()
-
                     ->searchable(),
                 Tables\Columns\TextColumn::make('phone')
                     ->translateLabel()
@@ -102,11 +104,20 @@ class UserResource extends Resource
 
             ])
             ->filters([
-                //
+                Tables\Filters\SelectFilter::make('type')
+                    ->translateLabel()
+                    ->options(
+                        [
+                            'user' => 'user',
+                            'admin' => 'admin',
+                            'manager' => 'manager'
+
+                        ]
+                    )
             ])
             ->actions([
                 Tables\Actions\EditAction::make()->requiresConfirmation(true)->modalWidth('2xl')->modalIcon('heroicon-o-users'),
-//                Impersonate::make(),
+                Impersonate::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

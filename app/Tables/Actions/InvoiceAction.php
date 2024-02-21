@@ -18,6 +18,7 @@ class InvoiceAction extends Action
     protected array|\Closure|null $secondPartyDetails = [];
     protected string|\Closure|null $downloadName = 'invoice';
 
+
     protected string|\Closure|null $logo = null;
 
     protected string|\Closure|null $status = null;
@@ -159,6 +160,13 @@ class InvoiceAction extends Action
     }
 
 
+
+    //download name
+    public function downloadName(string|\Closure|null $name): static
+    {
+        $this->downloadName = $name;
+        return $this;
+    }
     //table headers
 
     public function download(string|\Closure|null $name = null): static
@@ -168,6 +176,8 @@ class InvoiceAction extends Action
         $this->configureAction(); // Configure the action after setting the mode.
         return $this;
     }
+
+
 
 
     protected function configureAction(): void

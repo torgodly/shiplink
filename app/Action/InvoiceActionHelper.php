@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Helper;
+namespace App\Action;
 
 use App\Models\Package;
 use App\Tables\Actions\InvoiceAction;
@@ -25,6 +25,8 @@ class InvoiceActionHelper
             ->amountPaid(fn(Package $record) => $record->price)
             ->balanceDue('0')
             ->total(fn(Package $record) => $record->price)
-            ->signature(fn(Package $record) => $record->signature);
+            ->signature(fn(Package $record) => $record->signature)
+            ->downloadName(fn(Package $record) => $record->code . '-invoice')
+            ;
     }
 }

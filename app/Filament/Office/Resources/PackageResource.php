@@ -2,10 +2,12 @@
 
 namespace App\Filament\Office\Resources;
 
+use App\Action\InvoiceActionHelper;
+use App\Action\PackageFilterHelper;
+use App\Action\QRCodeAction;
+use App\Action\TableColumnsHelper;
 use App\Enums\ShippingMethods;
 use App\Filament\Office\Resources\PackageResource\Pages;
-use App\Helper\InvoiceActionHelper;
-use App\Helper\PackageFilterHelper;
 use App\Models\Package;
 use App\Models\User;
 use Filament\Forms;
@@ -14,11 +16,8 @@ use Filament\Forms\Form;
 use Filament\Forms\Set;
 use Filament\Resources\Resource;
 use Filament\Tables;
-use Filament\Tables\Actions\Action;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Model;
-use LaraZeus\Qr\Facades\Qr;
 
 
 class PackageResource extends Resource
@@ -49,75 +48,9 @@ class PackageResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->defaultSort('created_at', 'desc')
             ->query(Package::query()->where('sender_branch_id', auth()->user()->mangedbrance->id))
-            ->columns([
-                Tables\Columns\TextColumn::make('code')
-                    ->label('Package Code')
-                    ->translateLabel()
-                    ->searchable()
-                    ->copyable()
-                    ->copyMessage('Color code copied')
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('sender_code')
-                    ->translateLabel()
-                    ->searchable()
-                    ->copyable()
-                    ->copyMessage('Color code copied')
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('receiver_code')
-                    ->translateLabel()
-                    ->searchable()
-                    ->copyable()
-                    ->copyMessage('Color code copied')
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('receiverBranch.name')
-                    ->translateLabel()
-                    ->searchable()
-                    ->copyable()
-                    ->copyMessage('Color code copied')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('dimensions')
-                    ->translateLabel()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('weight')
-                    ->translateLabel()
-                    ->suffix(' kg')
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('shipping_method')
-                    ->translateLabel()
-                    ->label('Shipping Method')
-                    ->searchable(),
-                Tables\Columns\IconColumn::make('is_refrigerated')
-                    ->translateLabel()
-                    ->boolean()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\IconColumn::make('fragile')
-                    ->translateLabel()
-                    ->boolean()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\IconColumn::make('fast_shipping')
-                    ->translateLabel()
-                    ->boolean()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\IconColumn::make('insurance')
-                    ->translateLabel()
-                    ->boolean(),
-                Tables\Columns\TextColumn::make('status')->sortable()
-                    ->translateLabel()
-                    ->badge()
-                    ->formatStateUsing(fn(string $state): string => __($state))
-                    ->color(fn(string $state): string => match ($state) {
-                        'InTransit' => 'blue',
-                        'OutForDelivery' => 'yellow',
-                        'WaitingForPickup' => 'orange',
-                        'Delivered' => 'green',
-                        'Returned' => 'danger',
-                        default => 'gray',
-                    })
-                    ->searchable(),
-
-            ])
+            ->columns(TableColumnsHelper::PackageColumns())
             ->filters(PackageFilterHelper::setPackageFilter())
             ->actions([
                 Tables\Actions\Action::make('Package Status')
@@ -126,21 +59,7 @@ class PackageResource extends Resource
                     ->icon('tabler-settings-cog')
                     ->color('primary')
                     ->url(fn($record) => PackageResource::getUrl('show', ['record' => $record])),
-                Action::make('qr')->modalContent(fn(Model $record) => Qr::render($record->code, options: [
-                    'size' => '300',
-                    'margin' => '1',
-                    'color' => 'rgba(27, 61, 212, 1)',
-                    'back_color' => 'rgba(252, 252, 252, 1)',
-                    'style' => 'round',
-                    'hasGradient' => false,
-                    'gradient_form' => 'rgb(69, 179, 157)',
-                    'gradient_to' => 'rgb(241, 148, 138)',
-                    'gradient_type' => 'vertical',
-                    'hasEyeColor' => true,
-                    'eye_color_inner' => 'rgb(255, 234, 41)',
-                    'eye_color_outer' => 'rgb(255, 234, 41)',
-                    'eye_style' => 'circle',
-                ], statePath: $record->code))->icon('tabler-qrcode')->label('QR Code')->translateLabel(),
+                QRCodeAction::QrCodeAction(),
                 Tables\Actions\ActionGroup::make([
                     Tables\Actions\EditAction::make(),
                     Tables\Actions\ViewAction::make()->requiresConfirmation(true),
@@ -181,7 +100,7 @@ class PackageResource extends Resource
                                 })
                                 ->preload()
                                 ->searchable()
-                                ->afterStateUpdated(fn(Set $set, ?string $state) => $set('sender_name', User::where('sender_code', $state)->first()->name))
+                                ->afterStateUpdated(fn(Set $set, ?string $state) => $set('sender_name', User::where('sender_code', $state)->first()?->name))
                                 ->reactive()
                                 ->required(),
 
@@ -193,7 +112,7 @@ class PackageResource extends Resource
                                     $senderCode = $get('sender_code');
                                     return $query->when($senderCode, fn($q) => $q->where('sender_code', '!=', $senderCode));
                                 })
-                                ->afterStateUpdated(fn(Set $set, ?string $state) => $set('receiver_name', User::where('receiver_code', $state)->first()->name))
+                                ->afterStateUpdated(fn(Set $set, ?string $state) => $set('receiver_name', User::where('receiver_code', $state)->first()?->name))
                                 ->preload()
                                 ->searchable()
                                 ->reactive(),

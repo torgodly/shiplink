@@ -5,7 +5,6 @@ namespace App\Traits;
 use App\Models\Package;
 use Filament\Actions\Action;
 use Filament\Forms\Components\Select;
-use Illuminate\Support\Arr;
 use Saade\FilamentAutograph\Forms\Components\SignaturePad;
 
 trait HasChangeStatusAction
@@ -16,10 +15,11 @@ trait HasChangeStatusAction
             ->label('Change Status')
             ->translateLabel()
             ->record($this->record)
+            ->fillForm($this->record->toArray())
             ->form([
                 Select::make('status')
                     ->translateLabel()
-                    ->options(Arr::except(collect($this->record->CustomStatusOptions)->mapWithKeys(fn($status) => [$status => __($status)])->toArray(), [$this->record->status]))
+                    ->options(collect($this->record->CustomStatusOptions)->mapWithKeys(fn($status) => [$status => __($status)])->toArray())
                     ->live()
                     ->required()
                     ->native(false),
