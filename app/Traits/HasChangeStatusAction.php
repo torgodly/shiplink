@@ -28,7 +28,6 @@ trait HasChangeStatusAction
                     ->requiredIf('status', 'Delivered')
                     ->backgroundColor('transparent')
                     ->visible(fn($get) => $get('status') === 'Delivered')
-
             ])
             // ...
             ->action(function (array $data): void {

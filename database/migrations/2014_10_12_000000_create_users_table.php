@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('sender_code')->nullable()->unique();
             $table->string('receiver_code')->nullable()->unique();
+            $table->string('avatar_url')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
