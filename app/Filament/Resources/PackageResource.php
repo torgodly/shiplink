@@ -10,6 +10,7 @@ use App\Action\InvoiceActionHelper;
 use App\Action\PackageFilterHelper;
 use App\Models\Package;
 use App\Models\User;
+use App\Tables\Columns\RatingColumn;
 use Filament\Forms\Components\Group;
 use Filament\Forms\Components\MarkdownEditor;
 use Filament\Forms\Components\Section;
@@ -270,6 +271,10 @@ class PackageResource extends Resource
                         default => 'gray',
                     })
                     ->searchable(),
+                RatingColumn::make('rating')
+                    ->sortable()
+                    ->translateLabel()
+                    ->label('Rating'),
 
             ])
             ->filters(PackageFilterHelper::setPackageFilter())

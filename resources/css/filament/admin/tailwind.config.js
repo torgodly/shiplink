@@ -7,5 +7,7 @@ export default {
         './resources/views/filament/**/*.blade.php',
         './vendor/filament/**/*.blade.php',
         './vendor/jaocero/activity-timeline/resources/views/**/*.blade.php',
+        'resources/views/forms/components/rating.blade.php',
+        'resources/views/tables/columns/rating-column.blade.php'
     ],
 }

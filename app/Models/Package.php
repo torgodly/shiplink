@@ -30,7 +30,8 @@ class Package extends Model
         'description',
         'is_refrigerated',
         'signature',
-        'payment_method'
+        'payment_method',
+        "rating"
 
 
     ];

@@ -1,4 +1,3 @@
-<link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.0.4/tailwind.min.css" rel="stylesheet"/>
 
 <x-dynamic-component
     :component="$getFieldWrapperView()"
@@ -7,8 +6,8 @@
     <div
         x-data="{
         state: $wire.$entangle('{{ $getStatePath() }}'),
-        rating: 2,
-		hoverRating: 2,
+        rating: 0,
+		hoverRating: 0,
 		ratings: 5,
 
 		rate(amount) {
@@ -29,24 +28,24 @@
 
 		}"
 
+        x-init="rating = state; hoverRating = state"
+
     >
-        <div class="flex flex-col items-center justify-center space-y-2 rounded m-2 w-72 h-56 p-3 bg-gray-200 mx-auto">
-            <div class="flex space-x-0 bg-gray-100">
-                <template x-for="i in ratings" :key="i">
-                    <button @click="rate(i)" @mouseover="hoverRating = i"
-                            @mouseleave="hoverRating = rating"
-                            aria-hidden="true"
-                            :title="star.label"
-                            class="rounded-sm text-gray-400 fill-current focus:outline-none focus:shadow-outline p-1 w-12 m-0 cursor-pointer"
-                            :class="{'text-gray-600': hoverRating >= i, 'text-yellow-400': rating >= i && hoverRating >= i}">
-                        <x-heroicon-c-star class="w-15 transition duration-150"/>
-                    </button>
+        <template x-for="i in ratings" :key="i">
+            <button @click="rate(i); state = rating" @mouseover="hoverRating = i"
+                    @mouseleave="hoverRating = rating"
+                    aria-hidden="true"
+                    :title="star.label"
+                    class="rounded-sm text-gray-400 fill-current focus:outline-none focus:shadow-outline p-1 w-12 m-0 cursor-pointer"
+                    :class="{'text-gray-600': hoverRating >= i, 'text-yellow-400': rating >= i && hoverRating >= i}">
+                <x-heroicon-c-star class="w-15 transition duration-150"/>
+            </button>
 
-                </template>
-            </div>
+        </template>
+
+        <input hidden="" x-model="state" >
 
 
-        </div>
     </div>
 </x-dynamic-component>
 

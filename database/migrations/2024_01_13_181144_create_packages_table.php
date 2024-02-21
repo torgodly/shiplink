@@ -30,6 +30,8 @@ return new class extends Migration {
             $table->text('signature')->nullable();
             $table->enum('status', \App\Enums\ShippingStatus::array())->default('Pending');
             $table->string('payment_method')->nullable();
+            //rating
+            $table->integer('rating')->default(0);
 
             $table->timestamps();
         });

@@ -3,6 +3,8 @@
 namespace App\Action;
 
 use App\Filament\Office\Resources\PackageResource;
+use App\Tables\Columns\Rating;
+use App\Tables\Columns\RatingColumn;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 
@@ -49,6 +51,10 @@ class TableColumnsHelper
                 ->badge()
                 ->formatStateUsing(fn(string $state): string => __($state))
                 ->searchable(),
+            RatingColumn::make('rating')
+                ->sortable()
+                ->translateLabel()
+                ->label('Rating'),
             IconColumn::make('is_refrigerated')
                 ->translateLabel()
                 ->boolean()
