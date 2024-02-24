@@ -2,12 +2,11 @@
 
 namespace App\Filament\Resources;
 
-use App\Enums\ShippingMethods;
-use App\Enums\ShippingStatus;
-use App\Filament\Resources\PackageResource\Pages;
-use App\Filament\Resources\PackageResource\RelationManagers;
 use App\Action\InvoiceActionHelper;
 use App\Action\PackageFilterHelper;
+use App\Enums\ShippingMethods;
+use App\Filament\Resources\PackageResource\Pages;
+use App\Filament\Resources\PackageResource\RelationManagers;
 use App\Models\Package;
 use App\Models\User;
 use App\Tables\Columns\RatingColumn;
@@ -21,8 +20,7 @@ use Filament\Forms\Form;
 use Filament\Forms\Set;
 use Filament\Resources\Resource;
 use Filament\Tables;
-use Filament\Tables\Enums\FiltersLayout;
-use Filament\Tables\Filters\SelectFilter;
+use Filament\Tables\Actions\ActionGroup;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 
@@ -279,14 +277,17 @@ class PackageResource extends Resource
             ])
             ->filters(PackageFilterHelper::setPackageFilter())
             ->actions([
-                Tables\Actions\Action::make('Package Status')
-                    ->label('Status')
-                    ->translateLabel()
-                    ->icon('tabler-settings-cog')
-                    ->color('primary')
-                    ->url(fn($record) => \App\Filament\Office\Resources\PackageResource::getUrl('show', ['record' => $record])),
-                Tables\Actions\ViewAction::make()->requiresConfirmation(true)->color('primary'),
-                InvoiceActionHelper::setupInvoiceAction()->stream()
+                ActionGroup::make([
+                    Tables\Actions\Action::make('Package Status')
+                        ->label('Status')
+                        ->translateLabel()
+                        ->icon('tabler-settings-cog')
+                        ->color('primary')
+                        ->url(fn($record) => \App\Filament\Office\Resources\PackageResource::getUrl('show', ['record' => $record])),
+                    Tables\Actions\ViewAction::make()->requiresConfirmation(true)->color('primary'),
+                    InvoiceActionHelper::setupInvoiceAction()->stream()
+                ])
+
                 //change status action
 
             ]);

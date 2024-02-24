@@ -3,10 +3,10 @@
 namespace App\Filament\Office\Pages;
 
 use App\Enums\BranchStatus;
+use App\Http\Responses\Auth\Contracts\CustomLoginResponse;
 use DanHarrin\LivewireRateLimiting\Exceptions\TooManyRequestsException;
 use Filament\Facades\Filament;
 use Filament\Http\Responses\Auth\Contracts\LoginResponse;
-use Filament\Models\Contracts\FilamentUser;
 use Filament\Notifications\Notification;
 use Filament\Pages\Auth\Login as BaseLogin;
 use Illuminate\Validation\ValidationException;
@@ -15,6 +15,7 @@ class Login extends BaseLogin
 {
     public function authenticate(): ?LoginResponse
     {
+
         try {
             $this->rateLimit(5);
         } catch (TooManyRequestsException $exception) {
@@ -40,29 +41,30 @@ class Login extends BaseLogin
         }
 
         $user = Filament::auth()->user();
-        if (
-            ($user instanceof FilamentUser) &&
-            (!$user->canAccessPanel(Filament::getCurrentPanel()))
-        ) {
-            Filament::auth()->logout();
-
-            $this->throwFailureValidationException();
-        }
+//        if (
+//            ($user instanceof FilamentUser) &&
+//            (!$user->canAccessPanel(Filament::getCurrentPanel()))
+//        ) {
+//            Filament::auth()->logout();
+//
+//            $this->throwFailureValidationException();
+//        }
         //if user is assigned to a branch,
-        if ($user->mangedbrance()->exists()) {
+        if ($user->is_manager && $user->mangedbrance()->exists()) {
             if ($user->mangedbrance->status === 1) {
 
 
                 session()->regenerate();
-
-                return app(LoginResponse::class);
+                return app(CustomLoginResponse::class);
             } else {
                 Filament::auth()->logout();
                 $this->throwInactiveBranchException();
             }
 
-        } //if user is not assigned to a branch
-        else {
+        } elseif ($user->is_admin || $user->is_user) {
+            session()->regenerate();
+            return app(CustomLoginResponse::class);
+        } else {
             Filament::auth()->logout();
             $this->throwNoBranchException();
         }

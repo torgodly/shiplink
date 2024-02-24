@@ -85,6 +85,8 @@ class UserResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('email')
                     ->translateLabel()
+                    ->copyable()
+                    ->copyMessage(__('Copied!'))
                     ->searchable(),
                 Tables\Columns\TextColumn::make('phone')
                     ->translateLabel()

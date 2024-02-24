@@ -109,6 +109,17 @@ class User extends Authenticatable implements FilamentUser, HasAvatar
     {
         return $this->type == 'admin';
     }
+    //is manager
+    public function getIsManagerAttribute()
+    {
+        return $this->type == 'manager';
+    }
+
+    //is user
+    public function getIsUserAttribute()
+    {
+        return $this->type == 'user';
+    }
 
 
 }

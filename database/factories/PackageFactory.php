@@ -41,6 +41,7 @@ class PackageFactory extends Factory
             'description' => $this->faker->sentence,
             'status' => $this->faker->randomElement(ShippingStatus::array()),
             'payment_method' => $this->faker->randomElement(['cash', 'credit_card', 'paypal']),
+            'rating' => $this->faker->numberBetween(1, 5),
 
 
         ];

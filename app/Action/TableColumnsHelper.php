@@ -23,13 +23,13 @@ class TableColumnsHelper
                 ->translateLabel()
                 ->searchable()
                 ->copyable()
-                ->copyMessage('Color code copied')
+                ->copyMessage(__('Sender Code copied'))
                 ->sortable(),
             TextColumn::make('receiver_code')
                 ->translateLabel()
                 ->searchable()
                 ->copyable()
-                ->copyMessage('Color code copied')
+                ->copyMessage(__('Receiver Code copied'))
                 ->sortable(),
             TextColumn::make('receiverBranch.name')
                 ->translateLabel()
