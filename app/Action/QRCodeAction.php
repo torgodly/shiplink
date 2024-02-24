@@ -10,7 +10,8 @@ class QRCodeAction
 {
     public static function QrCodeAction()
     {
-        return Action::make('qr')->modalContent(fn(Model $record) => Qr::render($record->code, options: [
+        return Action::make('qr')
+            ->modalContent(fn(Model $record) => Qr::render($record->code, options: [
             'size' => '300',
             'margin' => '1',
             'color' => 'rgba(27, 61, 212, 1)',
@@ -24,7 +25,7 @@ class QRCodeAction
             'eye_color_inner' => 'rgb(255, 234, 41)',
             'eye_color_outer' => 'rgb(255, 234, 41)',
             'eye_style' => 'circle',
-        ], statePath: $record->code))->icon('tabler-qrcode')->label('QR Code')->translateLabel();
+        ], statePath: $record->code))->icon('tabler-qrcode')->label('QR Code')->translateLabel()->modalCancelAction(false)->modalSubmitAction(false);
 
     }
 }
