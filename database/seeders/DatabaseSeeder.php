@@ -20,15 +20,13 @@ class DatabaseSeeder extends Seeder
             ]
         );
 
-        Branch::factory(2)->create();
+        Branch::factory(10)->create();
 
 //        \App\Models\User::factory(2)->create(
 //            [
 //                'type' => 'manager',
 //            ]
 //        );
-
-
 
 
 //         Branch::factory(10)->create();/
@@ -39,6 +37,6 @@ class DatabaseSeeder extends Seeder
             'type' => 'admin',
         ]);
 
-        Package::factory(100)->create();
+        Package::factory(500)->create();
     }
 }

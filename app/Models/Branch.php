@@ -43,4 +43,9 @@ class Branch extends Model
         return $this->hasMany(Package::class, 'receiver_branch_id', 'id');
     }
 
+    public function packages()
+    {
+        return $this->sentPackages()->union($this->receivedPackages());
+    }
+
 }

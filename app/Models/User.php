@@ -122,4 +122,16 @@ class User extends Authenticatable implements FilamentUser, HasAvatar
     }
 
 
+    //Sent packages
+    public function sentPackages()
+    {
+        return $this->hasMany(Package::class, 'sender_code', 'sender_code');
+    }
+
+    //Received packages
+    public function receivedPackages()
+    {
+        return $this->hasMany(Package::class, 'receiver_code', 'receiver_code');
+    }
+
 }

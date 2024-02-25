@@ -118,5 +118,19 @@
     "Total Revenue": "إجمالي الإيرادات",
     "Total revenue generated": "إجمالي الإيرادات المتولدة",
     "Most Active Branch": "الفرع الأكثر نشاطًا",
-    "Branch with the highest activity": "الفرع ذو أعلى نشاط"
+    "Branch with the highest activity": "الفرع ذو أعلى نشاط",
+    "Branch Rank": "تصنيف الفرع",
+    "Based on the total number of sent and received packages": "استنادًا إلى العدد الإجمالي للشحنات المرسلة والمستلمة",
+    "Total number of packages sent": "العدد الإجمالي للشحنات المرسلة",
+    "Total number of packages received": "العدد الإجمالي للشحنات المستلمة",
+    "Pending Packages": "الشحنات قيد الانتظار",
+    "Out For Delivery Packages": "الشحنات خارج للتوصيل",
+    "Delivered Packages": "الشحنات المستلمة",
+    "Returned Packages": "الشحنات المرجعة",
+    "Waiting For Pickup Packages": "الشحنات في انتظار الاستلام",
+    "Total number of packages pending": "العدد الإجمالي للشحنات قيد الانتظار",
+    "Total number of packages out for delivery": "العدد الإجمالي للشحنات خارج للتوصيل",
+    "Total number of packages delivered": "العدد الإجمالي للشحنات المستلمة",
+    "Total number of packages returned": "العدد الإجمالي للشحنات المرجعة",
+    "Total number of packages waiting for pickup": "العدد الإجمالي للشحنات في انتظار الاستلام"
 }

@@ -69,7 +69,10 @@ class SentPackages extends Page implements HasTable, HasForms
                     ->sortable(),
                 TextColumn::make('price')
                     ->label("Shipping Price")
+                    ->numeric()
+                    ->formatStateUsing(fn(string $state): string =>   $state.' د.ل ')
                     ->translateLabel()
+                    ->weight('bold')
                     ->sortable(),
                 TextColumn::make('receiver_code')
                     ->translateLabel()
@@ -94,6 +97,8 @@ class SentPackages extends Page implements HasTable, HasForms
                 TextColumn::make('shipping_method')
                     ->translateLabel()
                     ->label('Shipping Method')
+                    ->badge()
+                    ->formatStateUsing(fn(string $state): string => __($state))
                     ->searchable(),
                 IconColumn::make('is_refrigerated')
                     ->translateLabel()

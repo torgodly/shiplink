@@ -4,6 +4,7 @@ namespace App\Providers\Filament;
 
 use App\Filament\Office\Pages\Login;
 use App\Filament\User\Pages\Auth\Register;
+use App\Filament\User\Widgets\StatsOverview;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
@@ -60,8 +61,7 @@ class UserPanelProvider extends PanelProvider
             ])
             ->discoverWidgets(in: app_path('Filament/User/Widgets'), for: 'App\\Filament\\User\\Widgets')
             ->widgets([
-                Widgets\AccountWidget::class,
-                Widgets\FilamentInfoWidget::class,
+                   StatsOverview::class,
             ])
             ->middleware([
                 EncryptCookies::class,

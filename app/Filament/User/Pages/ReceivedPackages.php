@@ -58,6 +58,8 @@ class ReceivedPackages extends SentPackages
                 TextColumn::make('shipping_method')
                     ->translateLabel()
                     ->label('Shipping Method')
+                    ->badge()
+                    ->formatStateUsing(fn(string $state): string => __($state))
                     ->searchable(),
                 IconColumn::make('is_refrigerated')
                     ->translateLabel()

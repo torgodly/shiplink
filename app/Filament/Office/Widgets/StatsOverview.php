@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Filament\Widgets;
+namespace App\Filament\Office\Widgets;
 
 use App\Models\Branch;
-use App\Models\Package;
 use App\Models\User;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
@@ -12,19 +11,17 @@ class StatsOverview extends BaseWidget
 {
     protected function getStats(): array
     {
-        $packages = Package::all();
-        $users = User::where('type', 'user')->get();
-        $branches = Branch::all();
+        $branch = \Auth::user()->mangedbrance()->with('sentPackages', 'receivedPackages',)->first();
+        $packages = $branch->packages;
         $avgRating = round($packages->where('rating', '!=', 0)->sum('rating') / $packages->where('rating', '!=', 0)->count(), 1);
-        //revenue
         $revenue = $packages->sum('price');
+        $sentPackages = $branch->sentPackages->count();
+        $receivedPackages = $branch->receivedPackages->count();
 
-        //most Active Branch
-        $mostActiveBranch = $branches->sortByDesc(function ($branch) {
+        //branch rank based on sent and received packages
+        $branchRank = Branch::all()->sortByDesc(function ($branch) {
             return $branch->sentPackages->count() + $branch->receivedPackages->count();
-        })->first();
-
-//        dd($mostActiveBranch);
+        })->pluck('id')->search($branch->id) + 1;
 
         return [
             //$avgRating
@@ -40,28 +37,32 @@ class StatsOverview extends BaseWidget
                 ->descriptionIcon('tabler-package')
                 ->chart([7, 2, 10, 3, 15, 4, 17]),
 
-            Stat::make(__('Total Users'), $users->count())
+            //branch rank
+            Stat::make(__('Branch Rank'), $branchRank)
                 ->color('green')
-                ->description(__('Total number of registered users'))
-                ->descriptionIcon('tabler-users')
+                ->description(__('Based on the total number of sent and received packages'))
+                ->descriptionIcon('tabler-trending-up')
                 ->chart([7, 2, 10, 3, 15, 4, 17]),
 
-            Stat::make(__('Total Branches'), $branches->count())
-                ->color('orange')
-                ->description(__('Total number of branches operating'))
-                ->descriptionIcon('heroicon-o-building-office')
+            Stat::make(__('Sent Packages'), $sentPackages)
+                ->color('green')
+                ->description(__('Total number of packages sent'))
+                ->descriptionIcon('tabler-package-export')
                 ->chart([7, 2, 10, 3, 15, 4, 17]),
+
+            Stat::make(__('Received Packages'), $receivedPackages)
+                ->color('green')
+                ->description(__('Total number of packages received'))
+                ->descriptionIcon('tabler-package-import')
+                ->chart([7, 2, 10, 3, 15, 4, 17]),
+
+
+
 
             Stat::make(__('Total Revenue'), \Number::currency($revenue, 'LYD', 'ar_LY'))
                 ->color('green')
                 ->description(__('Total revenue generated'))
                 ->descriptionIcon('heroicon-o-banknotes')
-                ->chart([7, 2, 10, 3, 15, 4, 17]),
-
-            Stat::make(__('Most Active Branch'), $mostActiveBranch->name)
-                ->color('blue')
-                ->description(__('Branch with the highest activity'))
-                ->descriptionIcon('heroicon-o-building-office')
                 ->chart([7, 2, 10, 3, 15, 4, 17]),
 
         ];
