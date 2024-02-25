@@ -40,7 +40,7 @@ class OfficePanelProvider extends PanelProvider
 
             )
             ->brandLogo(asset('images/logo.png'))
-
+            ->sidebarCollapsibleOnDesktop()
             ->brandLogoHeight('3rem')
             ->brandName('ShipLink')
             ->login(Login::class)

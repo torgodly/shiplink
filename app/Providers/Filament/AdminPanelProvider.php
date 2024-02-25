@@ -3,6 +3,7 @@
 namespace App\Providers\Filament;
 
 use App\Filament\Office\Pages\Login;
+use App\Filament\Widgets\StatsOverview;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
@@ -10,7 +11,6 @@ use Filament\Pages;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
-use Filament\Widgets;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
@@ -36,6 +36,7 @@ class AdminPanelProvider extends PanelProvider
                     slug: 'my-profile' // Sets the slug for the profile page (default = 'my-profile')
                 )->enableTwoFactorAuthentication()
             )
+            ->sidebarCollapsibleOnDesktop()
             ->brandLogo(asset('images/logo.png'))
             ->brandLogoHeight('3rem')
             ->login(Login::class)
@@ -48,7 +49,7 @@ class AdminPanelProvider extends PanelProvider
                 'blue' => Color::Blue,
                 'yellow' => Color::Yellow,
                 'orange' => Color::Orange,
-
+                'red' => Color::Red,
             ])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
@@ -58,8 +59,9 @@ class AdminPanelProvider extends PanelProvider
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->viteTheme('resources/css/filament/admin/theme.css')
             ->widgets([
-                Widgets\AccountWidget::class,
-                Widgets\FilamentInfoWidget::class,
+//                Widgets\AccountWidget::class,
+//                Widgets\FilamentInfoWidget::class,
+                StatsOverview::class
             ])
             ->middleware([
                 EncryptCookies::class,

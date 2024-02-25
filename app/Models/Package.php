@@ -38,7 +38,8 @@ class Package extends Model
 
     protected $appends = [
         'sender_name',
-        'receiver_name'
+        'receiver_name',
+        'price'
     ];
 
     //sender
@@ -71,7 +72,7 @@ class Package extends Model
         return "$this->height cm x $this->width cm x $this->length cm";
     }
 
-    public function getPriceAttribute()
+    public function getPriceAttribute(): float
     {
         // Assuming dimensions are in centimeters and weight is in kilograms
         $volumetricWeight = ($this->height * $this->width * $this->length) / 5000; // Volumetric weight calculation
@@ -111,8 +112,11 @@ class Package extends Model
         }
 
         // Rounding the price to two decimal places and appending currency
-        return number_format($price, 2) . ' د.ل';
+        return (float) number_format($price, 2);
     }
+
+    //pricenum
+
 
     //attributes sender branch name
     public function getSenderBranchNameAttribute()
@@ -169,6 +173,7 @@ class Package extends Model
         // If the package is not from the authenticated user's branch, return the last two status options
         return $allStatusOptions->slice(-3)->toArray();
     }
+
 
     //sender name
     public function getSenderNameAttribute()

@@ -30,4 +30,17 @@ class Branch extends Model
         return $this->manager?->name;
     }
 
+
+    //sent packages
+    public function sentPackages()
+    {
+        return $this->hasMany(Package::class, 'sender_branch_id', 'id');
+    }
+
+    //received packages
+    public function receivedPackages()
+    {
+        return $this->hasMany(Package::class, 'receiver_branch_id', 'id');
+    }
+
 }
