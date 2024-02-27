@@ -2,14 +2,12 @@
 
 namespace App\Filament\User\Pages;
 
-use App\Enums\ShippingStatus;
 use App\Action\InvoiceActionHelper;
 use App\Action\PackageFilterHelper;
 use App\Models\Package;
 use Filament\Tables\Actions\Action;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 
 class ReceivedPackages extends SentPackages
@@ -33,7 +31,10 @@ class ReceivedPackages extends SentPackages
                     ->sortable(),
                 TextColumn::make('price')
                     ->label("Shipping Price")
+                    ->numeric()
+                    ->formatStateUsing(fn(string $state): string => $state . ' د.ل ')
                     ->translateLabel()
+                    ->weight('bold')
                     ->sortable(),
                 TextColumn::make('receiver_code')
                     ->translateLabel()

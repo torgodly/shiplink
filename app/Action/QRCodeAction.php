@@ -25,7 +25,12 @@ class QRCodeAction
             'eye_color_inner' => 'rgb(255, 234, 41)',
             'eye_color_outer' => 'rgb(255, 234, 41)',
             'eye_style' => 'circle',
-        ], statePath: $record->code))->icon('tabler-qrcode')->label('QR Code')->translateLabel()->modalCancelAction(false)->modalSubmitAction(false);
+        ], statePath: $record->code))
+            ->icon('tabler-qrcode')
+            ->label('QR Code')
+            ->translateLabel()
+            ->modalCancelAction(false)
+            ->modalSubmitAction(false);
 
     }
 }
