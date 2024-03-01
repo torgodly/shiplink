@@ -18,6 +18,7 @@ use Filament\Infolists\Contracts\HasInfolists;
 use Filament\Infolists\Infolist;
 use Filament\Pages\Page;
 use IbrahimBougaoua\FilamentRatingStar\Actions\RatingStar;
+use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Support\Arr;
 use JaOcero\ActivityTimeline\Components\ActivityDescription;
 use JaOcero\ActivityTimeline\Components\ActivityIcon;
@@ -43,6 +44,10 @@ class ShowProgress extends Page implements HasInfolists, HasActions, HasForms
     {
         $this->record = $record;
             //mountAction('Rating')
+    }
+    public function getTitle(): string|Htmlable
+    {
+        return __('Package Progress');
     }
 
 

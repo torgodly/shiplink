@@ -1,8 +1,10 @@
 <x-filament-panels::page>
-    <div>
-        {{ $this->RatingAction }}
+    @if($record->status === 'Delivered' && $record->receiver_code === auth()->user()->receiver_code)
+        <div>
+            {{ $this->RatingAction }}
 
-        <x-filament-actions::modals />
-    </div>
+            <x-filament-actions::modals/>
+        </div>
+    @endif
     {{$this->activityTimelineInfolist}}
 </x-filament-panels::page>

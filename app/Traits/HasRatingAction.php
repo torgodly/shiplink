@@ -36,7 +36,6 @@ trait HasRatingAction
             ->color('yellow')
             ->modalDescription(__('please Rate the shipping of this package'))
             ->modalWidth('max-w-sm')
-//            ->visible(fn(): bool => $this->record->status === 'delivered' && $this->record->receiver_code === auth()->user()->receiver_code)
             ->modalCancelAction(false)
             ->modalSubmitAction(false);
 
