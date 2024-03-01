@@ -22,7 +22,14 @@ class ListUsers extends ListRecords
 
                     return $data;
                 }
-            )->requiresConfirmation(true)->createAnother(false)->modalWidth('2xl')->icon('heroicon-o-plus-circle')->color('success')->modalIcon('heroicon-o-users'),
+            )->requiresConfirmation(true)
+                ->createAnother(false)
+                ->modalWidth('2xl')
+                ->icon('heroicon-o-plus-circle')
+                ->modalIcon('heroicon-o-users')
+                ->modalDescription(__('Please Fill In All Required Fields Correctly'))
+
+            ,
         ];
     }
 }

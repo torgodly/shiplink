@@ -4,7 +4,7 @@ namespace App\Enums;
 enum ShippingMethods: string
 {
     use \App\Traits\Enum;
-    case Air = 'air';
-    case Sea = 'sea';
-    case Land = 'land';
+    case Air = 'Air';
+    case Sea = 'Sea';
+    case Land = 'Land';
 }

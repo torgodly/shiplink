@@ -19,19 +19,26 @@ trait HasRatingAction
 ////                TODO: crete star rating field and remove teh old pakage
                 Rating::make('rating')
                     ->label('Rating')
+                    ->translateLabel()
+                    ->hiddenLabel()
+                    ->autoSubmit()
                     ->required()
-
 
             ])
             // ...
             ->action(function (array $data): void {
 //                dd($data);
                 $this->record->update($data);
-            })->requiresConfirmation()
+            })
+            ->requiresConfirmation()
             ->icon('tabler-star')
             ->modalIcon('tabler-star')
             ->color('yellow')
-            ->modalDescription(__('please Rate the shipping of this package'));
+            ->modalDescription(__('please Rate the shipping of this package'))
+            ->modalWidth('max-w-sm')
+            ->modalCancelAction(false)
+            ->modalSubmitAction(false);
+
     }
 
 }

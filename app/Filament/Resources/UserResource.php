@@ -110,9 +110,9 @@ class UserResource extends Resource
                     ->translateLabel()
                     ->options(
                         [
-                            'user' => 'user',
-                            'admin' => 'admin',
-                            'manager' => 'manager'
+                            'user' => 'User',
+                            'admin' => 'Admin',
+                            'manager' => 'Manager'
 
                         ]
                     )

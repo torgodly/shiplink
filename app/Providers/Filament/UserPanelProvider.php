@@ -33,7 +33,7 @@ class UserPanelProvider extends PanelProvider
             ->passwordReset()
             ->id('user')
             ->path('user')
-            ->font('Tajawal')
+            ->font('Cairo')
             ->plugin(BreezyCore::make()
                 ->myProfile(
                     shouldRegisterUserMenu: true, // Sets the 'account' link in the panel User Menu (default = true)
