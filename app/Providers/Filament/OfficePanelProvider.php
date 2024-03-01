@@ -30,7 +30,7 @@ class OfficePanelProvider extends PanelProvider
         return $panel
             ->id('office')
             ->path('office')
-            ->font('Tajawal')
+            ->font('Cairo')
             ->plugin(BreezyCore::make()
                 ->myProfile(
                     shouldRegisterUserMenu: true,

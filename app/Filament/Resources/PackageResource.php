@@ -5,25 +5,15 @@ namespace App\Filament\Resources;
 use App\Action\InvoiceActionHelper;
 use App\Action\PackageFilterHelper;
 use App\Action\PackageFormHelper;
-use App\Enums\ShippingMethods;
 use App\Filament\Resources\PackageResource\Pages;
 use App\Filament\Resources\PackageResource\RelationManagers;
 use App\Models\Package;
-use App\Models\User;
 use App\Tables\Columns\RatingColumn;
-use Filament\Forms\Components\Group;
-use Filament\Forms\Components\MarkdownEditor;
-use Filament\Forms\Components\Section;
-use Filament\Forms\Components\Select;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
-use Filament\Forms\Set;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Actions\ActionGroup;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
 
 class PackageResource extends Resource
 {
@@ -65,8 +55,7 @@ class PackageResource extends Resource
                     ->label('Package Code')
                     ->translateLabel()
                     ->searchable()
-                    ->copyable()
-                    ->copyMessage('Color code copied')
+                    ->url(fn($record) => PackageResource::getUrl('view', ['record' => $record]))
                     ->sortable(),
                 Tables\Columns\TextColumn::make('sender_code')
                     ->translateLabel()

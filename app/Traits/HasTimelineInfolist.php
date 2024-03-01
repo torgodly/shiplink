@@ -23,7 +23,7 @@ trait HasTimelineInfolist
 //                'created_at' => '-', // Adjust the date accordingly
             ],
             [
-                'title' => __('✈️ Your Package is Flying High - In Transit!'),
+                'title' => __('✈️ Your Package is on its way!'),
                 'description' => __('Your package is on the move and making swift progress towards you. It won’t be long now!'),
                 'status' => 'OutForDelivery',
                 'created_at' => now(), // Adjust the date accordingly

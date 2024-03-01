@@ -33,7 +33,7 @@
     "Insurance": "التأمين",
     "🎉 Order Confirmed - We're On It!": "🎉 تم تأكيد طلبك - نحن بالخدمة!",
     "Great news! We have received your order and are working on it with utmost priority. Stay tuned for updates!": "أخبار سعيدة! تم استلام طلبك ونحن نعمل عليه بكل اهتمام. ترقبوا المزيد من التفاصيل قريبًا!",
-    "✈️ Your Package is Flying High - In Transit!": "✈️ طردك مسافر بين السحاب - في الطريق!",
+    "✈\uFE0F Your Package is on its way!": "✈️ طردك  في الطريق!",
     "Your package is on the move and making swift progress towards you. It won’t be long now!": "طردك يقطع المسافات بسرعة نحوك. اللقاء قريب!",
     "📍 Package Ready for Pickup - Almost Yours!": "📍 طردك جاهز للاستلام - كاد أن يكون بين يديك!",
     "Exciting news! Your package awaits you at the designated pickup point. It’s almost in your hands!": "أخبار ممتعة! طردك ينتظرك في نقطة الاستلام. سيكون بين يديك في لحظات!",
@@ -41,12 +41,12 @@
     "Hooray! Your package has safely arrived. We hope it brings you joy. Thanks for choosing us!": "تهانينا! وصل طردك بسلامة. نتمنى أن يحمل لك الفرحة. شكرًا لثقتكم بنا!",
     "Package Status": "حالة الشحنة",
     "Follow the progress of your package.": "تابع تقدم طردك.",
-    "Package Progress": "تقدم الشحنة",
+    "Package Progress": "مراحل الشحنة",
     "Sent Packages": "الشحنات الصادرة",
     "Send New Package": "إرسال شحنة جديدة",
     "Pending": "قيد الانتظار",
     "OutForDelivery": "خارج للتوصيل",
-    "Delivered": "تم التوصيل والاستلام",
+    "Delivered": "تم الاستلام",
     "Change Status": "تغيير الحالة",
     "Change the status of this package.": "تغيير حالة هذه الشحنة.",
     "fast_shipping": "شحن سريع",
@@ -132,5 +132,6 @@
     "Total number of packages out for delivery": "العدد الإجمالي للشحنات خارج للتوصيل",
     "Total number of packages delivered": "العدد الإجمالي للشحنات المستلمة",
     "Total number of packages returned": "العدد الإجمالي للشحنات المرجعة",
-    "Total number of packages waiting for pickup": "العدد الإجمالي للشحنات في انتظار الاستلام"
+    "Total number of packages waiting for pickup": "العدد الإجمالي للشحنات في انتظار الاستلام",
+    "Please Fill In All Required Fields Correctly": "يرجى ملئ جميع الحقول المطلوبة بشكل صحيح"
 }

@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\ShippingMethods;
 use App\Enums\ShippingStatus;
 use App\Models\Branch;
 use App\Models\User;
@@ -35,7 +36,7 @@ class PackageFactory extends Factory
             'length' => $this->faker->randomFloat(2, 0, 100),
             'fragile' => $this->faker->boolean,
             'fast_shipping' => $this->faker->boolean,
-            'shipping_method' => $this->faker->randomElement(['air', 'sea', 'land']),
+            'shipping_method' => $this->faker->randomElement(ShippingMethods::array()),
             'insurance' => $this->faker->boolean,
             'is_refrigerated' => $this->faker->boolean,
             'description' => $this->faker->sentence,

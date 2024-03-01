@@ -11,7 +11,8 @@ use Filament\Tables\Columns\TextColumn;
 class TableColumnsHelper
 {
 
-    public static function PackageColumns(){
+    public static function PackageColumns()
+    {
         return [
             TextColumn::make('code')
                 ->label('Package Code')
@@ -56,6 +57,7 @@ class TableColumnsHelper
                 ->translateLabel()
                 ->label('Rating'),
             IconColumn::make('is_refrigerated')
+                ->label('Refrigerated')
                 ->translateLabel()
                 ->boolean()
                 ->toggleable(isToggledHiddenByDefault: true),
