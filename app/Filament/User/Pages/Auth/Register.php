@@ -2,10 +2,9 @@
 
 namespace App\Filament\User\Pages\Auth;
 
-use Filament\Forms\Components\TextInput;
-use Filament\Pages\Auth\Register as BaseRegister;
-use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Component;
+use Filament\Pages\Auth\Register as BaseRegister;
+use Ysfkaya\FilamentPhoneInput\Forms\PhoneInput;
 
 class Register extends BaseRegister
 {
@@ -29,13 +28,16 @@ class Register extends BaseRegister
     }
 
 
-
     //phone
     protected function getPhoneFormComponent(): Component
     {
-        return TextInput::make('phone')
-            ->label(__('Phone'))
+        return PhoneInput::make('phone')
+            ->validateFor(
+                lenient: true, // default: false
+            )
             ->required()
-            ->maxLength(255);
+            ->unique('users', 'phone', ignoreRecord: true)
+            ->defaultCountry('US')
+            ;
     }
 }

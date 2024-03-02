@@ -23,7 +23,8 @@
         "saade/filament-autograph": "^3.0",
         "spatie/laravel-pdf": "^1.1",
         "stechstudio/filament-impersonate": "^3.5",
-        "thiktak/filament-simple-list-entry": "^1.0"
+        "thiktak/filament-simple-list-entry": "^1.0",
+        "ysfkaya/filament-phone-input": "^2.3"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

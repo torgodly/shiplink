@@ -12,6 +12,8 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use STS\FilamentImpersonate\Tables\Actions\Impersonate;
+use Ysfkaya\FilamentPhoneInput\Forms\PhoneInput;
+use Ysfkaya\FilamentPhoneInput\Tables\PhoneColumn;
 
 class UserResource extends Resource
 {
@@ -48,12 +50,13 @@ class UserResource extends Resource
                     ->unique('users', 'email', ignoreRecord: true)
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('phone')
-                    ->translateLabel()
-                    ->tel()
-                    ->unique('users', 'phone', ignoreRecord: true)
+
+                PhoneInput::make('phone')
+                    ->validateFor(
+                        lenient: true, // default: false
+                    )
                     ->required()
-                    ->maxLength(10),
+                    ->unique('users', 'phone', ignoreRecord: true),
                 Forms\Components\select::make('type')
                     ->translateLabel()
                     ->required()
@@ -82,26 +85,33 @@ class UserResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('name')
                     ->translateLabel()
+                    ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('email')
                     ->translateLabel()
+                    ->sortable()
                     ->copyable()
                     ->copyMessage(__('Copied!'))
                     ->searchable(),
-                Tables\Columns\TextColumn::make('phone')
+
+                PhoneColumn::make('phone')
                     ->translateLabel()
+                    ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('type')
                     ->translateLabel()
+                    ->sortable()
                     ->badge()
                     ->searchable(),
                 //sender code
                 Tables\Columns\TextColumn::make('sender_code')
                     ->translateLabel()
+                    ->sortable()
                     ->searchable(),
                 //receiver code
                 Tables\Columns\TextColumn::make('receiver_code')
                     ->translateLabel()
+                    ->sortable()
                     ->searchable(),
 
             ])

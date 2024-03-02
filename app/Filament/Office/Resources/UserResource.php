@@ -11,6 +11,8 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use Ysfkaya\FilamentPhoneInput\Forms\PhoneInput;
+use Ysfkaya\FilamentPhoneInput\Tables\PhoneColumn;
 
 class UserResource extends Resource
 {
@@ -48,13 +50,12 @@ class UserResource extends Resource
                     ->unique('users', 'email', ignoreRecord: true)
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('phone')
-                    ->columnSpanFull()
-                    ->translateLabel()
-                    ->tel()
-                    ->unique('users', 'phone', ignoreRecord: true)
+                PhoneInput::make('phone')
+                    ->validateFor(
+                        lenient: true, // default: false
+                    )
                     ->required()
-                    ->maxLength(10),
+                    ->unique('users', 'phone', ignoreRecord: true),
                 Forms\Components\TextInput::make('password')
                     ->translateLabel()
                     ->password()
@@ -81,8 +82,9 @@ class UserResource extends Resource
                     ->copyable()
                     ->copyMessage(__('Copied!'))
                     ->searchable(),
-                Tables\Columns\TextColumn::make('phone')
+                PhoneColumn::make('phone')
                     ->translateLabel()
+                    ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('type')
                     ->translateLabel()
