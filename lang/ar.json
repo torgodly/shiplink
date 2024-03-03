@@ -133,5 +133,6 @@
     "Total number of packages delivered": "العدد الإجمالي للشحنات المستلمة",
     "Total number of packages returned": "العدد الإجمالي للشحنات المرجعة",
     "Total number of packages waiting for pickup": "العدد الإجمالي للشحنات في انتظار الاستلام",
-    "Please Fill In All Required Fields Correctly": "يرجى ملئ جميع الحقول المطلوبة بشكل صحيح"
+    "Please Fill In All Required Fields Correctly": "يرجى ملئ جميع الحقول المطلوبة بشكل صحيح",
+    "Packages by Status": "الشحنات حسب الحالة"
 }

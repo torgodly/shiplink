@@ -77,7 +77,6 @@ class TableColumnsHelper
                 ->badge()
                 ->formatStateUsing(fn(string $state): string => __($state))
                 ->color(fn(string $state): string => match ($state) {
-                    'InTransit' => 'blue',
                     'OutForDelivery' => 'yellow',
                     'WaitingForPickup' => 'orange',
                     'Delivered' => 'green',

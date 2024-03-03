@@ -4,6 +4,7 @@ namespace App\Providers\Filament;
 
 use App\Filament\Office\Pages\Login;
 use App\Filament\Widgets\StatsOverview;
+use App\Filament\Widgets\StatusChart;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
@@ -61,7 +62,8 @@ class AdminPanelProvider extends PanelProvider
             ->widgets([
 //                Widgets\AccountWidget::class,
 //                Widgets\FilamentInfoWidget::class,
-                StatsOverview::class
+                StatsOverview::class,
+                StatusChart::class
             ])
             ->middleware([
                 EncryptCookies::class,
