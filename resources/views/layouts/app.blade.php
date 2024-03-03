@@ -12,25 +12,16 @@
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet"/>
     <script src="https://cdn.jsdelivr.net/npm/flowbite/dist/flowbite.js"></script>
     <!-- Scripts -->
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/app.jsx'])
     <script src="https://cdn.tailwindcss.com"></script>
 
 </head>
 <body class="font-sans antialiased">
-<div class="min-h-screen bg-gray-100">
-{{--    @include('layouts.navigation')--}}
-    <!-- Page Heading -->
-    @if (isset($header))
-        <header class="bg-white shadow">
-            <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                {{ $header }}
-            </div>
-        </header>
-    @endif
+<div class="min-h-screen bg-white">
 
 
     <!-- Page Content -->
-    <main>
+    <main id="app">
         {{ $slot }}
     </main>
 </div>
