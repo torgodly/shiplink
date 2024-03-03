@@ -16,7 +16,6 @@ trait HasRatingAction
             ->fillForm($this->record->toArray())
             ->record($this->record)
             ->form([
-////                TODO: crete star rating field and remove teh old pakage
                 Rating::make('rating')
                     ->label('Rating')
                     ->translateLabel()

@@ -3,6 +3,7 @@
 namespace App\Action;
 
 use App\Enums\ShippingMethods;
+use App\Forms\Components\ViewPrice;
 use App\Models\User;
 use Filament\Forms\Components\Group;
 use Filament\Forms\Components\MarkdownEditor;
@@ -99,9 +100,17 @@ class PackageFormHelper
 
             Group::make()
                 ->schema([
+                    Section::make(__('Price'))
+                        ->schema([
+                            ViewPrice::make('price')
+                                ->hiddenLabel()
+                                ->translateLabel()
+                                ->columnSpanFull(),
+                        ])->columns(),
                     Section::make(__('Options'))
                         ->schema([
                             Toggle::make('is_refrigerated')
+                                ->live()
                                 ->translateLabel()
                                 ->label('Refrigerated')
                                 ->onIcon('tabler-snowflake')
@@ -110,6 +119,7 @@ class PackageFormHelper
                                 ->helperText(__('Is the package refrigerated?'))
                                 ->required(),
                             Toggle::make('fragile')
+                                ->live()
                                 ->translateLabel()
                                 ->label('Fragile')
                                 ->onIcon('carbon-fragile')
@@ -117,6 +127,7 @@ class PackageFormHelper
                                 ->helperText(__('Is the package fragile?'))
                                 ->required(),
                             Toggle::make('fast_shipping')
+                                ->live()
                                 ->translateLabel()
                                 ->label('Fast Shipping')
                                 ->onIcon('tabler-brand-speedtest')
@@ -124,6 +135,7 @@ class PackageFormHelper
                                 ->helperText(__('Do you want to ship the package fast?'))
                                 ->required(),
                             Toggle::make('insurance')
+                                ->live()
                                 ->translateLabel()
                                 ->label('Insurance')
                                 ->onIcon('tabler-shield-check')
@@ -135,12 +147,14 @@ class PackageFormHelper
                     Section::make(__('Dimensions'))
                         ->schema([
                             TextInput::make('weight')
+                                ->live()
                                 ->label('Weight')
                                 ->translateLabel()
                                 ->required()
                                 ->prefix('kg')
                                 ->numeric(),
                             TextInput::make('height')
+                                ->live()
                                 ->label('Height')
                                 ->translateLabel()
                                 ->prefix('cm')
@@ -148,6 +162,7 @@ class PackageFormHelper
                                 ->required()
                                 ->numeric(),
                             TextInput::make('width')
+                                ->live()
                                 ->label('Width')
                                 ->translateLabel()
                                 ->prefix('cm')
@@ -155,6 +170,7 @@ class PackageFormHelper
                                 ->required()
                                 ->numeric(),
                             TextInput::make('length')
+                                ->live()
                                 ->label('Length')
                                 ->translateLabel()
                                 ->prefix('cm')
@@ -162,6 +178,7 @@ class PackageFormHelper
                                 ->required()
                                 ->numeric(),
                             Select::make('shipping_method')
+                                ->live()
                                 ->translateLabel()
                                 ->label('Shipping Method')
                                 ->options(collect(ShippingMethods::array())->map(fn($value, $key) => __($value))->toArray())
