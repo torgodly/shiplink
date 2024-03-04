@@ -25,6 +25,7 @@ class ListUsers extends ListRecords
                     return $data;
                 }
             )
+                ->modelLabel(__('User'))
                 ->requiresConfirmation(true)
                 ->createAnother(false)
                 ->modalWidth('2xl')

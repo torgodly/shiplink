@@ -55,6 +55,7 @@ class UserResource extends Resource
                         lenient: true, // default: false
                     )
                     ->required()
+                    ->columnSpanFull()
                     ->unique('users', 'phone', ignoreRecord: true),
                 Forms\Components\TextInput::make('password')
                     ->translateLabel()
