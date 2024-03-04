@@ -46,14 +46,13 @@ class Package extends Model
 
     public static function getPrice($weight, $height, $width, $length, $fragile, $fast_shipping, $shipping_method, $insurance, $is_refrigerated): float
     {
-
-        $volumetricWeight = ($height * $width * $length) / 5000; // Volumetric weight calculation
+        $volumetricWeight = ((float)$height * (float)$width * (float)$length) / 5000; // Volumetric weight calculation
         $actualWeight = max($weight, $volumetricWeight); // Take the maximum of actual weight and volumetric weight
 
         $price = 0;
 
         // Base price calculation based on weight and dimensions
-        $price += $actualWeight * 20; // Base price per kg
+        $price += $actualWeight * 5; // Base price per kg
 
         // Additional charges
         if ($fragile) {
@@ -139,7 +138,7 @@ class Package extends Model
         $price = 0;
 
         // Base price calculation based on weight and dimensions
-        $price += $actualWeight * 20; // Base price per kg
+        $price += $actualWeight * 5; // Base price per kg
 
         // Additional charges
         if ($this->fragile) {
