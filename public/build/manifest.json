@@ -1,6 +1,6 @@
 {
   "resources/css/app.css": {
-    "file": "assets/app-UH_odjdB.css",
+    "file": "assets/app-td63Vbs5.css",
     "isEntry": true,
     "src": "resources/css/app.css"
   },
@@ -20,76 +20,8 @@
     "src": "resources/css/filament/admin/theme.css"
   },
   "resources/js/app.js": {
-    "file": "assets/app-pf51QZbK.js",
+    "file": "assets/app-8vezzgaX.js",
     "isEntry": true,
     "src": "resources/js/app.js"
-  },
-  "resources/js/app.jsx": {
-    "assets": [
-      "assets/kws-xxv7PTH6.png",
-      "assets/geps-ko1aQYWD.png",
-      "assets/protergia-ZiYnevTT.png",
-      "assets/web-dev-S2G6HW1c.svg",
-      "assets/Web-developer-PLJjhtY-.svg",
-      "assets/web-OGfhW7rK.svg",
-      "assets/app-pFwG2SxI.svg",
-      "assets/hosting-3suZe0uv.svg",
-      "assets/consultation-CB4GoVdI.svg",
-      "assets/hero-bg-ufXHAM5D.svg",
-      "assets/footer-MNI_1WzH.svg"
-    ],
-    "css": [
-      "assets/app-ofmE5Zyj.css"
-    ],
-    "file": "assets/app-2tiBy6oQ.js",
-    "imports": [
-      "resources/js/app.js"
-    ],
-    "isEntry": true,
-    "src": "resources/js/app.jsx"
-  },
-  "resources/js/images/Web-developer.svg": {
-    "file": "assets/Web-developer-PLJjhtY-.svg",
-    "src": "resources/js/images/Web-developer.svg"
-  },
-  "resources/js/images/app.svg": {
-    "file": "assets/app-pFwG2SxI.svg",
-    "src": "resources/js/images/app.svg"
-  },
-  "resources/js/images/clients/geps.png": {
-    "file": "assets/geps-ko1aQYWD.png",
-    "src": "resources/js/images/clients/geps.png"
-  },
-  "resources/js/images/clients/kws.png": {
-    "file": "assets/kws-xxv7PTH6.png",
-    "src": "resources/js/images/clients/kws.png"
-  },
-  "resources/js/images/clients/protergia.png": {
-    "file": "assets/protergia-ZiYnevTT.png",
-    "src": "resources/js/images/clients/protergia.png"
-  },
-  "resources/js/images/consultation.svg": {
-    "file": "assets/consultation-CB4GoVdI.svg",
-    "src": "resources/js/images/consultation.svg"
-  },
-  "resources/js/images/footer.svg": {
-    "file": "assets/footer-MNI_1WzH.svg",
-    "src": "resources/js/images/footer.svg"
-  },
-  "resources/js/images/hero-bg.svg": {
-    "file": "assets/hero-bg-ufXHAM5D.svg",
-    "src": "resources/js/images/hero-bg.svg"
-  },
-  "resources/js/images/hosting.svg": {
-    "file": "assets/hosting-3suZe0uv.svg",
-    "src": "resources/js/images/hosting.svg"
-  },
-  "resources/js/images/web-dev.svg": {
-    "file": "assets/web-dev-S2G6HW1c.svg",
-    "src": "resources/js/images/web-dev.svg"
-  },
-  "resources/js/images/web.svg": {
-    "file": "assets/web-OGfhW7rK.svg",
-    "src": "resources/js/images/web.svg"
   }
 }
