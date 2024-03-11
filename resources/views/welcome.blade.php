@@ -48,28 +48,28 @@
 
     <!-- Carousel Start -->
     <div class="container-fluid p-0 pb-5" id="Home">
-        {{--        <div class="owl-carousel header-carousel position-relative mb-5">--}}
-        <div class="owl-carousel-item position-relative">
-            <img class="img-fluid" src="{{asset('img/carousel-1.jpg')}}" alt="">
-            <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center"
-                 style="background: rgba(6, 3, 21, .5);">
-                <div class="container">
-                    <div class="row justify-content-start" dir="rtl">
-                        <div class="col-10 col-lg-8">
-                            <h5 class="text-white text-uppercase mb-3 animated slideInDown">حلول النقل
-                                واللوجستيات</h5>
-                            <h1 class="display-3 text-white animated slideInDown mb-4">#1 مكان لحلولك في <span
-                                    class="text-primary">اللوجستيات</span></h1>
-                            <p class="fs-5 fw-medium text-white mb-4 pb-2">توفر حلولنا مزيجًا مثاليًا من الكفاءة والموثوقية لتلبية احتياجاتك في النقل واللوجستيات. نحن نهتم بكل تفاصيل عملك لضمان وصول سلس وفعال لبضائعك.</p>
-                            <a href="/user/login" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">تسجيل</a>
-                            <a href="#Pricing" class="btn btn-secondary py-md-3 px-md-5 animated slideInRight">احسب
-                                سعر
-                                شحنتك</a>
+        <div class="owl-carousel header-carousel position-relative mb-5">
+            <div class="owl-carousel-item position-relative">
+                <img class="img-fluid" src="{{asset('img/carousel-1.jpg')}}" alt="">
+                <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center"
+                     style="background: rgba(6, 3, 21, .5);">
+                    <div class="container">
+                        <div class="row justify-content-start" dir="rtl">
+                            <div class="col-10 col-lg-8">
+                                <h5 class="text-white text-uppercase mb-3 animated slideInDown">حلول النقل
+                                    واللوجستيات</h5>
+                                <h1 class="display-3 text-white animated slideInDown mb-4">#1 مكان لحلولك في <span
+                                        class="text-primary">اللوجستيات</span></h1>
+                                <p class="fs-5 fw-medium text-white mb-4 pb-2">توفر حلولنا مزيجًا مثاليًا من الكفاءة والموثوقية لتلبية احتياجاتك في النقل واللوجستيات. نحن نهتم بكل تفاصيل عملك لضمان وصول سلس وفعال لبضائعك.</p>
+                                <a href="/user/login" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">تسجيل</a>
+                                <a href="#Pricing" class="btn btn-secondary py-md-3 px-md-5 animated slideInRight">احسب
+                                    سعر
+                                    شحنتك</a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            {{--            </div>--}}
             {{--            <div class="owl-carousel-item position-relative">--}}
             {{--                <img class="img-fluid" src="img/carousel-2.jpg" alt="">--}}
             {{--                <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center"--}}
