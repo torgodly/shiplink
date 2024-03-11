@@ -13,7 +13,6 @@
     <script src="https://cdn.jsdelivr.net/npm/flowbite/dist/flowbite.js"></script>
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/app.jsx'])
-    <script src="https://cdn.tailwindcss.com"></script>
 
 </head>
 <body class="font-sans antialiased">
