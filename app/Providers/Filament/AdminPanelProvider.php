@@ -39,6 +39,7 @@ class AdminPanelProvider extends PanelProvider
             )
             ->sidebarCollapsibleOnDesktop()
             ->brandLogo(asset('images/logo.png'))
+            ->favicon(asset('images/fav.png'))
             ->brandLogoHeight('3rem')
             ->login(Login::class)
             ->colors([

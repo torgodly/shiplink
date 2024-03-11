@@ -42,6 +42,7 @@ class UserPanelProvider extends PanelProvider
                     slug: 'my-profile' // Sets the slug for the profile page (default = 'my-profile')
                 )->enableTwoFactorAuthentication())
             ->brandLogo(asset('images/logo.png'))
+            ->favicon(asset('images/fav.png'))
             ->brandLogoHeight('3rem')
             ->colors([
                 'primary' => '#247DFF',
