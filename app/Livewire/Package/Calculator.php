@@ -49,7 +49,7 @@ class Calculator extends Component implements HasForms
                                     ->label('Refrigerated')
                                     ->onIcon('tabler-snowflake')
                                     ->offIcon('tabler-sun')
-                                    ->onColor('sky')
+                                    ->onColor('gray')
                                     ->helperText(__('Is the package refrigerated?'))
                                     ->required(),
                                 Toggle::make('fragile')
@@ -58,6 +58,7 @@ class Calculator extends Component implements HasForms
                                     ->label('Fragile')
                                     ->onIcon('carbon-fragile')
                                     ->offIcon('tabler-artboard')
+                                    ->onColor('gray')
                                     ->helperText(__('Is the package fragile?'))
                                     ->required(),
                                 Toggle::make('fast_shipping')
@@ -66,6 +67,7 @@ class Calculator extends Component implements HasForms
                                     ->label('Fast Shipping')
                                     ->onIcon('tabler-brand-speedtest')
                                     ->offIcon('tabler-brand-speedtest')
+                                    ->onColor('gray')
                                     ->helperText(__('Do you want to ship the package fast?'))
                                     ->required(),
                                 Toggle::make('insurance')
@@ -74,6 +76,7 @@ class Calculator extends Component implements HasForms
                                     ->label('Insurance')
                                     ->onIcon('tabler-shield-check')
                                     ->offIcon('tabler-shield-x')
+                                    ->onColor('gray')
                                     ->helperText(__('Do you want to insure the package?'))
                                     ->required(),
 
