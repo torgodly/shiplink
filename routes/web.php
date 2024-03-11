@@ -17,6 +17,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('test', function () {
-    return view('welcome');
+//price calculator
+Route::get('/calculator', function () {
+    return view('calculator');
 });
