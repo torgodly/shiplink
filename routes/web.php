@@ -20,4 +20,4 @@ Route::get('/', function () {
 //price calculator
 Route::get('/calculator', function () {
     return view('calculator');
-});
+})->name('calculator');

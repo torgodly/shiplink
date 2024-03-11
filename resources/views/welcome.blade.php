@@ -402,7 +402,7 @@
             {{--                    </div>--}}
             {{--                </div>--}}
             {{--            </div>--}}
-            <iframe src="http://shiplink.test/calculator" title="description" style=" height: 100vh"
+            <iframe src="{{route('calculator')}}" title="description" style=" height: 100vh"
                     width="100%"></iframe>
 
 
