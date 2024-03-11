@@ -403,8 +403,23 @@
             {{--                    </div>--}}
             {{--                </div>--}}
             {{--            </div>--}}
-            <iframe src="{{route('calculator')}}" title="description" style=" height: 100vh"
-                    width="100%"></iframe>
+            <div id="iframe-container" style="padding: 20px; overflow: hidden;">
+                <iframe id="dynamic-iframe" src="{{ route('calculator') }}" title="description" style="width: 100%; border: none;"></iframe>
+            </div>
+
+            <script>
+                // Wait for the iframe content to load
+                window.onload = function() {
+                    // Get the iframe and its document
+                    var iframe = document.getElementById('dynamic-iframe');
+                    var iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
+
+                    // Set the height of the iframe to match the height of its content
+                    iframe.style.height = iframeDocument.documentElement.scrollHeight + 'px';
+                };
+            </script>
+
+
 
 
         </div>
