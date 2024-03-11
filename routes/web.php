@@ -21,3 +21,6 @@ Route::get('/', function () {
 Route::get('/calculator', function () {
     return view('calculator');
 })->name('calculator');
+
+//contact us store image
+Route::post('/contact/store', [\App\Http\Controllers\MessageController::class, 'store'])->name('contact.store');

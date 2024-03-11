@@ -135,5 +135,7 @@
     "Total number of packages waiting for pickup": "العدد الإجمالي للشحنات في انتظار الاستلام",
     "Please Fill In All Required Fields Correctly": "يرجى ملئ جميع الحقول المطلوبة بشكل صحيح",
     "Packages by Status": "الشحنات حسب الحالة",
-    "User": "مستخدم"
+    "User": "مستخدم",
+    "Message": "الرسالة",
+    "Messages": "الرسائل"
 }
