@@ -14,9 +14,10 @@
     <!-- Navbar Start -->
     <nav class="navbar navbar-expand-lg bg-white navbar-light shadow border-top border-5 border-primary sticky-top p-0">
         <a href="#Home" class="navbar-brand  d-flex align-items-center px-4 px-lg-5">
-            {{--            <h2 class="mb-2 text-white">ShipLink</h2>--}}
+            {{--                        <h2 class="mb-2 text-white">ShipLink</h2>--}}
             {{--            <x-app-logo class="ms-2" />--}}
-            <img src="{{asset('images/logo.png')}}" width="300">
+            <img src="{{asset('images/logo.png')}}" alt="Logo" style="    width: 200px;">
+
         </a>
         <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
             <span class="navbar-toggler-icon"></span>
