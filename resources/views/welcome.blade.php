@@ -76,7 +76,7 @@
                                 <h5 class="text-white text-uppercase mb-3 animated slideInDown">{{__("Reliable delivery and accurate tracking")}}</h5>
                                 <h1 class="display-3 text-white animated slideInDown mb-4">{{__('We are the optimal shipping journey')}}</h1>
                                 <p class="fs-5 fw-medium text-white mb-4 pb-2">
-                                    {{__("We are a shipping and tracking company that specializes in providing fast and efficient shipping solutions to our customers across the country. We aim to meet the needs of our customers by providing high-quality and reliable shipping services.")}}</p>
+                                    {{__("We are a shipping and tracking company that specializes in providing fast and efficient shipping solutions to our customers across the country We aim to meet the needs of our customers by providing high-quality and reliable shipping services")}}</p>
                                 <a href="/user/login"
                                    class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">{{__('Sign In')}}</a>
                                 <a href="#Pricing" class="btn btn-secondary py-md-3 px-md-5 animated slideInRight">
@@ -128,19 +128,19 @@
                     <h6 class="text-secondary text-uppercase mb-3">{{__('About Us')}}</h6>
                     <h1 class="mb-5">{{__("We make your shipping journey a unique and reliable experience")}}</h1>
                     <p class="mb-5">
-                        {{__("We provide you with fast and efficient transportation and logistics solutions. We are here to ensure that we provide the best services with high efficiency and on time.")}}
+                        {{__("We provide you with fast and efficient transportation and logistics solutions We are here to ensure that we provide the best services with high efficiency and on time")}}
 
                     </p>
                     <div class="row g-4 mb-5">
                         <div class="col-sm-6 wow fadeIn" data-wow-delay="0.5s">
                             <i class="fa fa-calculator fa-3x text-primary mb-3"></i>
                             <h5>{{__("Pre-calculate the cost of the shipment")}}</h5>
-                            <p class="m-0">{{__("We provide you with the ability to easily calculate the cost of your shipment through our website by entering your shipment data.")}}</p>
+                            <p class="m-0">{{__("We provide you with the ability to easily calculate the cost of your shipment through our website by entering your shipment data")}}</p>
                         </div>
                         <div class="col-sm-6 wow fadeIn" data-wow-delay="0.7s">
                             <i class="fa fa-shipping-fast fa-3x text-primary mb-3"></i>
                             <h5>{{__("Delivery on time")}}</h5>
-                            <p class="m-0">{{__("We guarantee that shipments are delivered on time. You can count on us to ensure that your order arrives on time without delay.")}}</p>
+                            <p class="m-0">{{__("We guarantee that shipments are delivered on time You can count on us to ensure that your order arrives on time without delay")}}</p>
                         </div>
                     </div>
                 </div>
@@ -157,7 +157,7 @@
             <div class="row g-5">
                 <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
                     <h1 class="mb-5">{{__("Your shipment is our commitment")}}</h1>
-                    <p class="mb-5">{{__("We offer you the ability to track your shipment to be always informed of the status of your shipment and ensure that it arrives safely and in the best condition.")}}</p>
+                    <p class="mb-5">{{__("Our carefully designed website provides you with an easy experience to easily track status around the clock")}}</p>
                     <div class="d-flex align-items-center">
                         <i class="fa fa-headphones fa-2x flex-shrink-0 bg-primary p-3 text-white"></i>
                         <div class="pe-4">
@@ -209,7 +209,7 @@
                             <img class="img-fluid" src="img/service-1.jpg" alt="">
                         </div>
                         <h4 class="mb-3">{{__("Air Shipping")}}</h4>
-                        <p>{{__("Our Air Shipping services provide fast and reliable transportation of goods as quickly and efficiently as possible.")}}</p>
+                        <p>{{__("Our Air Shipping services provide fast and reliable transportation of goods as quickly and efficiently as possible")}}</p>
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.5s">
@@ -218,7 +218,7 @@
                             <img class="img-fluid" src="img/service-2.jpg" alt="">
                         </div>
                         <h4 class="mb-3">{{__("Sea Shipping")}}</h4>
-                        <p>{{__("We offer a comprehensive range of Sea Shipping services for all types of full container loads and combined cargo shipments.")}}</p>
+                        <p>{{__("We offer a comprehensive range of Sea Shipping services for all types of full container loads and combined cargo shipments")}}</p>
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.7s">
@@ -227,7 +227,7 @@
                             <img class="img-fluid" src="img/service-3.jpg" alt="">
                         </div>
                         <h4 class="mb-3">{{__("Land Shipping")}}</h4>
-                        <p>{{__("We provide flexible and efficient Land Shipping services to ensure that your shipment arrives as quickly as possible and with the highest level of quality.")}}</p>
+                        <p>{{__("We provide flexible and efficient Land Shipping services to ensure that your shipment arrives as quickly as possible and with the highest level of quality")}}</p>
                     </div>
                 </div>
                 <!-- Add the remaining service items similarly -->
@@ -317,7 +317,7 @@
                         <i class="fas fa-file-signature text-primary fa-3x flex-shrink-0"></i>
                         <div class="me-4">
                             <h5>{{__("Digital Signature")}}</h5>
-                            <p class="mb-0">{{__("Digital Signature is easy and effective for confirming receipt of your shipment.")}}</p>
+                            <p class="mb-0">{{__("Digital Signature is easy and effective for confirming receipt of your shipment")}}</p>
                         </div>
                     </div>
                     <div class="d-flex mb-5 wow fadeIn" data-wow-delay="0.5s">
@@ -331,7 +331,7 @@
                         <i class="fa fa-headphones text-primary fa-3x flex-shrink-0"></i>
                         <div class="me-4">
                             <h5>{{ __("24/7 Phone Support") }}</h5>
-                            <p class="mb-0">{{ __("We're here to assist you anytime. You can call us around the clock for support and assistance.") }}</p>
+                            <p class="mb-0">{{ __("We're here to assist you anytime You can call us around the clock for support and assistance") }}</p>
                         </div>
                     </div>
 
@@ -386,7 +386,7 @@
                 <div class="col-lg-5 wow fadeInUp" data-wow-delay="0.1s">
                     <h6 class="text-secondary text-uppercase mb-3">{{ __("Contact Us") }}</h6>
                     <h1 class="mb-5">{{ __("Contact Us Now!") }}</h1>
-                    <p class="mb-5">{{ __("We are here to help and answer your inquiries, feel free to contact us for support.") }}</p>
+                    <p class="mb-5">{{ __("We are here to help and answer your inquiries, feel free to contact us for support") }}</p>
                     <div class="d-flex align-items-center">
                         <i class="fa fa-headphones fa-2x flex-shrink-0 bg-primary p-3 text-white"></i>
                         <div class="pe-4">
