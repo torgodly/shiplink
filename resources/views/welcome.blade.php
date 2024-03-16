@@ -12,7 +12,8 @@
 
 
     <!-- Navbar Start -->
-    <nav class="navbar navbar-expand-lg bg-white navbar-light shadow border-top border-5 border-primary sticky-top p-0" dir="rtl">
+    <nav class="navbar navbar-expand-lg bg-white navbar-light shadow border-top border-5 border-primary sticky-top p-0"
+         dir="rtl">
         <a href="#Home" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
             <img src="{{ asset('images/logo.png') }}" alt="Logo" style="width: 200px;">
         </a>
@@ -24,7 +25,7 @@
                 <a href="#Home" class="nav-item nav-link active">{{ __("Home") }}</a>
                 <a href="#About" class="nav-item nav-link">{{ __("About") }}</a>
                 <a href="#Services" class="nav-item nav-link">{{ __("Services") }}</a>
-                <div class="nav-item dropdown" >
+                <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">{{ __("Pages") }}</a>
                     <div class="dropdown-menu fade-up m-0">
                         <a href="#Pricing" class="dropdown-item">{{ __("Calculate Your Shipping Cost") }}</a>
@@ -33,7 +34,7 @@
                 </div>
                 <a href="#Contact" class="nav-item nav-link">{{ __("Contact Us") }}</a>
             </div>
-            <div class="d-flex align-items-center me-auto p-lg-0 gap-3 " >
+            <div class="d-flex align-items-center me-auto p-lg-0 gap-3 ">
                 <a href="/user/login" class="btn btn-primary py-2 px-4 me-4 rounded-3"
                    style="height: fit-content;">{{ __("Login") }}</a>
                 <a href="/user/register" class="btn btn-secondary py-2 px-4 rounded-3"
@@ -45,16 +46,13 @@
                     @csrf
                     <div class="input-group">
                         <label for="languageSelect" class="visually-hidden">Language</label>
-                        <select name="language" onchange="this.form.submit()" class="form-select rounded-start bg-light text-dark border-0" id="languageSelect">
+                        <select name="language" onchange="this.form.submit()"
+                                class="form-select rounded-start bg-light text-dark border-0" id="languageSelect">
                             <option value="en" {{ app()->getLocale() === 'en' ? 'selected' : '' }}>English</option>
                             <option value="ar" {{ app()->getLocale() === 'ar' ? 'selected' : '' }}>العربية</option>
                         </select>
                     </div>
                 </form>
-
-
-
-
 
 
                 <!-- End Language Switcher Button -->
@@ -66,7 +64,7 @@
 
 
     <!-- Carousel Start -->
-    <div class="container-fluid p-0 pb-5" id="Home" >
+    <div class="container-fluid p-0 pb-5" id="Home">
         <div class="owl-carousel header-carousel position-relative mb-5">
             <div class="owl-carousel-item position-relative">
                 <img class="img-fluid" src="{{asset('img/carousel-1.jpg')}}" alt="">
@@ -116,7 +114,8 @@
 
 
     <!-- About Start -->
-    <div class="container-fluid overflow-hidden py-5 px-lg-0" id="About" dir="{{ App::getLocale() == 'en' ? 'ltr' : 'rtl' }}">
+    <div class="container-fluid overflow-hidden py-5 px-lg-0" id="About"
+         dir="{{ App::getLocale() == 'en' ? 'ltr' : 'rtl' }}">
         <div class="container about py-5 px-lg-0">
             <div class="row g-5 mx-lg-0">
                 <div class="col-lg-6 ps-lg-0 wow fadeInLeft" data-wow-delay="0.1s" style="min-height: 400px;">
@@ -314,7 +313,8 @@
                     <h6 class="text-secondary text-uppercase mb-3">{{__("Our features")}}</h6>
                     <h1 class="mb-5">{{__("Take advantage of our diverse services - everything you need in one place")}}</h1>
                     <div class="d-flex mb-5 wow fadeInUp" data-wow-delay="0.3s">
-                        <i class="fa fa-globe text-primary fa-3x flex-shrink-0"></i>
+{{--                        <i class="fa fa-globe text-primary fa-3x flex-shrink-0"></i>--}}
+                        <i class="fas fa-file-signature text-primary fa-3x flex-shrink-0"></i>
                         <div class="me-4">
                             <h5>{{__("Digital Signature")}}</h5>
                             <p class="mb-0">{{__("Digital Signature is easy and effective for confirming receipt of your shipment.")}}</p>
