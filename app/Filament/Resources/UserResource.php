@@ -114,6 +114,11 @@ class UserResource extends Resource
                     ->sortable()
                     ->searchable(),
 
+                Tables\Columns\ToggleColumn::make('active')
+                    ->translateLabel()
+                    ->sortable()
+                    ->searchable(),
+
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('type')
@@ -132,9 +137,9 @@ class UserResource extends Resource
                 Impersonate::make(),
             ])
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
+//                Tables\Actions\BulkActionGroup::make([
+//                    Tables\Actions\DeleteBulkAction::make(),
+//                ]),
             ]);
     }
 

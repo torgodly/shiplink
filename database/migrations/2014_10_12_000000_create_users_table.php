@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('sender_code')->nullable()->unique();
             $table->string('receiver_code')->nullable()->unique();
             $table->string('avatar_url')->nullable();
+            $table->boolean('active')->default(true);
             $table->rememberToken();
             $table->timestamps();
         });

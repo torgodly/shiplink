@@ -209,8 +209,8 @@
                         <div class="overflow-hidden mb-4">
                             <img class="img-fluid" src="img/service-1.jpg" alt="">
                         </div>
-                        <h4 class="mb-3">{{__("Air freight")}}</h4>
-                        <p>{{__("Our air freight services provide fast and reliable transportation of goods as quickly and efficiently as possible.")}}</p>
+                        <h4 class="mb-3">{{__("Air Shipping")}}</h4>
+                        <p>{{__("Our Air Shipping services provide fast and reliable transportation of goods as quickly and efficiently as possible.")}}</p>
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.5s">
@@ -218,8 +218,8 @@
                         <div class="overflow-hidden mb-4">
                             <img class="img-fluid" src="img/service-2.jpg" alt="">
                         </div>
-                        <h4 class="mb-3">{{__("Ocean freight")}}</h4>
-                        <p>{{__("We offer a comprehensive range of ocean freight services for all types of full container loads and combined cargo shipments.")}}</p>
+                        <h4 class="mb-3">{{__("Sea Shipping")}}</h4>
+                        <p>{{__("We offer a comprehensive range of Sea Shipping services for all types of full container loads and combined cargo shipments.")}}</p>
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.7s">
@@ -227,8 +227,8 @@
                         <div class="overflow-hidden mb-4">
                             <img class="img-fluid" src="img/service-3.jpg" alt="">
                         </div>
-                        <h4 class="mb-3">{{__("Ground shipping")}}</h4>
-                        <p>{{__("We provide flexible and efficient ground shipping services to ensure that your shipment arrives as quickly as possible and with the highest level of quality.")}}</p>
+                        <h4 class="mb-3">{{__("Land Shipping")}}</h4>
+                        <p>{{__("We provide flexible and efficient Land Shipping services to ensure that your shipment arrives as quickly as possible and with the highest level of quality.")}}</p>
                     </div>
                 </div>
                 <!-- Add the remaining service items similarly -->

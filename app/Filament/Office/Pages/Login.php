@@ -50,6 +50,11 @@ class Login extends BaseLogin
 //            $this->throwFailureValidationException();
 //        }
         //if user is assigned to a branch,
+        if ($user->active === 0) {
+            Filament::auth()->logout();
+            $this->throwInactiveAccountException();
+        }
+
         if ($user->is_manager && $user->mangedbrance()->exists()) {
             if ($user->mangedbrance->status === 1) {
 
@@ -73,6 +78,16 @@ class Login extends BaseLogin
 
 
     //Throw exception for inactive branch
+
+    protected function throwInactiveAccountException(): never
+    {
+        throw ValidationException::withMessages([
+            'data.email' => __('Your account is inactive, please contact the admin'),
+        ]);
+    }
+
+    //Throw exception for inactive Account
+
     protected function throwInactiveBranchException(): never
     {
         throw ValidationException::withMessages([
@@ -81,6 +96,7 @@ class Login extends BaseLogin
     }
 
     //throwNoBranchException
+
     protected function throwNoBranchException(): never
     {
         throw ValidationException::withMessages([
