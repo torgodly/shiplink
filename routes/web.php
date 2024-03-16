@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
 
 //price calculator
 Route::get('/calculator', function () {
@@ -24,3 +25,16 @@ Route::get('/calculator', function () {
 
 //contact us store image
 Route::post('/contact/store', [\App\Http\Controllers\MessageController::class, 'store'])->name('contact.store');
+
+
+//change language route and logic
+Route::post('/language-switch', function (Request $request) {
+
+//Get the language from the form
+    $language = $request->input(key: 'language');
+
+//Store the language in the session
+    session(key: ['language' => $language]);
+
+    return redirect()->back()->with(key: ['language_switched' => $language]);
+})->name('language.switch');

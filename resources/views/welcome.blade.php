@@ -12,42 +12,61 @@
 
 
     <!-- Navbar Start -->
-    <nav class="navbar navbar-expand-lg bg-white navbar-light shadow border-top border-5 border-primary sticky-top p-0">
-        <a href="#Home" class="navbar-brand  d-flex align-items-center px-4 px-lg-5">
-            {{--                        <h2 class="mb-2 text-white">ShipLink</h2>--}}
-            {{--            <x-app-logo class="ms-2" />--}}
-            <img src="{{asset('images/logo.png')}}" alt="Logo" style="    width: 200px;">
-
+    <nav class="navbar navbar-expand-lg bg-white navbar-light shadow border-top border-5 border-primary sticky-top p-0" dir="rtl">
+        <a href="#Home" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
+            <img src="{{ asset('images/logo.png') }}" alt="Logo" style="width: 200px;">
         </a>
         <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-            <div class="navbar-nav me-auto p-4 p-lg-0">
-                <a href="#Home" class="nav-item nav-link active">الرئيسية</a>
-                <a href="#About" class="nav-item nav-link">حول</a>
-                <a href="#Services" class="nav-item nav-link">خدمات</a>
-                <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">صفحات</a>
+        <div class="collapse navbar-collapse" id="navbarCollapse" style="margin-left: 1rem;">
+            <div class="navbar-nav p-4 p-lg-0">
+                <a href="#Home" class="nav-item nav-link active">{{ __("Home") }}</a>
+                <a href="#About" class="nav-item nav-link">{{ __("About") }}</a>
+                <a href="#Services" class="nav-item nav-link">{{ __("Services") }}</a>
+                <div class="nav-item dropdown" >
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">{{ __("Pages") }}</a>
                     <div class="dropdown-menu fade-up m-0">
-                        <a href="#Pricing" class="dropdown-item">احسب تكلفة شحنتك</a>
-                        <a href="#Features" class="dropdown-item">الميزات</a>
-                        {{--                        <a href="#Free_Quote" class="dropdown-item">عرض سعر مجاني</a>--}}
-                        {{--                        <a href="#Team" class="dropdown-item">فريقنا</a>--}}
-                        {{--                        <a href="#Testimonial" class="dropdown-item">الشهادات</a>--}}
+                        <a href="#Pricing" class="dropdown-item">{{ __("Calculate Your Shipping Cost") }}</a>
+                        <a href="#Features" class="dropdown-item">{{ __("Features") }}</a>
                     </div>
                 </div>
-                <a href="#Contact" class="nav-item nav-link">اتصل بنا</a>
+                <a href="#Contact" class="nav-item nav-link">{{ __("Contact Us") }}</a>
             </div>
-            <h4 class="m-0 pe-lg-5 d-none d-lg-block"><i class="fa fa-headphones text-primary me-3"></i>+218 0911111111
-            </h4>
+            <div class="d-flex align-items-center me-auto p-lg-0 gap-3 " >
+                <a href="/user/login" class="btn btn-primary py-2 px-4 me-4 rounded-3"
+                   style="height: fit-content;">{{ __("Login") }}</a>
+                <a href="/user/register" class="btn btn-secondary py-2 px-4 rounded-3"
+                   style="height: fit-content;">{{ __("Register") }}</a>
+
+                <!-- Language Switcher Button -->
+
+                <form action="{{ route('language.switch') }}" method="POST" class="d-inline-block">
+                    @csrf
+                    <div class="input-group">
+                        <label for="languageSelect" class="visually-hidden">Language</label>
+                        <select name="language" onchange="this.form.submit()" class="form-select rounded-start bg-light text-dark border-0" id="languageSelect">
+                            <option value="en" {{ app()->getLocale() === 'en' ? 'selected' : '' }}>English</option>
+                            <option value="ar" {{ app()->getLocale() === 'ar' ? 'selected' : '' }}>العربية</option>
+                        </select>
+                    </div>
+                </form>
+
+
+
+
+
+
+                <!-- End Language Switcher Button -->
+            </div>
         </div>
     </nav>
+
     <!-- Navbar End -->
 
 
     <!-- Carousel Start -->
-    <div class="container-fluid p-0 pb-5" id="Home">
+    <div class="container-fluid p-0 pb-5" id="Home" >
         <div class="owl-carousel header-carousel position-relative mb-5">
             <div class="owl-carousel-item position-relative">
                 <img class="img-fluid" src="{{asset('img/carousel-1.jpg')}}" alt="">
@@ -56,15 +75,15 @@
                     <div class="container">
                         <div class="row justify-content-start" dir="rtl">
                             <div class="col-10 col-lg-8">
-                                <h5 class="text-white text-uppercase mb-3 animated slideInDown">حلول النقل
-                                    واللوجستيات</h5>
-                                <h1 class="display-3 text-white animated slideInDown mb-4">#1 مكان لحلولك في <span
-                                        class="text-primary">اللوجستيات</span></h1>
-                                <p class="fs-5 fw-medium text-white mb-4 pb-2">توفر حلولنا مزيجًا مثاليًا من الكفاءة والموثوقية لتلبية احتياجاتك في النقل واللوجستيات. نحن نهتم بكل تفاصيل عملك لضمان وصول سلس وفعال لبضائعك.</p>
-                                <a href="/user/login" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">تسجيل</a>
-                                <a href="#Pricing" class="btn btn-secondary py-md-3 px-md-5 animated slideInRight">احسب
-                                    سعر
-                                    شحنتك</a>
+                                <h5 class="text-white text-uppercase mb-3 animated slideInDown">{{__("Reliable delivery and accurate tracking")}}</h5>
+                                <h1 class="display-3 text-white animated slideInDown mb-4">{{__('We are the optimal shipping journey')}}</h1>
+                                <p class="fs-5 fw-medium text-white mb-4 pb-2">
+                                    {{__("We are a shipping and tracking company that specializes in providing fast and efficient shipping solutions to our customers across the country. We aim to meet the needs of our customers by providing high-quality and reliable shipping services.")}}</p>
+                                <a href="/user/login"
+                                   class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">{{__('Sign In')}}</a>
+                                <a href="#Pricing" class="btn btn-secondary py-md-3 px-md-5 animated slideInRight">
+                                    {{__('Calculate the cost of your shipment')}}
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -97,7 +116,7 @@
 
 
     <!-- About Start -->
-    <div class="container-fluid overflow-hidden py-5 px-lg-0" id="About">
+    <div class="container-fluid overflow-hidden py-5 px-lg-0" id="About" dir="{{ App::getLocale() == 'en' ? 'ltr' : 'rtl' }}">
         <div class="container about py-5 px-lg-0">
             <div class="row g-5 mx-lg-0">
                 <div class="col-lg-6 ps-lg-0 wow fadeInLeft" data-wow-delay="0.1s" style="min-height: 400px;">
@@ -107,22 +126,24 @@
                     </div>
                 </div>
                 <div class="col-lg-6 about-text wow fadeInUp" data-wow-delay="0.3s" dir="rtl">
-                    <h6 class="text-secondary text-uppercase mb-3">معلومات عنا</h6>
-                    <h1 class="mb-5">حلول النقل واللوجستيات السريعة</h1>
-                    <p class="mb-5">نقدم حلولاً سريعة وفعالة للنقل واللوجستيات. معنا، ستجد الحلا الأمثل لتلبية احتياجاتك. نحن هنا لتوفير أفضل الخدمات بكفاءة عالية وبوقت دقيق.</p>
+                    <h6 class="text-secondary text-uppercase mb-3">{{__('About Us')}}</h6>
+                    <h1 class="mb-5">{{__("We make your shipping journey a unique and reliable experience")}}</h1>
+                    <p class="mb-5">
+                        {{__("We provide you with fast and efficient transportation and logistics solutions. We are here to ensure that we provide the best services with high efficiency and on time.")}}
+
+                    </p>
                     <div class="row g-4 mb-5">
                         <div class="col-sm-6 wow fadeIn" data-wow-delay="0.5s">
-                            <i class="fa fa-globe fa-3x text-primary mb-3"></i>
-                            <h5>تغطية عالمية</h5>
-                            <p class="m-0">نحن نغطي العديد من الوجهات حول العالم. اعتماداً على احتياجاتك، سنوصل شحناتك إلى أي مكان ترغب فيه.</p>
+                            <i class="fa fa-calculator fa-3x text-primary mb-3"></i>
+                            <h5>{{__("Pre-calculate the cost of the shipment")}}</h5>
+                            <p class="m-0">{{__("We provide you with the ability to easily calculate the cost of your shipment through our website by entering your shipment data.")}}</p>
                         </div>
                         <div class="col-sm-6 wow fadeIn" data-wow-delay="0.7s">
                             <i class="fa fa-shipping-fast fa-3x text-primary mb-3"></i>
-                            <h5>تسليم في الوقت المحدد</h5>
-                            <p class="m-0">نحن نضمن تسليم الشحنات في الوقت المحدد. يمكنك الاعتماد علينا لضمان وصول طلبك في الوقت المناسب دون تأخير.</p>
+                            <h5>{{__("Delivery on time")}}</h5>
+                            <p class="m-0">{{__("We guarantee that shipments are delivered on time. You can count on us to ensure that your order arrives on time without delay.")}}</p>
                         </div>
                     </div>
-                    <a href="#" class="btn btn-primary py-3 px-5">استكشاف المزيد</a>
                 </div>
 
             </div>
@@ -136,13 +157,12 @@
         <div class="container py-5" dir="rtl">
             <div class="row g-5">
                 <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
-                    <h6 class="text-secondary text-uppercase mb-3">بعض الحقائق</h6>
-                    <h1 class="mb-5">#1 مكان لإدارة جميع شحناتك</h1>
-                    <p class="mb-5">توفر خدمتنا حلولًا فعالة لإدارة جميع شحناتك بكل سهولة ويسر. نحن هنا لتوفير أفضل الخدمات لتلبية احتياجات عملك.</p>
+                    <h1 class="mb-5">{{__("Your shipment is our commitment")}}</h1>
+                    <p class="mb-5">{{__("We offer you the ability to track your shipment to be always informed of the status of your shipment and ensure that it arrives safely and in the best condition.")}}</p>
                     <div class="d-flex align-items-center">
                         <i class="fa fa-headphones fa-2x flex-shrink-0 bg-primary p-3 text-white"></i>
                         <div class="pe-4">
-                            <h6>اتصل لأي استفسار!</h6>
+                            <h6>{{__("keep in touch")}}</h6>
                             <h3 class="text-primary m-0" dir="ltr">+218 0911111111</h3>
                         </div>
                     </div>
@@ -153,19 +173,19 @@
                             <div class="bg-primary p-4 mb-4 wow fadeIn" data-wow-delay="0.3s">
                                 <i class="fa fa-users fa-2x text-white mb-3"></i>
                                 <h2 class="text-white mb-2" data-toggle="counter-up">1234</h2>
-                                <p class="text-white mb-0">عملاء سعداء</p>
+                                <p class="text-white mb-0">{{__("Happy Customers")}}</p>
                             </div>
                             <div class="bg-secondary p-4 wow fadeIn" data-wow-delay="0.5s">
                                 <i class="fa fa-ship fa-2x text-white mb-3"></i>
                                 <h2 class="text-white mb-2" data-toggle="counter-up">1234</h2>
-                                <p class="text-white mb-0">شحنات مكتملة</p>
+                                <p class="text-white mb-0">{{__('Completed shipments')}}</p>
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="bg-success p-4 wow fadeIn" data-wow-delay="0.7s">
                                 <i class="fa fa-star fa-2x text-white mb-3"></i>
                                 <h2 class="text-white mb-2" data-toggle="counter-up">1234</h2>
-                                <p class="text-white mb-0">تقييمات العملاء</p>
+                                <p class="text-white mb-0">{{__('Customer reviews')}}</p>
                             </div>
                         </div>
                     </div>
@@ -180,8 +200,8 @@
     <div class="container-xxl py-5" id="Services">
         <div class="container py-5" dir="rtl">
             <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
-                <h6 class="text-secondary text-uppercase">خدماتنا</h6>
-                <h1 class="mb-5">استكشف خدماتنا</h1>
+                <h6 class="text-secondary text-uppercase">{{__('Our services')}}</h6>
+                <h1 class="mb-5">{{__("Explore our services")}}</h1>
             </div>
             <div class="row g-4">
                 <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.3s">
@@ -189,9 +209,8 @@
                         <div class="overflow-hidden mb-4">
                             <img class="img-fluid" src="img/service-1.jpg" alt="">
                         </div>
-                        <h4 class="mb-3">شحن جوي</h4>
-                        <p>توفر خدمتنا شحن جوي سريع وموثوق. اكتشف كيف يمكننا مساعدتك في نقل بضائعك بأمان وسرعة.</p>
-                        <a class="btn-slide mt-2" href=""><i class="fa fa-arrow-left"></i><span>اقرأ المزيد</span></a>
+                        <h4 class="mb-3">{{__("Air freight")}}</h4>
+                        <p>{{__("Our air freight services provide fast and reliable transportation of goods as quickly and efficiently as possible.")}}</p>
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.5s">
@@ -199,9 +218,8 @@
                         <div class="overflow-hidden mb-4">
                             <img class="img-fluid" src="img/service-2.jpg" alt="">
                         </div>
-                        <h4 class="mb-3">شحن بحري</h4>
-                        <p>نحن نقدم خدمات شحن بحري موثوقة وفعالة. تعرف على خيارات الشحن البحري التي نقدمها لتلبية احتياجاتك.</p>
-                        <a class="btn-slide mt-2" href=""><i class="fa fa-arrow-left"></i><span>اقرأ المزيد</span></a>
+                        <h4 class="mb-3">{{__("Ocean freight")}}</h4>
+                        <p>{{__("We offer a comprehensive range of ocean freight services for all types of full container loads and combined cargo shipments.")}}</p>
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.7s">
@@ -209,9 +227,8 @@
                         <div class="overflow-hidden mb-4">
                             <img class="img-fluid" src="img/service-3.jpg" alt="">
                         </div>
-                        <h4 class="mb-3">شحن بري</h4>
-                        <p>نقدم خدمات شحن بري موثوقة وفعالة. اعرف المزيد عن خدمات النقل البري التي نقدمها لعملائنا.</p>
-                        <a class="btn-slide mt-2" href=""><i class="fa fa-arrow-left"></i><span>اقرأ المزيد</span></a>
+                        <h4 class="mb-3">{{__("Ground shipping")}}</h4>
+                        <p>{{__("We provide flexible and efficient ground shipping services to ensure that your shipment arrives as quickly as possible and with the highest level of quality.")}}</p>
                     </div>
                 </div>
                 <!-- Add the remaining service items similarly -->
@@ -294,29 +311,30 @@
         <div class="container feature py-5 px-lg-0">
             <div class="row g-5 mx-lg-0">
                 <div class="col-lg-6 feature-text wow fadeInUp" data-wow-delay="0.1s" dir="rtl">
-                    <h6 class="text-secondary text-uppercase mb-3">ميزاتنا</h6>
-                    <h1 class="mb-5">نحن شركة لوجستية موثوقة منذ عام 1990</h1>
+                    <h6 class="text-secondary text-uppercase mb-3">{{__("Our features")}}</h6>
+                    <h1 class="mb-5">{{__("Take advantage of our diverse services - everything you need in one place")}}</h1>
                     <div class="d-flex mb-5 wow fadeInUp" data-wow-delay="0.3s">
                         <i class="fa fa-globe text-primary fa-3x flex-shrink-0"></i>
                         <div class="me-4">
-                            <h5>خدمة عالمية</h5>
-                            <p class="mb-0">نقدم خدماتنا حول العالم، نحن هنا لضمان وصول شحناتك إلى أي مكان في العالم بسرعة وأمان.</p>
+                            <h5>{{__("Digital Signature")}}</h5>
+                            <p class="mb-0">{{__("Digital Signature is easy and effective for confirming receipt of your shipment.")}}</p>
                         </div>
                     </div>
                     <div class="d-flex mb-5 wow fadeIn" data-wow-delay="0.5s">
                         <i class="fa fa-shipping-fast text-primary fa-3x flex-shrink-0"></i>
                         <div class="me-4">
-                            <h5>تسليم في الوقت المحدد</h5>
-                            <p class="mb-0">نحن نلتزم بتقديم خدمات التسليم في الوقت المحدد، لتأكيد وصول شحناتك إلى وجهتها في الوقت المناسب.</p>
+                            <h5>{{__("Fast Shipping")}}</h5>
+                            <p class="mb-0">{{__("Enjoy fast and high-quality shipping services, no need to wait")}}</p>
                         </div>
                     </div>
                     <div class="d-flex mb-0 wow fadeInUp" data-wow-delay="0.7s">
                         <i class="fa fa-headphones text-primary fa-3x flex-shrink-0"></i>
                         <div class="me-4">
-                            <h5>دعم هاتفي على مدار الساعة</h5>
-                            <p class="mb-0">نحن هنا لمساعدتك في أي وقت، يمكنك الاتصال بنا على مدار الساعة للحصول على الدعم والمساعدة.</p>
+                            <h5>{{ __("24/7 Phone Support") }}</h5>
+                            <p class="mb-0">{{ __("We're here to assist you anytime. You can call us around the clock for support and assistance.") }}</p>
                         </div>
                     </div>
+
                 </div>
 
                 <div class="col-lg-6 pe-lg-0 wow fadeInRight" data-wow-delay="0.1s" style="min-height: 400px;">
@@ -335,74 +353,9 @@
     <div class="container-xxl " id="Pricing">
         <div class="container ">
             <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
-                {{--                <h6 class="text-secondary text-uppercase">Pricing Plan</h6>--}}
-                <h1 class="mb-5">احسب تكلفة شحنتك</h1>
+                <h1 class="mb-5">{{__("Calculate the cost of your shipment")}}</h1>
             </div>
-            {{--            <div class="row g-4">--}}
-            {{--                <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.3s">--}}
-            {{--                    <div class="price-item">--}}
-            {{--                        <div class="border-bottom p-4 mb-4">--}}
-            {{--                            <h5 class="text-primary mb-1">Basic Plan</h5>--}}
-            {{--                            <h1 class="display-5 mb-0">--}}
-            {{--                                <small class="align-top"--}}
-            {{--                                       style="font-size: 22px; line-height: 45px;">$</small>49.00<small--}}
-            {{--                                    class="align-bottom" style="font-size: 16px; line-height: 40px;">/ Month</small>--}}
-            {{--                            </h1>--}}
-            {{--                        </div>--}}
-            {{--                        <div class="p-4 pt-0">--}}
-            {{--                            <p><i class="fa fa-check text-success me-3"></i>HTML5 & CSS3</p>--}}
-            {{--                            <p><i class="fa fa-check text-success me-3"></i>Bootstrap v5</p>--}}
-            {{--                            <p><i class="fa fa-check text-success me-3"></i>FontAwesome Icons</p>--}}
-            {{--                            <p><i class="fa fa-check text-success me-3"></i>Responsive Layout</p>--}}
-            {{--                            <p><i class="fa fa-check text-success me-3"></i>Cross-browser Support</p>--}}
-            {{--                            <a class="btn-slide mt-2" href=""><i--}}
-            {{--                                    class="fa fa-arrow-right"></i><span>Order Now</span></a>--}}
-            {{--                        </div>--}}
-            {{--                    </div>--}}
-            {{--                </div>--}}
-            {{--                <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.5s">--}}
-            {{--                    <div class="price-item">--}}
-            {{--                        <div class="border-bottom p-4 mb-4">--}}
-            {{--                            <h5 class="text-primary mb-1">Standard Plan</h5>--}}
-            {{--                            <h1 class="display-5 mb-0">--}}
-            {{--                                <small class="align-top"--}}
-            {{--                                       style="font-size: 22px; line-height: 45px;">$</small>99.00<small--}}
-            {{--                                    class="align-bottom" style="font-size: 16px; line-height: 40px;">/ Month</small>--}}
-            {{--                            </h1>--}}
-            {{--                        </div>--}}
-            {{--                        <div class="p-4 pt-0">--}}
-            {{--                            <p><i class="fa fa-check text-success me-3"></i>HTML5 & CSS3</p>--}}
-            {{--                            <p><i class="fa fa-check text-success me-3"></i>Bootstrap v5</p>--}}
-            {{--                            <p><i class="fa fa-check text-success me-3"></i>FontAwesome Icons</p>--}}
-            {{--                            <p><i class="fa fa-check text-success me-3"></i>Responsive Layout</p>--}}
-            {{--                            <p><i class="fa fa-check text-success me-3"></i>Cross-browser Support</p>--}}
-            {{--                            <a class="btn-slide mt-2" href=""><i--}}
-            {{--                                    class="fa fa-arrow-right"></i><span>Order Now</span></a>--}}
-            {{--                        </div>--}}
-            {{--                    </div>--}}
-            {{--                </div>--}}
-            {{--                <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.7s">--}}
-            {{--                    <div class="price-item">--}}
-            {{--                        <div class="border-bottom p-4 mb-4">--}}
-            {{--                            <h5 class="text-primary mb-1">Advanced Plan</h5>--}}
-            {{--                            <h1 class="display-5 mb-0">--}}
-            {{--                                <small class="align-top"--}}
-            {{--                                       style="font-size: 22px; line-height: 45px;">$</small>149.00<small--}}
-            {{--                                    class="align-bottom" style="font-size: 16px; line-height: 40px;">/ Month</small>--}}
-            {{--                            </h1>--}}
-            {{--                        </div>--}}
-            {{--                        <div class="p-4 pt-0">--}}
-            {{--                            <p><i class="fa fa-check text-success me-3"></i>HTML5 & CSS3</p>--}}
-            {{--                            <p><i class="fa fa-check text-success me-3"></i>Bootstrap v5</p>--}}
-            {{--                            <p><i class="fa fa-check text-success me-3"></i>FontAwesome Icons</p>--}}
-            {{--                            <p><i class="fa fa-check text-success me-3"></i>Responsive Layout</p>--}}
-            {{--                            <p><i class="fa fa-check text-success me-3"></i>Cross-browser Support</p>--}}
-            {{--                            <a class="btn-slide mt-2" href=""><i--}}
-            {{--                                    class="fa fa-arrow-right"></i><span>Order Now</span></a>--}}
-            {{--                        </div>--}}
-            {{--                    </div>--}}
-            {{--                </div>--}}
-            {{--            </div>--}}
+
             <div id="iframe-container" style="padding: 20px; overflow: hidden;">
                 <iframe id="dynamic-iframe" src="{{ route('calculator') }}" title="description"
                         style="width: 100%; border: none;"></iframe>
@@ -431,13 +384,13 @@
         <div class="container py-5">
             <div class="row g-5 align-items-center" dir="rtl">
                 <div class="col-lg-5 wow fadeInUp" data-wow-delay="0.1s">
-                    <h6 class="text-secondary text-uppercase mb-3">اتصل بنا</h6>
-                    <h1 class="mb-5">اتصل بنا الآن!</h1>
-                    <p class="mb-5">نحن هنا لتقديم المساعدة والإجابة على استفساراتك، لا تتردد في الاتصال بنا للحصول على الدعم.</p>
+                    <h6 class="text-secondary text-uppercase mb-3">{{ __("Contact Us") }}</h6>
+                    <h1 class="mb-5">{{ __("Contact Us Now!") }}</h1>
+                    <p class="mb-5">{{ __("We are here to help and answer your inquiries, feel free to contact us for support.") }}</p>
                     <div class="d-flex align-items-center">
                         <i class="fa fa-headphones fa-2x flex-shrink-0 bg-primary p-3 text-white"></i>
                         <div class="pe-4">
-                            <h6>اتصل لأي استفسار!</h6>
+                            <h6>{{ __("Call for any inquiry!") }}</h6>
                             <h3 class="text-primary m-0" dir="ltr">+218 0911111111</h3>
                         </div>
                     </div>
@@ -453,177 +406,34 @@
                             @csrf
                             <div class="row g-3">
                                 <div class="col-12">
-                                    <input type="text" class="form-control border-0" placeholder="الاسم الكامل"
+                                    <input type="text" class="form-control border-0" placeholder="{{ __("Full Name") }}"
                                            style="height: 55px;" name="name" required>
                                 </div>
                                 <div class="col-12">
-                                    <input type="email" class="form-control border-0" placeholder="البريد الإلكتروني"
+                                    <input type="email" class="form-control border-0"
+                                           placeholder="{{ __("Email Address") }}"
                                            style="height: 55px;" name="email" required>
                                 </div>
                                 <div class="col-12">
-                                    <input type="text" class="form-control border-0" placeholder="رقم الجوال"
+                                    <input type="text" class="form-control border-0"
+                                           placeholder="{{ __("Phone Number") }}"
                                            style="height: 55px;" name="phone" required>
                                 </div>
                                 <div class="col-12">
-                                    <textarea class="form-control border-0" placeholder="رسالتك" name="message"
-                                              required></textarea>
+                                <textarea class="form-control border-0" placeholder="{{ __("Your Message") }}"
+                                          name="message"
+                                          required></textarea>
                                 </div>
                                 <div class="col-12">
-                                    <button class="btn btn-primary w-100 py-3" type="submit">إرسال</button>
+                                    <button class="btn btn-primary w-100 py-3" type="submit">{{ __("Send") }}</button>
                                 </div>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
-    <!-- Quote End -->
-
-
-    <!-- Team Start -->
-    {{--    <div class="container-xxl py-5" id="Team">--}}
-    {{--        <div class="container py-5">--}}
-    {{--            <div class="text-center wow fadeInUp" data-wow-delay="0.1s">--}}
-    {{--                <h6 class="text-secondary text-uppercase">Our Team</h6>--}}
-    {{--                <h1 class="mb-5">Expert Team Members</h1>--}}
-    {{--            </div>--}}
-    {{--            <div class="row g-4">--}}
-    {{--                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.3s">--}}
-    {{--                    <div class="team-item p-4">--}}
-    {{--                        <div class="overflow-hidden mb-4">--}}
-    {{--                            <img class="img-fluid" src="img/team-1.jpg" alt="">--}}
-    {{--                        </div>--}}
-    {{--                        <h5 class="mb-0">Full Name</h5>--}}
-    {{--                        <p>Designation</p>--}}
-    {{--                        <div class="btn-slide mt-1">--}}
-    {{--                            <i class="fa fa-share"></i>--}}
-    {{--                            <span>--}}
-    {{--                                <a href=""><i class="fab fa-facebook-f"></i></a>--}}
-    {{--                                <a href=""><i class="fab fa-twitter"></i></a>--}}
-    {{--                                <a href=""><i class="fab fa-instagram"></i></a>--}}
-    {{--                            </span>--}}
-    {{--                        </div>--}}
-    {{--                    </div>--}}
-    {{--                </div>--}}
-    {{--                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.5s">--}}
-    {{--                    <div class="team-item p-4">--}}
-    {{--                        <div class="overflow-hidden mb-4">--}}
-    {{--                            <img class="img-fluid" src="img/team-2.jpg" alt="">--}}
-    {{--                        </div>--}}
-    {{--                        <h5 class="mb-0">Full Name</h5>--}}
-    {{--                        <p>Designation</p>--}}
-    {{--                        <div class="btn-slide mt-1">--}}
-    {{--                            <i class="fa fa-share"></i>--}}
-    {{--                            <span>--}}
-    {{--                                <a href=""><i class="fab fa-facebook-f"></i></a>--}}
-    {{--                                <a href=""><i class="fab fa-twitter"></i></a>--}}
-    {{--                                <a href=""><i class="fab fa-instagram"></i></a>--}}
-    {{--                            </span>--}}
-    {{--                        </div>--}}
-    {{--                    </div>--}}
-    {{--                </div>--}}
-    {{--                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.7s">--}}
-    {{--                    <div class="team-item p-4">--}}
-    {{--                        <div class="overflow-hidden mb-4">--}}
-    {{--                            <img class="img-fluid" src="img/team-3.jpg" alt="">--}}
-    {{--                        </div>--}}
-    {{--                        <h5 class="mb-0">Full Name</h5>--}}
-    {{--                        <p>Designation</p>--}}
-    {{--                        <div class="btn-slide mt-1">--}}
-    {{--                            <i class="fa fa-share"></i>--}}
-    {{--                            <span>--}}
-    {{--                                <a href=""><i class="fab fa-facebook-f"></i></a>--}}
-    {{--                                <a href=""><i class="fab fa-twitter"></i></a>--}}
-    {{--                                <a href=""><i class="fab fa-instagram"></i></a>--}}
-    {{--                            </span>--}}
-    {{--                        </div>--}}
-    {{--                    </div>--}}
-    {{--                </div>--}}
-    {{--                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.9s">--}}
-    {{--                    <div class="team-item p-4">--}}
-    {{--                        <div class="overflow-hidden mb-4">--}}
-    {{--                            <img class="img-fluid" src="img/team-4.jpg" alt="">--}}
-    {{--                        </div>--}}
-    {{--                        <h5 class="mb-0">Full Name</h5>--}}
-    {{--                        <p>Designation</p>--}}
-    {{--                        <div class="btn-slide mt-1">--}}
-    {{--                            <i class="fa fa-share"></i>--}}
-    {{--                            <span>--}}
-    {{--                                <a href=""><i class="fab fa-facebook-f"></i></a>--}}
-    {{--                                <a href=""><i class="fab fa-twitter"></i></a>--}}
-    {{--                                <a href=""><i class="fab fa-instagram"></i></a>--}}
-    {{--                            </span>--}}
-    {{--                        </div>--}}
-    {{--                    </div>--}}
-    {{--                </div>--}}
-    {{--            </div>--}}
-    {{--        </div>--}}
-    {{--    </div>--}}
-    <!-- Team End -->
-
-
-    <!-- Testimonial Start -->
-    {{--    <div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s" id="Testimonial">--}}
-    {{--        <div class="container py-5">--}}
-    {{--            <div class="text-center">--}}
-    {{--                <h6 class="text-secondary text-uppercase">Testimonial</h6>--}}
-    {{--                <h1 class="mb-0">Our Clients Say!</h1>--}}
-    {{--            </div>--}}
-    {{--            <div class="owl-carousel testimonial-carousel wow fadeInUp" data-wow-delay="0.1s">--}}
-    {{--                <div class="testimonial-item p-4 my-5">--}}
-    {{--                    <i class="fa fa-quote-right fa-3x text-light position-absolute top-0 end-0 mt-n3 me-4"></i>--}}
-    {{--                    <div class="d-flex align-items-end mb-4">--}}
-    {{--                        <img class="img-fluid flex-shrink-0" src="img/testimonial-1.jpg"--}}
-    {{--                             style="width: 80px; height: 80px;">--}}
-    {{--                        <div class="ms-4">--}}
-    {{--                            <h5 class="mb-1">Client Name</h5>--}}
-    {{--                            <p class="m-0">Profession</p>--}}
-    {{--                        </div>--}}
-    {{--                    </div>--}}
-    {{--                    <p class="mb-0">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam amet diam et eos. Clita erat ipsum et lorem et sit.</p>--}}
-    {{--                </div>--}}
-    {{--                <div class="testimonial-item p-4 my-5">--}}
-    {{--                    <i class="fa fa-quote-right fa-3x text-light position-absolute top-0 end-0 mt-n3 me-4"></i>--}}
-    {{--                    <div class="d-flex align-items-end mb-4">--}}
-    {{--                        <img class="img-fluid flex-shrink-0" src="img/testimonial-2.jpg"--}}
-    {{--                             style="width: 80px; height: 80px;">--}}
-    {{--                        <div class="ms-4">--}}
-    {{--                            <h5 class="mb-1">Client Name</h5>--}}
-    {{--                            <p class="m-0">Profession</p>--}}
-    {{--                        </div>--}}
-    {{--                    </div>--}}
-    {{--                    <p class="mb-0">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam amet diam et eos. Clita erat ipsum et lorem et sit.</p>--}}
-    {{--                </div>--}}
-    {{--                <div class="testimonial-item p-4 my-5">--}}
-    {{--                    <i class="fa fa-quote-right fa-3x text-light position-absolute top-0 end-0 mt-n3 me-4"></i>--}}
-    {{--                    <div class="d-flex align-items-end mb-4">--}}
-    {{--                        <img class="img-fluid flex-shrink-0" src="img/testimonial-3.jpg"--}}
-    {{--                             style="width: 80px; height: 80px;">--}}
-    {{--                        <div class="ms-4">--}}
-    {{--                            <h5 class="mb-1">Client Name</h5>--}}
-    {{--                            <p class="m-0">Profession</p>--}}
-    {{--                        </div>--}}
-    {{--                    </div>--}}
-    {{--                    <p class="mb-0">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam amet diam et eos. Clita erat ipsum et lorem et sit.</p>--}}
-    {{--                </div>--}}
-    {{--                <div class="testimonial-item p-4 my-5">--}}
-    {{--                    <i class="fa fa-quote-right fa-3x text-light position-absolute top-0 end-0 mt-n3 me-4"></i>--}}
-    {{--                    <div class="d-flex align-items-end mb-4">--}}
-    {{--                        <img class="img-fluid flex-shrink-0" src="img/testimonial-4.jpg"--}}
-    {{--                             style="width: 80px; height: 80px;">--}}
-    {{--                        <div class="ms-4">--}}
-    {{--                            <h5 class="mb-1">Client Name</h5>--}}
-    {{--                            <p class="m-0">Profession</p>--}}
-    {{--                        </div>--}}
-    {{--                    </div>--}}
-    {{--                    <p class="mb-0">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam amet diam et eos. Clita erat ipsum et lorem et sit.</p>--}}
-    {{--                </div>--}}
-    {{--            </div>--}}
-    {{--        </div>--}}
-    {{--    </div>--}}
-    <!-- Testimonial End -->
 
 
     <!-- Footer Start -->
@@ -632,8 +442,8 @@
         <div class="container py-5">
             <div class="row g-5">
                 <div class="col-lg-3 col-md-6">
-                    <h4 class="text-light mb-4">Address</h4>
-                    <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>طرابلس . ليبيا</p>
+                    <h4 class="text-light mb-4">{{ __("Address") }}</h4>
+                    <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>{{ __("Tripoli, Libya") }}</p>
                     <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+218 0911111111</p>
                     <p class="mb-2"><i class="fa fa-envelope me-3"></i>info@shiplink.ly</p>
                     <div class="d-flex pt-2">
@@ -644,25 +454,25 @@
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6">
-                    <h4 class="text-light mb-4">الخدمات</h4>
-                    <a class="btn btn-link" href="">الشحن الجوي</a>
-                    <a class="btn btn-link" href="">الشحن البحري</a>
-                    <a class="btn btn-link" href="">الشحن البري</a>
+                    <h4 class="text-light mb-4">{{ __("Services") }}</h4>
+                    <a class="btn btn-link" href="">{{ __("Air Shipping") }}</a>
+                    <a class="btn btn-link" href="">{{ __("Sea Shipping") }}</a>
+                    <a class="btn btn-link" href="">{{ __("Land Shipping") }}</a>
                 </div>
                 <div class="col-lg-3 col-md-6">
-                    <h4 class="text-light mb-4">روابط سريعة</h4>
-                    <a class="btn btn-link" href="#About">من نحن</a>
-                    <a class="btn btn-link" href="#Contact">اتصل بنا</a>
-                    <a class="btn btn-link" href="#Services">خدماتنا</a>
-                    <a class="btn btn-link" href="#Pricing">احسب تكلفة شحنتك</a>
+                    <h4 class="text-light mb-4">{{ __("Quick Links") }}</h4>
+                    <a class="btn btn-link" href="#About">{{ __("About Us") }}</a>
+                    <a class="btn btn-link" href="#Contact">{{ __("Contact Us") }}</a>
+                    <a class="btn btn-link" href="#Services">{{ __("Our Services") }}</a>
+                    <a class="btn btn-link" href="#Pricing">{{ __("Calculate Your Shipping Cost") }}</a>
                 </div>
                 <div class="col-lg-3 col-md-6">
-                    <h4 class="text-light mb-4">اشترك معنا</h4>
-                    <p>يمكنك انشاء حساب جديد لأستخدام خدماتنا في اكثر من مكان</p>
+                    <h4 class="text-light mb-4">{{ __("Subscribe") }}</h4>
+                    <p>{{ __("You can create a new account to use our services in more than one place") }}</p>
                     <div class="position-relative mx-auto" style="max-width: 400px;">
                         <input class="form-control border-0 w-100 py-3 ps-4 pe-5" type="text" placeholder="Email">
                         <a href="/user/register" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">
-                            تسجيل
+                            {{ __("Register") }}
                         </a>
                     </div>
                 </div>
@@ -672,13 +482,14 @@
             <div class="copyright">
                 <div class="row">
                     <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                        &copy; <a class="border-bottom" href="#">ShipLink.ly</a>, All Right Reserved.
+                        &copy; <a class="border-bottom" href="#">ShipLink.ly</a>, {{ __("All Right Reserved.") }}
                     </div>
 
                 </div>
             </div>
         </div>
     </div>
+
     <!-- Footer End -->
 
 

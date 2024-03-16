@@ -62,18 +62,16 @@ class BranchResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')->translateLabel()
+                Tables\Columns\TextColumn::make('name')
+                    ->translateLabel()
                     ->searchable()
                     ->sortable(),
-
                 Tables\Columns\TextColumn::make('city')->translateLabel()
                     ->searchable()
                     ->sortable(),
-
                 Tables\Columns\TextColumn::make('country')->translateLabel()
                     ->searchable()
                     ->sortable(),
-
                 Tables\Columns\TextColumn::make('manager_name')
                     ->label('Manager')
                     ->translateLabel()
@@ -81,9 +79,7 @@ class BranchResource extends Resource
                 Tables\Columns\ToggleColumn::make('status')
                     ->translateLabel()
                     ->label('Status')
-
                     ->sortable(),
-
             ])
             ->filters([
                 //

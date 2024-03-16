@@ -42,6 +42,7 @@ class Messages extends Page implements HasTable
         return $table
             ->query(Message::query())
             ->columns([
+
                 TextColumn::make('name')
                     ->translateLabel()
                     ->searchable()

@@ -93,8 +93,7 @@ class StatusChart extends ChartWidget
 
 //        dd($result);
 
-        return
-            $result;
+        return $result;
     }
 
     protected function getType(): string

@@ -29,6 +29,7 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->font('Cairo')
+            ->emailVerification()
             ->plugin(BreezyCore::make()
                 ->myProfile(
                     shouldRegisterUserMenu: true, // Sets the 'account' link in the panel User Menu (default = true)
@@ -40,7 +41,6 @@ class AdminPanelProvider extends PanelProvider
             ->sidebarCollapsibleOnDesktop()
             ->brandLogo(asset('images/logo.png'))
             ->favicon(asset('images/fav.png'))
-            ->brandLogoHeight('3rem')
             ->login(Login::class)
             ->colors([
                 'primary' => '#247DFF',

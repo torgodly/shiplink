@@ -1,3 +1,3 @@
-<x-app-layout>
-
-</x-app-layout>
+Hey,
+Can your Laravel app send emails yet? 😉
+Funny Coder

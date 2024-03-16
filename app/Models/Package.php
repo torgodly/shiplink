@@ -56,19 +56,19 @@ class Package extends Model
 
         // Additional charges
         if ($fragile) {
-            $price += 10; // Additional charge for fragile items
+            $price += 5; // Additional charge for fragile items
         }
 
         if ($fast_shipping) {
-            $price += 10; // Additional charge for fast shipping
+            $price += 5; // Additional charge for fast shipping
         }
 
         if ($is_refrigerated) {
-            $price += 10; // Additional charge for refrigerated items
+            $price += 5; // Additional charge for refrigerated items
         }
 
         if ($insurance) {
-            $price += 10; // Additional charge for insurance
+            $price += 5; // Additional charge for insurance
         }
 
         // Shipping method charges
@@ -142,19 +142,19 @@ class Package extends Model
 
         // Additional charges
         if ($this->fragile) {
-            $price += 10; // Additional charge for fragile items
+            $price += 5; // Additional charge for fragile items
         }
 
         if ($this->fast_shipping) {
-            $price += 10; // Additional charge for fast shipping
+            $price += 5; // Additional charge for fast shipping
         }
 
         if ($this->is_refrigerated) {
-            $price += 10; // Additional charge for refrigerated items
+            $price += 5; // Additional charge for refrigerated items
         }
 
         if ($this->insurance) {
-            $price += 10; // Additional charge for insurance
+            $price += 5; // Additional charge for insurance
         }
 
         // Shipping method charges
