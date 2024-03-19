@@ -133,12 +133,12 @@
                     </p>
                     <div class="row g-4 mb-5">
                         <div class="col-sm-6 wow fadeIn" data-wow-delay="0.5s">
-                            <i class="fa fa-calculator fa-3x text-primary mb-3"></i>
+                            <x-calculation-icon/>
                             <h5>{{__("Pre-calculate the cost of the shipment")}}</h5>
                             <p class="m-0">{{__("We provide you with the ability to easily calculate the cost of your shipment through our website by entering your shipment data")}}</p>
                         </div>
                         <div class="col-sm-6 wow fadeIn" data-wow-delay="0.7s">
-                            <i class="fa fa-shipping-fast fa-3x text-primary mb-3"></i>
+                            <x-car-icon/>
                             <h5>{{__("Delivery on time")}}</h5>
                             <p class="m-0">{{__("We guarantee that shipments are delivered on time You can count on us to ensure that your order arrives on time without delay")}}</p>
                         </div>
@@ -169,20 +169,24 @@
                 <div class="col-lg-6">
                     <div class="row g-4 align-items-center">
                         <div class="col-sm-6">
-                            <div class="bg-primary p-4 mb-4 wow fadeIn" data-wow-delay="0.3s">
-                                <i class="fa fa-users fa-2x text-white mb-3"></i>
+                            <div class="bg-primary p-4 mb-4 wow fadeIn" style="border-radius: 30px"
+                                 data-wow-delay="0.3s">
+
+                                <x-users-icon/>
                                 <h2 class="text-white mb-2" data-toggle="counter-up">1234</h2>
                                 <p class="text-white mb-0">{{__("Happy Customers")}}</p>
                             </div>
-                            <div class="bg-secondary p-4 wow fadeIn" data-wow-delay="0.5s">
-                                <i class="fa fa-ship fa-2x text-white mb-3"></i>
+                            <div class=" p-4 wow fadeIn" style="border-radius: 30px; background-color: #4ac8ff"
+                                 data-wow-delay="0.5s">
+                                <x-shiping-car/>
                                 <h2 class="text-white mb-2" data-toggle="counter-up">1234</h2>
                                 <p class="text-white mb-0">{{__('Completed shipments')}}</p>
                             </div>
                         </div>
                         <div class="col-sm-6">
-                            <div class="bg-success p-4 wow fadeIn" data-wow-delay="0.7s">
-                                <i class="fa fa-star fa-2x text-white mb-3"></i>
+                            <div class=" p-4 wow fadeIn"
+                                 style="border-radius: 30px; background-color: #fadd02" data-wow-delay="0.7s">
+                                <x-stars-icon/>
                                 <h2 class="text-white mb-2" data-toggle="counter-up">1234</h2>
                                 <p class="text-white mb-0">{{__('Customer reviews')}}</p>
                             </div>
@@ -313,22 +317,22 @@
                     <h6 class="text-secondary text-uppercase mb-3">{{__("Our features")}}</h6>
                     <h1 class="mb-5">{{__("Take advantage of our diverse services - everything you need in one place")}}</h1>
                     <div class="d-flex mb-5 wow fadeInUp" data-wow-delay="0.3s">
-{{--                        <i class="fa fa-globe text-primary fa-3x flex-shrink-0"></i>--}}
-                        <i class="fas fa-file-signature text-primary fa-3x flex-shrink-0"></i>
+                        {{--                        <i class="fa fa-globe text-primary fa-3x flex-shrink-0"></i>--}}
+                        <x-signature-icon/>
                         <div class="me-4">
                             <h5>{{__("Digital Signature")}}</h5>
                             <p class="mb-0">{{__("Digital Signature is easy and effective for confirming receipt of your shipment")}}</p>
                         </div>
                     </div>
                     <div class="d-flex mb-5 wow fadeIn" data-wow-delay="0.5s">
-                        <i class="fa fa-shipping-fast text-primary fa-3x flex-shrink-0"></i>
+                        <x-car-icon-w/>
                         <div class="me-4">
                             <h5>{{__("Fast Shipping")}}</h5>
                             <p class="mb-0">{{__("Enjoy fast and high-quality shipping services, no need to wait")}}</p>
                         </div>
                     </div>
                     <div class="d-flex mb-0 wow fadeInUp" data-wow-delay="0.7s">
-                        <i class="fa fa-headphones text-primary fa-3x flex-shrink-0"></i>
+                        <x-call-icon/>
                         <div class="me-4">
                             <h5>{{ __("24/7 Phone Support") }}</h5>
                             <p class="mb-0">{{ __("We're here to assist you anytime You can call us around the clock for support and assistance") }}</p>
@@ -388,7 +392,7 @@
                     <h1 class="mb-5">{{ __("Contact Us Now!") }}</h1>
                     <p class="mb-5">{{ __("We are here to help and answer your inquiries, feel free to contact us for support") }}</p>
                     <div class="d-flex align-items-center">
-                        <i class="fa fa-headphones fa-2x flex-shrink-0 bg-primary p-3 text-white"></i>
+                        <x-call-icon/>
                         <div class="pe-4">
                             <h6>{{ __("Call for any inquiry!") }}</h6>
                             <h3 class="text-primary m-0" dir="ltr">+218 0911111111</h3>
