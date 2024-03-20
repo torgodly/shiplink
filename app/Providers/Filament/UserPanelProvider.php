@@ -44,7 +44,7 @@ class UserPanelProvider extends PanelProvider
                 )->enableTwoFactorAuthentication())
             ->brandLogo(asset('images/logo.png'))
             ->favicon(asset('images/fav.png'))
-            ->brandLogoHeight('3rem')
+            ->brandLogoHeight('2.5rem')
             ->colors([
                 'primary' => '#247DFF',
                 'secondary' => '#FADD02',

@@ -45,7 +45,7 @@ class OfficePanelProvider extends PanelProvider
             ->brandLogo(asset('images/logo.png'))
             ->favicon(asset('images/fav.png'))
             ->sidebarCollapsibleOnDesktop()
-            ->brandLogoHeight('3rem')
+            ->brandLogoHeight('2.5rem')
             ->brandName('ShipLink')
             ->login(Login::class)
             ->viteTheme('resources/css/filament/office/theme.css')

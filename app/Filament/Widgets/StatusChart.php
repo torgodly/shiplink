@@ -78,11 +78,11 @@ class StatusChart extends ChartWidget
                     'label' => 'Packages by Status',
                     'data' => $statusData,
                     'backgroundColor' => [
-                        '#FF8C00',
-                        '#36A2EB',
-                        '#32CD32',
+                        '#cbd5e1',
+                        '#247DFF',
+                        '#FADD02',
                         '#FF4500',
-                        '#FFD700',
+                        '#22c55e',
                     ]
                     ,
                     'hoverOffset'=> 10

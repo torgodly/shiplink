@@ -64,7 +64,7 @@
 
 
     <!-- Carousel Start -->
-    <div class="container-fluid p-0 pb-5" id="Home">
+    <div class="container-fluid p-0 pb-5" id="Home" >
         <div class="owl-carousel header-carousel position-relative mb-5">
             <div class="owl-carousel-item position-relative">
                 <img class="img-fluid" src="{{asset('img/carousel-1.jpg')}}" alt="">
@@ -125,8 +125,8 @@
                     </div>
                 </div>
                 <div class="col-lg-6 about-text wow fadeInUp" data-wow-delay="0.3s" dir="rtl">
-                    <h6 class="text-secondary text-uppercase mb-3">{{__('About Us')}}</h6>
-                    <h1 class="mb-5">{{__("We make your shipping journey a unique and reliable experience")}}</h1>
+                    <h6 class=" text-uppercase mb-3">{{__('About Us')}}</h6>
+                    <h1 class="text-primary mb-5">{{__("We make your shipping journey a unique and reliable experience")}}</h1>
                     <p class="mb-5">
                         {{__("We provide you with fast and efficient transportation and logistics solutions We are here to ensure that we provide the best services with high efficiency and on time")}}
 
@@ -156,10 +156,10 @@
         <div class="container py-5" dir="rtl">
             <div class="row g-5">
                 <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
-                    <h1 class="mb-5">{{__("Your shipment is our commitment")}}</h1>
+                    <h1 class="mb-5 text-primary">{{__("Your shipment is our commitment")}}</h1>
                     <p class="mb-5">{{__("Our carefully designed website provides you with an easy experience to easily track status around the clock")}}</p>
                     <div class="d-flex align-items-center">
-                        <i class="fa fa-headphones fa-2x flex-shrink-0 bg-primary p-3 text-white"></i>
+                        <x-call-icon/>
                         <div class="pe-4">
                             <h6>{{__("keep in touch")}}</h6>
                             <h3 class="text-primary m-0" dir="ltr">+218 0911111111</h3>
@@ -203,8 +203,8 @@
     <div class="container-xxl py-5" id="Services">
         <div class="container py-5" dir="rtl">
             <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
-                <h6 class="text-secondary text-uppercase">{{__('Our services')}}</h6>
-                <h1 class="mb-5">{{__("Explore our services")}}</h1>
+                <h6 class=" text-uppercase">{{__('Our services')}}</h6>
+                <h1 class="text-primary mb-5">{{__("Explore our services")}}</h1>
             </div>
             <div class="row g-4">
                 <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.3s">
@@ -314,8 +314,8 @@
         <div class="container feature py-5 px-lg-0">
             <div class="row g-5 mx-lg-0">
                 <div class="col-lg-6 feature-text wow fadeInUp" data-wow-delay="0.1s" dir="rtl">
-                    <h6 class="text-secondary text-uppercase mb-3">{{__("Our features")}}</h6>
-                    <h1 class="mb-5">{{__("Take advantage of our diverse services - everything you need in one place")}}</h1>
+                    <h6 class=" text-uppercase mb-3">{{__("Our features")}}</h6>
+                    <h1 class="text-primary mb-5">{{__("Take advantage of our diverse services - everything you need in one place")}}</h1>
                     <div class="d-flex mb-5 wow fadeInUp" data-wow-delay="0.3s">
                         {{--                        <i class="fa fa-globe text-primary fa-3x flex-shrink-0"></i>--}}
                         <x-signature-icon/>
@@ -357,7 +357,7 @@
     <div class="container-xxl " id="Pricing">
         <div class="container ">
             <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
-                <h1 class="mb-5">{{__("Calculate the cost of your shipment")}}</h1>
+                <h1 class="mb-5 text-primary">{{__("Calculate the cost of your shipment")}}</h1>
             </div>
 
             <div id="iframe-container" style="padding: 20px; overflow: hidden;">
@@ -388,9 +388,9 @@
         <div class="container py-5">
             <div class="row g-5 align-items-center" dir="rtl">
                 <div class="col-lg-5 wow fadeInUp" data-wow-delay="0.1s">
-                    <h6 class="text-secondary text-uppercase mb-3">{{ __("Contact Us") }}</h6>
-                    <h1 class="mb-5">{{ __("Contact Us Now!") }}</h1>
-                    <p class="mb-5">{{ __("We are here to help and answer your inquiries, feel free to contact us for support") }}</p>
+                    <h6 class=" text-uppercase mb-3">{{ __("Contact Us") }}</h6>
+                    <h1 class="mb-5 text-primary">{{ __("Contact Us Now!") }}</h1>
+                    <p class="mb-5 ">{{ __("We are here to help and answer your inquiries, feel free to contact us for support") }}</p>
                     <div class="d-flex align-items-center">
                         <x-call-icon/>
                         <div class="pe-4">

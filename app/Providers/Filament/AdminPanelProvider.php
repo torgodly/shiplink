@@ -43,6 +43,7 @@ class AdminPanelProvider extends PanelProvider
             ->brandLogo(asset('images/logo.png'))
             ->favicon(asset('images/fav.png'))
             ->login(Login::class)
+            ->brandLogoHeight('2.5rem')
             ->colors([
                 'primary' => '#247DFF',
                 'secondary' => '#FADD02',

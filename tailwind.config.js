@@ -6,7 +6,12 @@ export default {
         './resources/views/**/*.blade.php',
     ],
     theme: {
-        extend: {},
+
+        extend: {
+            fontFamily: {
+                cairo: ['Cairo', 'sans-serif'],
+            },
+        },
     },
     plugins: [],
     darkMode: 'class',
