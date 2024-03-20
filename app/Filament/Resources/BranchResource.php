@@ -50,7 +50,7 @@ class BranchResource extends Resource
                     ->required()
                     ->translateLabel()
                     ->maxLength(255),
-                Forms\Components\select::make('manager_id')
+                Forms\Components\Select::make('manager_id')
                     ->required()
                     ->translateLabel()
                     ->relationship('manager', 'name', modifyQueryUsing: fn(Builder $query) => $query->where('type', 'manager')->whereDoesntHave('mangedbrance'))
