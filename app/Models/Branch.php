@@ -48,4 +48,17 @@ class Branch extends Model
         return $this->sentPackages()->union($this->receivedPackages());
     }
 
+    //sent count
+    public function getSentCountAttribute()
+    {
+        return $this->sentPackages()->count();
+    }
+
+    //received count
+    public function getReceivedCountAttribute()
+    {
+        return $this->receivedPackages()->count();
+    }
+
+
 }

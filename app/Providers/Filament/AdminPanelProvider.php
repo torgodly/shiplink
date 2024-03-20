@@ -3,6 +3,7 @@
 namespace App\Providers\Filament;
 
 use App\Filament\Office\Pages\Login;
+use App\Filament\Widgets\PackageChart;
 use App\Filament\Widgets\StatsOverview;
 use App\Filament\Widgets\StatusChart;
 use Filament\Http\Middleware\Authenticate;
@@ -64,7 +65,9 @@ class AdminPanelProvider extends PanelProvider
 //                Widgets\AccountWidget::class,
 //                Widgets\FilamentInfoWidget::class,
                 StatsOverview::class,
-                StatusChart::class
+                StatusChart::class,
+                PackageChart::class,
+
             ])
             ->middleware([
                 EncryptCookies::class,
