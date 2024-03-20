@@ -32,6 +32,7 @@ class OfficePanelProvider extends PanelProvider
             ->id('office')
             ->path('office')
             ->font('Cairo')
+            ->emailVerification()
             ->plugin(BreezyCore::make()
                 ->myProfile(
                     shouldRegisterUserMenu: true,

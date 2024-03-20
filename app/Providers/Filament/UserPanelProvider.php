@@ -30,6 +30,7 @@ class UserPanelProvider extends PanelProvider
             ->default()
             ->login(Login::class)
             ->registration(Register::class)
+            ->emailVerification()
             ->passwordReset()
             ->id('user')
             ->path('user')
