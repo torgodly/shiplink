@@ -19,8 +19,9 @@ class LanguageMiddleware
         $language = session(key: 'language');
 
 //Set the current language
-
-        app()->setLocale($language);
+        if ($language) {
+            app()->setLocale($language);
+        }
         return $next($request);
     }
 }
