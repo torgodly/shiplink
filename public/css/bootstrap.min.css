@@ -540,7 +540,9 @@ progress {
     max-width: 100%;
     height: auto
 }
-
+html[dir="ltr"] .flip {
+    transform: scaleX(-1);
+}
 .img-thumbnail {
     padding: .25rem;
     background-color: #fff;

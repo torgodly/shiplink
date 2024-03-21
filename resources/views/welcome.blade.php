@@ -64,14 +64,14 @@
 
 
     <!-- Carousel Start -->
-    <div class="container-fluid p-0 pb-5" id="Home" >
+    <div class="container-fluid p-0 pb-5" id="Home" dir="ltr">
         <div class="owl-carousel header-carousel position-relative mb-5">
             <div class="owl-carousel-item position-relative">
-                <img class="img-fluid" src="{{asset('img/carousel-1.jpg')}}" alt="">
+                <img class="img-fluid flip" src="{{asset('img/carousel-1.jpg')}}" >
                 <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center"
                      style="background: rgba(6, 3, 21, .5);">
                     <div class="container">
-                        <div class="row justify-content-start" dir="rtl">
+                        <div class="row justify-content-start"  dir="{{ App::getLocale() == 'en' ? 'ltr' : 'rtl' }}">
                             <div class="col-10 col-lg-8">
                                 <h5 class="text-white text-uppercase mb-3 animated slideInDown">{{__("Reliable delivery and accurate tracking")}}</h5>
                                 <h1 class="display-3 text-white animated slideInDown mb-4">{{__('We are the optimal shipping journey')}}</h1>
@@ -115,7 +115,7 @@
 
     <!-- About Start -->
     <div class="container-fluid overflow-hidden py-5 px-lg-0" id="About"
-         dir="{{ App::getLocale() == 'en' ? 'ltr' : 'rtl' }}">
+    >
         <div class="container about py-5 px-lg-0">
             <div class="row g-5 mx-lg-0">
                 <div class="col-lg-6 ps-lg-0 wow fadeInLeft" data-wow-delay="0.1s" style="min-height: 400px;">
@@ -124,7 +124,7 @@
                              style="object-fit: cover;" alt="">
                     </div>
                 </div>
-                <div class="col-lg-6 about-text wow fadeInUp" data-wow-delay="0.3s" dir="rtl">
+                <div class="col-lg-6 about-text wow fadeInUp" data-wow-delay="0.3s" >
                     <h6 class=" text-uppercase mb-3">{{__('About Us')}}</h6>
                     <h1 class="text-primary mb-5">{{__("We make your shipping journey a unique and reliable experience")}}</h1>
                     <p class="mb-5">
@@ -153,14 +153,14 @@
 
     <!-- Fact Start -->
     <div class="container-xxl py-5">
-        <div class="container py-5" dir="rtl">
+        <div class="container py-5" >
             <div class="row g-5">
                 <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
                     <h1 class="mb-5 text-primary">{{__("Your shipment is our commitment")}}</h1>
                     <p class="mb-5">{{__("Our carefully designed website provides you with an easy experience to easily track status around the clock")}}</p>
                     <div class="d-flex align-items-center">
                         <x-call-icon/>
-                        <div class="pe-4">
+                        <div class="px-4">
                             <h6>{{__("keep in touch")}}</h6>
                             <h3 class="text-primary m-0" dir="ltr">+218 0911111111</h3>
                         </div>
@@ -201,7 +201,7 @@
 
     <!-- Service Start -->
     <div class="container-xxl py-5" id="Services">
-        <div class="container py-5" dir="rtl">
+        <div class="container py-5" >
             <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
                 <h6 class=" text-uppercase">{{__('Our services')}}</h6>
                 <h1 class="text-primary mb-5">{{__("Explore our services")}}</h1>
@@ -313,27 +313,27 @@
     <div class="container-fluid overflow-hidden py-5 px-lg-0" id="Features">
         <div class="container feature py-5 px-lg-0">
             <div class="row g-5 mx-lg-0">
-                <div class="col-lg-6 feature-text wow fadeInUp" data-wow-delay="0.1s" dir="rtl">
+                <div class="col-lg-6 feature-text wow fadeInUp" data-wow-delay="0.1s" >
                     <h6 class=" text-uppercase mb-3">{{__("Our features")}}</h6>
                     <h1 class="text-primary mb-5">{{__("Take advantage of our diverse services - everything you need in one place")}}</h1>
                     <div class="d-flex mb-5 wow fadeInUp" data-wow-delay="0.3s">
                         {{--                        <i class="fa fa-globe text-primary fa-3x flex-shrink-0"></i>--}}
                         <x-signature-icon/>
-                        <div class="me-4">
+                        <div class="mx-4">
                             <h5>{{__("Digital Signature")}}</h5>
                             <p class="mb-0">{{__("Digital Signature is easy and effective for confirming receipt of your shipment")}}</p>
                         </div>
                     </div>
                     <div class="d-flex mb-5 wow fadeIn" data-wow-delay="0.5s">
                         <x-car-icon-w/>
-                        <div class="me-4">
+                        <div class="mx-4">
                             <h5>{{__("Fast Shipping")}}</h5>
                             <p class="mb-0">{{__("Enjoy fast and high-quality shipping services, no need to wait")}}</p>
                         </div>
                     </div>
                     <div class="d-flex mb-0 wow fadeInUp" data-wow-delay="0.7s">
                         <x-call-icon/>
-                        <div class="me-4">
+                        <div class="mx-4">
                             <h5>{{ __("24/7 Phone Support") }}</h5>
                             <p class="mb-0">{{ __("We're here to assist you anytime You can call us around the clock for support and assistance") }}</p>
                         </div>
@@ -386,14 +386,14 @@
     <!-- Quote Start -->
     <div class="container-xxl py-5" id="Contact">
         <div class="container py-5">
-            <div class="row g-5 align-items-center" dir="rtl">
+            <div class="row g-5 align-items-center" >
                 <div class="col-lg-5 wow fadeInUp" data-wow-delay="0.1s">
                     <h6 class=" text-uppercase mb-3">{{ __("Contact Us") }}</h6>
                     <h1 class="mb-5 text-primary">{{ __("Contact Us Now!") }}</h1>
                     <p class="mb-5 ">{{ __("We are here to help and answer your inquiries, feel free to contact us for support") }}</p>
                     <div class="d-flex align-items-center">
                         <x-call-icon/>
-                        <div class="pe-4">
+                        <div class="px-4">
                             <h6>{{ __("Call for any inquiry!") }}</h6>
                             <h3 class="text-primary m-0" dir="ltr">+218 0911111111</h3>
                         </div>

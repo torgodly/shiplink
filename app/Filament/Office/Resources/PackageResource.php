@@ -58,10 +58,7 @@ class PackageResource extends Resource
                 Tables\Actions\ActionGroup::make([
                     Tables\Actions\EditAction::make(),
                     Tables\Actions\ViewAction::make()->requiresConfirmation(true),
-
-
                     InvoiceActionHelper::setupInvoiceAction()->stream()
-
                 ]),
 
                 //change status action

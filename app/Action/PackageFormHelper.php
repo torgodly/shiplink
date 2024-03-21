@@ -24,8 +24,6 @@ class PackageFormHelper
             Group::make()
                 ->schema([Section::make(__('Package Information'))
                     ->schema([
-
-
                         TextInput::make('sender_name')->label('Sender Name')->translateLabel()->disabled(),
                         TextInput::make('receiver_name')->label('Receiver Name')->translateLabel()->disabled(),
                         Select::make('sender_code')

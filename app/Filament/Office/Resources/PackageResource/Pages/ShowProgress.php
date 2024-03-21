@@ -31,11 +31,12 @@ class ShowProgress extends Page implements HasInfolists, HasActions, HasForms
     use InteractsWithInfolists;
     use InteractsWithActions;
     use InteractsWithForms;
+    use HasBadge;
+    //our custom trait
     use HasTimelineInfolist;
     use HasChangeStatusAction;
 
 //    use InteractsWithRecord;
-    use HasBadge;
 
     protected static string $resource = PackageResource::class;
     protected static string $view = 'filament.office.resources.package-resource.pages.show-progress';

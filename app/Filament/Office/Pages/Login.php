@@ -41,20 +41,14 @@ class Login extends BaseLogin
         }
 
         $user = Filament::auth()->user();
-//        if (
-//            ($user instanceof FilamentUser) &&
-//            (!$user->canAccessPanel(Filament::getCurrentPanel()))
-//        ) {
-//            Filament::auth()->logout();
-//
-//            $this->throwFailureValidationException();
-//        }
-        //if user is assigned to a branch,
+
+        //Check if the user is active
         if ($user->active === 0) {
             Filament::auth()->logout();
             $this->throwInactiveAccountException();
         }
 
+        //Check if the user is a manager and has a branch
         if ($user->is_manager && $user->mangedbrance()->exists()) {
             if ($user->mangedbrance->status === 1) {
 

@@ -62,7 +62,6 @@ class ReceivedPackages extends Page implements HasTable, HasActions
                     ->color('primary')
                     ->url(fn($record) => PackageResource::getUrl('show', ['record' => $record])),
                 QRCodeAction::QrCodeAction(),
-
                 ActionGroup::make([
                     ViewAction::make()->requiresConfirmation(true)
                         ->url(fn($record) => PackageResource::getUrl('view', ['record' => $record])),

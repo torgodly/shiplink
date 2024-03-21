@@ -86,7 +86,6 @@ trait HasTimelineInfolist
                         ActivityIcon::make('status')
                             ->icon(fn(string|null $state): string|null => match ($state) {
                                 'Pending' => 'tabler-clock',
-                                'InTransit' => 'tabler-truck-delivery',
                                 'OutForDelivery' => 'tabler-location-share',
                                 'WaitingForPickup' => 'tabler-package',
                                 'Delivered' => 'tabler-discount-check-filled',
@@ -95,7 +94,6 @@ trait HasTimelineInfolist
                             })
                             ->color(fn(string|null $state): string|null => match ($state) {
                                 'Pending' => $this->record->status === 'Pending' ? 'gray' : 'green',
-                                'InTransit' => $this->record->status === 'InTransit' ? 'gray' : 'blue',
                                 'OutForDelivery' => $this->record->status === 'OutForDelivery' ? 'gray' : 'yellow',
                                 'WaitingForPickup' => $this->record->status === 'WaitingForPickup' ? 'gray' : 'orange',
                                 'Delivered' => 'green',
