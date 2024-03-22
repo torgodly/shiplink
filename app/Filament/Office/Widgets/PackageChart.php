@@ -20,14 +20,14 @@ class PackageChart extends ChartWidget
 
     protected function getData(): array
     {
-        $sent = Trend::query(Package::query()->where('sender_branch_id', auth()->user()->mangedbrance->id))
+        $sent = Trend::query(Package::query()->where('sender_branch_id', auth()->user()->managedbranch->id))
             ->between(
                 start: now()->startOfWeek(),
                 end: now()->endOfWeek(),
             )
             ->perDay()
             ->count();
-        $received = Trend::query(Package::query()->where('receiver_branch_id', auth()->user()->mangedbrance->id))
+        $received = Trend::query(Package::query()->where('receiver_branch_id', auth()->user()->managedbranch->id))
             ->between(
                 start: now()->startOfWeek(),
                 end: now()->endOfWeek(),

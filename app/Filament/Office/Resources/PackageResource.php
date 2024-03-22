@@ -44,7 +44,7 @@ class PackageResource extends Resource
     {
         return $table
             ->defaultSort('created_at', 'desc')
-            ->query(Package::query()->where('sender_branch_id', auth()->user()->mangedbrance->id))
+            ->query(Package::query()->where('sender_branch_id', auth()->user()->managedbranch->id))
             ->columns(TableColumnsHelper::PackageColumns())
             ->filters(PackageFilterHelper::setPackageFilter())
             ->actions([

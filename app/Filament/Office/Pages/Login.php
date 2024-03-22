@@ -49,8 +49,8 @@ class Login extends BaseLogin
         }
 
         //Check if the user is a manager and has a branch
-        if ($user->is_manager && $user->mangedbrance()->exists()) {
-            if ($user->mangedbrance->status === 1) {
+        if ($user->is_manager && $user->managedbranch()->exists()) {
+            if ($user->managedbranch->status === 1) {
 
 
                 session()->regenerate();

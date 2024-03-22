@@ -53,7 +53,9 @@ class BranchResource extends Resource
                 Forms\Components\Select::make('manager_id')
                     ->required()
                     ->translateLabel()
-                    ->relationship('manager', 'name', modifyQueryUsing: fn(Builder $query) => $query->where('type', 'manager')->whereDoesntHave('mangedbrance'))
+                    ->relationship('manager', 'name', modifyQueryUsing: fn(Builder $query, Branch $record) => $query->where('type', 'manager')->whereDoesntHave('managedbranch')->orWhere('type', 'manager')->whereHas('managedbranch', function ($q) use ($record){
+                        $q->where('id', $record->id);
+                    }))
                     ->preload(),
             ]);
     }

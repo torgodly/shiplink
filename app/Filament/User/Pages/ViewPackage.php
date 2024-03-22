@@ -87,7 +87,7 @@ class ViewPackage extends Page implements HasForms
                                         $receiverBranch = $get('receiver_branch_id');
                                         return $query->when($receiverBranch, fn($q) => $q->where('id', '!=', $receiverBranch));
                                     })
-                                    ->default(fn() => !auth()->user()->is_admin ? auth()->user()->mangedbrance->id : null)
+                                    ->default(fn() => !auth()->user()->is_admin ? auth()->user()->managedbranch->id : null)
                                     ->searchable()
                                     ->preload()
                                     ->searchable()

@@ -43,7 +43,7 @@ class StatusChart extends ChartWidget
 // Get the count of packages for each status
         $statusCounts = Package::selectRaw('status, count(*) as count')
             ->when(auth()->user()->is_manager, function ($query) {
-                $query->where('sender_branch_id', auth()->user()->mangedbrance->id)->orWhere('receiver_branch_id', auth()->user()->mangedbrance->id);
+                $query->where('sender_branch_id', auth()->user()->managedbranch->id)->orWhere('receiver_branch_id', auth()->user()->managedbranch->id);
             })
             ->when($this->filter === 'today', function ($query) {
                 $query->whereDate('created_at', today());

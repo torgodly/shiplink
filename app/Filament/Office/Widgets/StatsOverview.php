@@ -10,7 +10,7 @@ class StatsOverview extends BaseWidget
 {
     protected function getStats(): array
     {
-        $branch = \Auth::user()->mangedbrance()->with('sentPackages', 'receivedPackages',)->first();
+        $branch = \Auth::user()->managedbranch()->with('sentPackages', 'receivedPackages',)->first();
         $packages = $branch->packages;
         $nonZeroPackages = $packages->where('rating', '!=', 0);
 

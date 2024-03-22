@@ -91,17 +91,17 @@ class User extends Authenticatable implements MustVerifyEmail, FilamentUser, Has
 
     //brance name
 
-    public function mangedbrance(): \Illuminate\Database\Eloquent\Relations\HasOne
+    public function managedbranch(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
         return $this->hasOne(Branch::class, 'manager_id');
     }
 
-    //has a mangedbrance
+    //has a managedbranch
 
 
     public function getBranchNameAttribute()
     {
-        return $this->mangedbrance?->name;
+        return $this->managedbranch?->name;
     }
 
 

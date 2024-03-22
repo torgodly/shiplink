@@ -51,7 +51,7 @@ class ReceivedPackages extends Page implements HasTable, HasActions
     {
         return $table
             ->defaultSort('created_at', 'desc')
-            ->query(Package::query()->where('receiver_branch_id', \Auth::user()->mangedbrance?->id)->whereNot('status', ShippingStatus::Pending))
+            ->query(Package::query()->where('receiver_branch_id', \Auth::user()->managedbranch?->id)->whereNot('status', ShippingStatus::Pending))
             ->columns(TableColumnsHelper::PackageColumns())
             ->filters(PackageFilterHelper::setPackageFilter())
             ->actions([
