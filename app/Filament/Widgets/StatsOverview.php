@@ -15,7 +15,11 @@ class StatsOverview extends BaseWidget
         $packages = Package::all();
         $users = User::where('type', 'user')->get();
         $branches = Branch::all();
-        $avgRating = round($packages->where('rating', '!=', 0)->sum('rating') / $packages->where('rating', '!=', 0)->count(), 1);
+        $totalRating = $packages->where('rating', '!=', 0)->sum('rating');
+        $totalCount = $packages->where('rating', '!=', 0)->count();
+
+        $avgRating = $totalCount > 0 ? round($totalRating / $totalCount, 1) : 0;
+
         //revenue
         $revenue = $packages->sum('price');
 
@@ -58,7 +62,7 @@ class StatsOverview extends BaseWidget
                 ->descriptionIcon('heroicon-o-banknotes')
                 ->chart([7, 2, 10, 3, 15, 4, 17]),
 
-            Stat::make(__('Most Active Branch'), $mostActiveBranch->name)
+            Stat::make(__('Most Active Branch'), $mostActiveBranch?->name)
                 ->color('blue')
                 ->description(__('Branch with the highest activity'))
                 ->descriptionIcon('heroicon-o-building-office')

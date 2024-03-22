@@ -3,7 +3,6 @@
 namespace App\Filament\Office\Widgets;
 
 use App\Models\Branch;
-use App\Models\User;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
 
@@ -13,15 +12,21 @@ class StatsOverview extends BaseWidget
     {
         $branch = \Auth::user()->mangedbrance()->with('sentPackages', 'receivedPackages',)->first();
         $packages = $branch->packages;
-        $avgRating = round($packages->where('rating', '!=', 0)->sum('rating') / $packages->where('rating', '!=', 0)->count(), 1);
+        $nonZeroPackages = $packages->where('rating', '!=', 0);
+
+        if ($nonZeroPackages->count() > 0) {
+            $avgRating = round($nonZeroPackages->sum('rating') / $nonZeroPackages->count(), 1);
+        } else {
+            $avgRating = 0;
+        }
         $revenue = $packages->sum('price');
         $sentPackages = $branch->sentPackages->count();
         $receivedPackages = $branch->receivedPackages->count();
 
         //branch rank based on sent and received packages
         $branchRank = Branch::all()->sortByDesc(function ($branch) {
-            return $branch->sentPackages->count() + $branch->receivedPackages->count();
-        })->pluck('id')->search($branch->id) + 1;
+                return $branch->sentPackages->count() + $branch->receivedPackages->count();
+            })->pluck('id')->search($branch->id) + 1;
 
         return [
             //$avgRating
@@ -55,8 +60,6 @@ class StatsOverview extends BaseWidget
                 ->description(__('Total number of packages received'))
                 ->descriptionIcon('tabler-package-import')
                 ->chart([7, 2, 10, 3, 15, 4, 17]),
-
-
 
 
             Stat::make(__('Total Revenue'), \Number::currency($revenue, 'LYD', 'ar_LY'))
