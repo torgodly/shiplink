@@ -14,22 +14,20 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-//        \App\Models\User::factory(2)->create(
-//            [
-//                'type' => 'user',
-//            ]
-//        );
+        \App\Models\User::factory(2)->create(
+            [
+                'type' => 'user',
+            ]
+        );
 
-//        Branch::factory(10)->create();
+        Branch::factory(10)->create();
 
-//        \App\Models\User::factory(2)->create(
-//            [
-//                'type' => 'manager',
-//            ]
-//        );
+        \App\Models\User::factory(2)->create(
+            [
+                'type' => 'manager',
+            ]
+        );
 
-
-//         Branch::factory(10)->create();/
 
         \App\Models\User::factory()->create([
             'name' => 'Test User',
@@ -37,6 +35,6 @@ class DatabaseSeeder extends Seeder
             'type' => 'admin',
         ]);
 
-//        Package::factory(500)->create();
+        Package::factory(500)->create();
     }
 }
