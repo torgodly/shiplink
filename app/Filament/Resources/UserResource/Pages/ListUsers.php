@@ -22,6 +22,11 @@ class ListUsers extends ListRecords
                         $data['receiver_code'] = 'REC-' . Str::random(10);
                     }
 
+                    //if email ends with @test.com
+                    if (Str::endsWith($data['email'], '@test.com')) {
+                        $data['email_verified_at'] = now();
+                    }
+
                     return $data;
                 }
             )
