@@ -29,6 +29,7 @@ class UserPanelProvider extends PanelProvider
         return $panel
             ->default()
             ->login(Login::class)
+            ->databaseNotifications()
             ->registration(Register::class)
             ->emailVerification()
             ->passwordReset()
