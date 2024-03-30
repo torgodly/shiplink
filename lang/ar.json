@@ -200,6 +200,8 @@
     "Active": "نشط",
     "Packages by Branch": "الشحنات حسب الفرع",
     "Packages by Week": "الشحنات حسب الأسبوع",
-    "branch": "الفرع"
+    "branch": "الفرع",
+    "Answered": "تم الرد",
+    "Answer": "الرد"
 }
 

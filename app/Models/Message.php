@@ -13,6 +13,33 @@ class Message extends Model
         'name',
         'email',
         'phone',
-        'message'
+        'message',
+        'branch_id',
+        'user_id',
+        'answer',
     ];
+
+
+    //branch name
+    public function getBranchNameAttribute()
+    {
+       return $this->branch->name;
+    }
+
+    public function branch()
+    {
+        return $this->belongsTo(Branch::class);
+    }
+
+    //user
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    //username
+    public function getUserNameAttribute()
+    {
+       return $this->user->name;
+    }
 }
