@@ -40,7 +40,7 @@ class Messages extends Page implements HasTable
     public function table(Table $table): Table
     {
         return $table
-            ->query(Message::query())
+            ->query(Message::query()->whereNull('user_id'))
             ->columns([
 
                 TextColumn::make('name')
