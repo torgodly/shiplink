@@ -31,6 +31,7 @@ class OfficePanelProvider extends PanelProvider
         return $panel
             ->id('office')
             ->path('office')
+            ->databaseNotifications()
             ->font('Cairo')
             ->emailVerification()
             ->plugin(BreezyCore::make()
