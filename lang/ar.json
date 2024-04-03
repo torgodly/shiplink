@@ -218,6 +218,19 @@
     "A new package with code ": "شحنة جديدة بكود ",
     " has been created to be received at your branch": " تم إنشاؤها لتكون استلامها في فرعك",
     " has been created to be received by you": " تم إنشاؤها لتكون استلامها من قبلك",
-    " has been created to be sent by you": " تم إنشاؤها لتكون إرسالها من قبلك"
+    " has been created to be sent by you": " تم إنشاؤها لتكون إرسالها من قبلك",
+    "What services does ShipLink company offer?": "ما هي الخدمات التي تقدمها شركة ShipLink؟",
+    "ShipLink company offers air,sea and land shipping in addition to extra services such as fast shipping and insurance.": "تقدم شركة ShipLink خدمات الشحن الجوي والبحري والبري بالإضافة إلى خدمات إضافية مثل الشحن السريع والتأمين.",
+    "What is the difference between actual weight and volumetric weight?": "ما هو الفرق بين الوزن الفعلي والوزن الحجمي؟",
+    "Actual weight is the weight of the package while volumetric weight takes into consideration the dimensions of the package. For example, if you order a tall vase, the volumetric package weight will be calculated based on the Length x Width x Height divided by 5000.\nWhen your package is received at our facility, we calculate both the actual weight of the package and its volumetric weight; the larger figure will be applied to your package. This procedure is followed by all airlines and freight forwarding companies.": "الوزن الفعلي هو وزن الشحنة بينما يأخذ الوزن الحجمي في الاعتبار أبعاد الشحنة. على سبيل المثال، إذا قمت بطلب إناء طويل، سيتم حساب وزن الشحنة الحجمي بناءً على الطول × العرض × الارتفاع مقسومًا على 5000.\nعند استلام شحنتك في مرفقنا، نقوم بحساب كل من الوزن الفعلي للشحنة ووزنها الحجمي؛ سيتم تطبيق الرقم الأكبر على شحنتك. يتبع هذا الإجراء جميع شركات الطيران وشركات الشحن.",
+    "What are the items that cannot be shipped?": "ما هي العناصر التي لا يمكن شحنها؟",
+    "Since ShipLink is following the country's civil defense regulations, we do not ship the following items:": "نظرًا لأن شركة ShipLink تتبع لوائح الدفاع المدني في البلاد، فإننا لا نقوم بشحن العناصر التالية:",
+    "Illegal items": "العناصر غير القانونية",
+    "Explosives": "المتفجرات",
+    "Living tissues": "الأنسجة الحية",
+    "How can we help you?": "كيف يمكننا مساعدتك؟",
+"We hope you have found an answer to your question. If you need any help, please search your query on our Support Center or contact us via email.": "نأمل أن تكون قد وجدت إجابة على سؤالك. إذا كنت بحاجة إلى أي مساعدة، يرجى البحث عن استفسارك في مركز الدعم الخاص بنا أو الاتصال بنا عبر البريد الإلكتروني.",
+    "What is the cost of shipping?": "ما هو تكلفة الشحن؟",
+    "The cost of shipping depends on the weight, dimensions, and shipping method. You can calculate the cost of shipping by entering the required information on our website.": "تعتمد تكلفة الشحن على الوزن والأبعاد وطريقة الشحن. يمكنك حساب تكلفة الشحن عن طريق إدخال المعلومات المطلوبة على موقعنا الإلكتروني."
 }
 

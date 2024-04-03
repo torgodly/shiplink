@@ -67,11 +67,11 @@
     <div class="container-fluid p-0 pb-5" id="Home" dir="ltr">
         <div class="owl-carousel header-carousel position-relative mb-5">
             <div class="owl-carousel-item position-relative">
-                <img class="img-fluid flip" src="{{asset('img/carousel-1.jpg')}}" >
+                <img class="img-fluid flip" src="{{asset('img/carousel-1.jpg')}}">
                 <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center"
                      style="background: rgba(6, 3, 21, .5);">
                     <div class="container">
-                        <div class="row justify-content-start"  dir="{{ App::getLocale() == 'en' ? 'ltr' : 'rtl' }}">
+                        <div class="row justify-content-start" dir="{{ App::getLocale() == 'en' ? 'ltr' : 'rtl' }}">
                             <div class="col-10 col-lg-8">
                                 <h5 class="text-white text-uppercase mb-3 animated slideInDown">{{__("Reliable delivery and accurate tracking")}}</h5>
                                 <h1 class="display-3 text-white animated slideInDown mb-4">{{__('We are the optimal shipping journey')}}</h1>
@@ -124,7 +124,7 @@
                              style="object-fit: cover;" alt="">
                     </div>
                 </div>
-                <div class="col-lg-6 about-text wow fadeInUp" data-wow-delay="0.3s" >
+                <div class="col-lg-6 about-text wow fadeInUp" data-wow-delay="0.3s">
                     <h6 class=" text-uppercase mb-3">{{__('About Us')}}</h6>
                     <h1 class="text-primary mb-5">{{__("We make your shipping journey a unique and reliable experience")}}</h1>
                     <p class="mb-5">
@@ -153,7 +153,7 @@
 
     <!-- Fact Start -->
     <div class="container-xxl py-5">
-        <div class="container py-5" >
+        <div class="container py-5">
             <div class="row g-5">
                 <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
                     <h1 class="mb-5 text-primary">{{__("Your shipment is our commitment")}}</h1>
@@ -201,7 +201,7 @@
 
     <!-- Service Start -->
     <div class="container-xxl py-5" id="Services">
-        <div class="container py-5" >
+        <div class="container py-5">
             <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
                 <h6 class=" text-uppercase">{{__('Our services')}}</h6>
                 <h1 class="text-primary mb-5">{{__("Explore our services")}}</h1>
@@ -313,7 +313,7 @@
     <div class="container-fluid overflow-hidden py-5 px-lg-0" id="Features">
         <div class="container feature py-5 px-lg-0">
             <div class="row g-5 mx-lg-0">
-                <div class="col-lg-6 feature-text wow fadeInUp" data-wow-delay="0.1s" >
+                <div class="col-lg-6 feature-text wow fadeInUp" data-wow-delay="0.1s">
                     <h6 class=" text-uppercase mb-3">{{__("Our features")}}</h6>
                     <h1 class="text-primary mb-5">{{__("Take advantage of our diverse services - everything you need in one place")}}</h1>
                     <div class="d-flex mb-5 wow fadeInUp" data-wow-delay="0.3s">
@@ -382,11 +382,87 @@
     </div>
     <!-- Pricing End -->
 
+    {{--  Fqa start  --}}
+    <!-- FAQ 1 - Bootstrap Brain Component -->
+    <section class=" py-3 py-md-5" dir="ltr">
+        <div class="container">
+            <div class="row gy-5 gy-lg-0 align-items-lg-center">
+                <div class="col-12 col-lg-6">
+                    <img class="img-fluid rounded" loading="lazy" src="./assets/img/faq-img-1.png"
+                         alt="How can we help you?">
+                </div>
+                <div class="col-12 col-lg-6">
+                    <div class="row justify-content-xl-end">
+                        <div class="col-12 col-xl-11">
+                            <h2 class="h1 mb-3 text-primary">{{__("How can we help you?")}}</h2>
+                            <p class="lead fs-4  mb-5">{{__("We hope you have found an answer to your question. If you need any help, please search your query on our Support Center or contact us via email.")}}</p>
+                            <div class="accordion accordion-flush" id="accordionExample">
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingOne">
+                                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                                data-bs-target="#collapseOne"
+                                                aria-controls="collapseOne">
+                                            {{__('What services does ShipLink company offer?')}}
+                                        </button>
+                                    </h2>
+                                    <div id="collapseOne" class="accordion-collapse collapse show"
+                                         aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            <p>{{__('ShipLink company offers air,sea and land shipping in addition to extra services such as fast shipping and insurance.')}}</p>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingTwo">
+                                        <button class="accordion-button collapsed" type="button"
+                                                data-bs-toggle="collapse" data-bs-target="#collapseTwo"
+                                                aria-expanded="false" aria-controls="collapseTwo">
+                                            {{__('What is the difference between actual weight and volumetric weight?')}}
+                                        </button>
+                                    </h2>
+                                    <div id="collapseTwo" class="accordion-collapse collapse"
+                                         aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            {{__('Actual weight is the weight of the package while volumetric weight takes into consideration the dimensions of the package. For example, if you order a tall vase, the volumetric package weight will be calculated based on the Length x Width x Height divided by 5000.
+When your package is received at our facility, we calculate both the actual weight of the package and its volumetric weight; the larger figure will be applied to your package. This procedure is followed by all airlines and freight forwarding companies.')}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingThree">
+                                        <button class="accordion-button collapsed" type="button"
+                                                data-bs-toggle="collapse" data-bs-target="#collapseThree"
+                                                aria-expanded="false" aria-controls="collapseThree">
+                                          {{__('What are the items that cannot be shipped?')}}
+                                        </button>
+                                    </h2>
+                                    <div id="collapseThree" class="accordion-collapse collapse"
+                                         aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            <p>{{__("Since ShipLink is following the country's civil defense regulations, we do not ship the following items:")}}</p>
+                                            <ul>
+                                                <li>{{__('Illegal items')}}</li>
+                                                <li>{{__("Explosives")}}
+                                                </li>
+                                                <li>{{__('Living tissues')}}</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    {{--  Fqa end  --}}
 
     <!-- Quote Start -->
     <div class="container-xxl py-5" id="Contact">
         <div class="container py-5">
-            <div class="row g-5 align-items-center" >
+            <div class="row g-5 align-items-center">
                 <div class="col-lg-5 wow fadeInUp" data-wow-delay="0.1s">
                     <h6 class=" text-uppercase mb-3">{{ __("Contact Us") }}</h6>
                     <h1 class="mb-5 text-primary">{{ __("Contact Us Now!") }}</h1>

@@ -4559,7 +4559,7 @@ textarea.form-control-lg {
 
 .accordion-button:focus {
     z-index: 3;
-    border-color: #ff9fa0;
+    border-color: #FADD02;
     outline: 0;
     box-shadow: 0 0 0 .25rem rgba(255, 62, 65, 0.25)
 }
