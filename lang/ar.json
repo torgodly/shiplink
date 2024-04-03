@@ -212,6 +212,8 @@
     "Processing": "قيد المعالجة",
     "InTransit": "محطة ترانزيت",
     "\uD83D\uDE9A Package is in Transit in ": "\uD83D\uDE9A الشحنة في محطة ترانزيت في ",
-    " - Next Stop: ": " - المحطة التالية: "
+    " - Next Stop: ": " - المحطة التالية: ",
+    "The Package ": "الشحنة ",
+    " is now": " الآن"
 }
 

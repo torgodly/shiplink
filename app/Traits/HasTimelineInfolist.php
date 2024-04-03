@@ -121,7 +121,7 @@ trait HasTimelineInfolist
                                 'Pending' => $this->record->status === 'Pending' ? 'gray' : 'green',
                                 'Processing' => $this->record->status === 'Processing' ? 'gray' : 'blue',
                                 'OutForDelivery' => $this->record->status === 'OutForDelivery' ? 'gray' : 'yellow',
-                                'InTransit' => $this->record->status === 'InTransit' ? 'gray' : 'blue',
+                                'InTransit' => $this->record->status === 'InTransit' ? 'gray' : 'sky',
                                 'WaitingForPickup' => $this->record->status === 'WaitingForPickup' ? 'gray' : 'orange',
                                 'Delivered' => 'green',
                                 'Returned' => 'danger',

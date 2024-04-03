@@ -45,24 +45,30 @@ trait HasChangeStatusAction
                 $data = ['status' => $selectedOption, 'signature' => $signature];
                 $this->record->update($data);
                 Notification::make()
-                    ->title('The Package '. '"'.$this->record->code.'"' .' is now' . $selectedOption)
+                    ->title(__('The Package '). '"'.$this->record->code.'"' .' is now' . __($selectedOption))
                     ->icon(fn(): string|null => match ($selectedOption) {
                         'Pending' => 'tabler-clock',
+                        'Processing' => 'tabler-settings-cog',
                         'OutForDelivery' => 'tabler-location-share',
+                        'InTransit' => 'tabler-clock-pause',
                         'WaitingForPickup' => 'tabler-package',
                         'Delivered' => 'tabler-discount-check-filled',
                         'Returned' => 'tabler-refresh',
                         default => null,
                     })
                     ->iconColor(fn(): string|null => match ($selectedOption) {
+                        'Processing' => 'blue',
                         'OutForDelivery' =>  'yellow',
+                        'InTransit' => 'sky',
                         'WaitingForPickup' => 'orange',
                         'Delivered' => 'green',
                         'Returned' => 'danger',
                         default => 'gray',
                     })
                     ->color(fn(): string|null => match ($selectedOption) {
+                        'Processing' => 'blue',
                         'OutForDelivery' =>  'yellow',
+                        'InTransit' => 'sky',
                         'WaitingForPickup' => 'orange',
                         'Delivered' => 'green',
                         'Returned' => 'danger',
