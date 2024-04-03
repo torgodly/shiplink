@@ -21,7 +21,7 @@ trait HasChangeStatusAction
             ->form([
                 Select::make('status')
                     ->translateLabel()
-                    ->options(collect($this->record->CustomStatusOptions)->mapWithKeys(fn($status) => [$status => __($status)])->toArray())
+                    ->options(collect($this->record->custom_status_options)->mapWithKeys(fn($status) => [$status => __($status)])->toArray())
                     ->live()
                     ->required()
                     ->native(false),
