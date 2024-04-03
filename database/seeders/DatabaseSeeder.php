@@ -12,8 +12,18 @@ class DatabaseSeeder extends Seeder
     /**
      * Seed the application's database.
      */
+
+
     public function run(): void
     {
+
+        \App\Models\User::factory()->create([
+            'name' => 'Test User',
+            'email' => 'admin@admin.com',
+            'type' => 'admin',
+        ]);
+
+
         \App\Models\User::factory(2)->create(
             [
                 'type' => 'user',
@@ -29,11 +39,7 @@ class DatabaseSeeder extends Seeder
         );
 
 
-        \App\Models\User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'admin@admin.com',
-            'type' => 'admin',
-        ]);
+
 
         Package::factory(500)->create();
     }
