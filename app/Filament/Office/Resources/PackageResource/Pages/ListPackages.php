@@ -4,6 +4,7 @@ namespace App\Filament\Office\Resources\PackageResource\Pages;
 
 use App\Filament\Office\Resources\PackageResource;
 use Filament\Actions;
+use Filament\Notifications\Notification;
 use Filament\Resources\Pages\ListRecords;
 use Illuminate\Support\Str;
 
@@ -14,7 +15,7 @@ class ListPackages extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make()->label('Send New Package')->translateLabel(),
+            Actions\CreateAction::make()->label('Send New Package')->translateLabel()
         ];
     }
 

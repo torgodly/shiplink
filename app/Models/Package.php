@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Enums\ShippingMethods;
 use App\Enums\ShippingStatus;
+use Filament\Notifications\Notification;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
@@ -282,4 +283,17 @@ class Package extends Model
     {
         return $this->receiver_branch_id === Auth::user()->managedbranch->id;
     }
+
+
+    protected static function booted()
+    {
+        static::creating(function (Package $package) {
+            Notification::make()->title(__("A new package with code "). $package->code .__(" has been created to be received at your branch"))->sendToDatabase($package->receiverBranch->manager);
+            //send to the receiver user that a new pakcage is its on its way to him
+            Notification::make()->title(__("A new package with code "). $package->code .__(" has been created to be received by you"))->sendToDatabase($package->receiver);
+            //send to the sender user that the package has been created
+            Notification::make()->title(__("A new package with code "). $package->code .__(" has been created to be sent by you"))->sendToDatabase($package->sender);
+        });
+    }
+
 }

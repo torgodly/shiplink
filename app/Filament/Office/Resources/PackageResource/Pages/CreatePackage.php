@@ -4,6 +4,7 @@ namespace App\Filament\Office\Resources\PackageResource\Pages;
 
 use App\Filament\Office\Resources\PackageResource;
 use App\Models\Package;
+use Filament\Notifications\Notification;
 use Filament\Resources\Pages\CreateRecord;
 use Illuminate\Support\Str;
 
@@ -17,4 +18,5 @@ class CreatePackage extends CreateRecord
         $data['code'] = 'ShipLink-' . Str::PadLeft(Package::query()->count() + 1, 7, '0');
         return $data;
     }
+
 }

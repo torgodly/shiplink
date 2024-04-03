@@ -214,6 +214,10 @@
     "\uD83D\uDE9A Package is in Transit in ": "\uD83D\uDE9A الشحنة في محطة ترانزيت في ",
     " - Next Stop: ": " - المحطة التالية: ",
     "The Package ": "الشحنة ",
-    " is now": " الآن"
+    " is now": " الآن",
+    "A new package with code ": "شحنة جديدة بكود ",
+    " has been created to be received at your branch": " تم إنشاؤها لتكون استلامها في فرعك",
+    " has been created to be received by you": " تم إنشاؤها لتكون استلامها من قبلك",
+    " has been created to be sent by you": " تم إنشاؤها لتكون إرسالها من قبلك"
 }
 
