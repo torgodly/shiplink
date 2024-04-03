@@ -12,6 +12,7 @@ trait HasChangeStatusAction
 {
     public function ChangeStatusAction(): Action
     {
+
         return Action::make('ChangeStatus')
             ->label('Change Status')
             ->translateLabel()
@@ -29,6 +30,13 @@ trait HasChangeStatusAction
                     ->requiredIf('status', 'Delivered')
                     ->backgroundColor('transparent')
                     ->visible(fn($get) => $get('status') === 'Delivered')
+                ,
+                Select::make('transit_branch_id')
+                    ->label('Transit Branch')
+                    ->requiredIf('status', 'InTransit')
+                    ->native(false)
+                    ->relationship('transitBranch', 'name')
+                    ->visible(fn($get) => $get('status') === 'InTransit')
             ])
             // ...
             ->action(function (array $data): void {

@@ -206,6 +206,12 @@
     "Answer The Message": "الرد على الرسالة",
     "Message Answered": "تم الرد على الرسالة",
     "Edit Answer": "تعديل الرد",
-    "Your Message is Answered": "تم الرد على رسالتك"
+    "Your Message is Answered": "تم الرد على رسالتك",
+    "\uD83D\uDD28 Order Processing - Almost Ready!": "\uD83D\uDD28 تجهيز الطلب - قريبًا!",
+    "Your order is being processed and will be ready for shipment soon. We appreciate your patience!": "يتم معالجة طلبك وسيكون جاهزًا للشحن قريبًا. نقدر صبرك!",
+    "Processing": "قيد المعالجة",
+    "InTransit": "محطة ترانزيت",
+    "\uD83D\uDE9A Package is in Transit in ": "\uD83D\uDE9A الشحنة في محطة ترانزيت في ",
+    " - Next Stop: ": " - المحطة التالية: "
 }
 

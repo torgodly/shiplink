@@ -15,6 +15,9 @@ trait HasTimelineInfolist
     public function activityTimelineInfolist(Infolist $infolist): Infolist
     {
         $currentStatus = $this->record->status;
+        $transit_branch_name = $this->record->transitBranch?->name;
+        $destination_branch_name = $this->record->receiverBranch?->name;
+
         $PackageStatus = [
             [
                 'title' => __("🎉 Order Confirmed - We're On It!"),
@@ -23,11 +26,25 @@ trait HasTimelineInfolist
 //                'created_at' => '-', // Adjust the date accordingly
             ],
             [
-                'title' => __('✈️ Your Package is on its way!'),
+                'title' => __('🔨 Order Processing - Almost Ready!'),
+                'description' => __('Your order is being processed and will be ready for shipment soon. We appreciate your patience!'),
+                'status' => 'Processing',
+                'created_at' => now(), // Adjust the date accordingly
+            ],
+
+            ['title' => __('✈️ Your Package is on its way!'),
                 'description' => __('Your package is on the move and making swift progress towards you. It won’t be long now!'),
                 'status' => 'OutForDelivery',
                 'created_at' => now(), // Adjust the date accordingly
             ],
+            //in transit in "andd a place for tanst branch name"
+            [
+                'title' => __('🚚 Package is in Transit in '). $transit_branch_name . __(' - Next Stop: ') . $destination_branch_name,
+                'description' => __('Your package is on the move and making swift progress towards you. It won’t be long now!'),
+                'status' => 'InTransit',
+                'created_at' => now(), // Adjust the date accordingly
+            ],
+
             [
                 'title' => __('📍 Package Ready for Pickup - Almost Yours!'),
                 'description' => __('Exciting news! Your package awaits you at the designated pickup point. It’s almost in your hands!'),
@@ -50,18 +67,24 @@ trait HasTimelineInfolist
         ];
         $statusOrder = ShippingStatus::values();
 
-
         // Adjusted logic to filter PackageStatus based on currentStatus
         if ($currentStatus === 'Returned') {
+
             // If status is Returned, exclude Delivered status
             $PackageStatus = array_filter($PackageStatus, fn($activity) => $activity['status'] !== 'Delivered');
         } elseif ($currentStatus === 'Delivered') {
             // If status is Delivered, exclude Returned status
             $PackageStatus = array_filter($PackageStatus, fn($activity) => $activity['status'] !== 'Returned');
+
         } else {
             // For other statuses, show up to the current status
             $currentStatusIndex = array_search($currentStatus, $statusOrder);
             $PackageStatus = array_filter($PackageStatus, fn($activity) => array_search($activity['status'], $statusOrder) <= $currentStatusIndex);
+        }
+
+        if ($this->record->transit_branch_id === null) {
+            // If transit_branch_id is null exclude  InTransit
+            $PackageStatus = array_filter($PackageStatus, fn($activity) => $activity['status'] !== 'InTransit');
         }
 
         return $infolist
@@ -86,7 +109,9 @@ trait HasTimelineInfolist
                         ActivityIcon::make('status')
                             ->icon(fn(string|null $state): string|null => match ($state) {
                                 'Pending' => 'tabler-clock',
+                                'Processing' => 'tabler-settings-cog',
                                 'OutForDelivery' => 'tabler-location-share',
+                                'InTransit' => 'tabler-clock-pause',
                                 'WaitingForPickup' => 'tabler-package',
                                 'Delivered' => 'tabler-discount-check-filled',
                                 'Returned' => 'tabler-refresh',
@@ -94,7 +119,9 @@ trait HasTimelineInfolist
                             })
                             ->color(fn(string|null $state): string|null => match ($state) {
                                 'Pending' => $this->record->status === 'Pending' ? 'gray' : 'green',
+                                'Processing' => $this->record->status === 'Processing' ? 'gray' : 'blue',
                                 'OutForDelivery' => $this->record->status === 'OutForDelivery' ? 'gray' : 'yellow',
+                                'InTransit' => $this->record->status === 'InTransit' ? 'gray' : 'blue',
                                 'WaitingForPickup' => $this->record->status === 'WaitingForPickup' ? 'gray' : 'orange',
                                 'Delivered' => 'green',
                                 'Returned' => 'danger',

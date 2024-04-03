@@ -28,6 +28,7 @@ return new class extends Migration {
             $table->boolean('is_refrigerated')->default(false);
             $table->text('description')->nullable();
             $table->text('signature')->nullable();
+            $table->foreignId('transit_branch_id')->nullable();
             $table->enum('status', \App\Enums\ShippingStatus::array())->default('Pending');
             $table->string('payment_method')->nullable();
             //rating

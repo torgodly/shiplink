@@ -231,7 +231,7 @@ class Package extends Model
 
         // If the package is from the authenticated user's branch, return first two status options
         if ($isFromAuthUserBranch) {
-            return $allStatusOptions->take(2)->toArray();
+            return $allStatusOptions->take(4)->toArray();
         }
 
         // If the package is not from the authenticated user's branch, return the last two status options
@@ -251,4 +251,35 @@ class Package extends Model
         return $this->receiver->name;
     }
 
+
+    //Transit branch
+    public function transitBranch()
+    {
+        return $this->belongsTo(Branch::class, 'transit_branch_id', 'id');
+    }
+
+
+    //Auth user is the sender bool
+    public function getIsAuthUserSenderAttribute(): bool
+    {
+        return $this->sender_code === Auth::user()->sender_code;
+    }
+
+    //auth user is the reserved bool
+    public function getIsAuthUserReceiverAttribute(): bool
+    {
+        return $this->receiver_code === Auth::user()->receiver_code;
+    }
+
+    //auth user is the sender branch bool
+    public function getIsAuthUserSenderBranchAttribute(): bool
+    {
+        return $this->sender_branch_id === Auth::user()->managedbranch->id;
+    }
+
+    //auth user is the receiver branch bool
+    public function getIsAuthUserReceiverBranchAttribute(): bool
+    {
+        return $this->receiver_branch_id === Auth::user()->managedbranch->id;
+    }
 }
