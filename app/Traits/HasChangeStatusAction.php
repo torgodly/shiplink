@@ -33,6 +33,7 @@ trait HasChangeStatusAction
                 ,
                 Select::make('transit_branch_id')
                     ->label('Transit Branch')
+                    ->translateLabel()
                     ->requiredIf('status', 'InTransit')
                     ->native(false)
                     ->relationship('transitBranch', 'name')
