@@ -36,6 +36,7 @@ class ShowProgress extends Page implements HasInfolists, HasActions, HasForms
     use HasTimelineInfolist;
     use HasChangeStatusAction;
 
+
 //    use InteractsWithRecord;
 
     protected static string $resource = PackageResource::class;

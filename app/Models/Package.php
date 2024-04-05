@@ -226,7 +226,7 @@ class Package extends Model
     public function getCustomStatusOptionsAttribute(): array
     {
         // Check if the package's sender branch is the same as the authenticated user's branch
-        $isFromAuthUserBranch = $this->sender_branch_id === Auth::user()->managedbranch->id;
+        $isFromAuthUserBranch = $this->sender_branch_id == Auth::user()->managedbranch->id;
         // Get all status options
         $allStatusOptions = collect(ShippingStatus::values());
 

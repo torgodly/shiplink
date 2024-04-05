@@ -8,13 +8,11 @@ use App\Filament\Widgets\StatusChart;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
-use Filament\Navigation\NavigationBuilder;
-use Filament\Navigation\NavigationItem;
 use Filament\Pages;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
-use Filament\Widgets;
+use Filament\View\PanelsRenderHook;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
@@ -29,6 +27,10 @@ class OfficePanelProvider extends PanelProvider
     public function panel(Panel $panel): Panel
     {
         return $panel
+            ->renderHook(
+                PanelsRenderHook::SIDEBAR_NAV_START,
+                fn() => view('branches.sidebar-nav-start')
+            )
             ->id('office')
             ->path('office')
             ->databaseNotifications()
