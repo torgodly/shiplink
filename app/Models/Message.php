@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Filament\Notifications\Notification;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -42,4 +43,14 @@ class Message extends Model
     {
        return $this->user->name;
     }
+
+    protected static function booted()
+    {
+        static::creating(function (Message $message) {
+            if ($message->branch_id != null) {
+                Notification::make()->title(__("You Have New Message"))->sendToDatabase($message->branch->manager);
+            }
+        });
+    }
+
 }
