@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Package;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -15,7 +16,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $customers = \App\Models\User::where('type', 'user')->count();
+    $packages = Package::all();
+
+    $totalRating = $packages->where('rating', '!=', 0)->sum('rating');
+    $totalCount = $packages->where('rating', '!=', 0)->count();
+    $avgRating = $totalCount > 0 ? round($totalRating / $totalCount, 1) : 0;
+
+    $completedPackages = $packages->where('status', 'Delivered')->count();
+    return view('welcome', compact('customers', 'avgRating', 'completedPackages'));
 })->name('home');
 
 //price calculator

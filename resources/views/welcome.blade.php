@@ -173,13 +173,13 @@
                                  data-wow-delay="0.3s">
 
                                 <x-users-icon/>
-                                <h2 class="text-white mb-2" data-toggle="counter-up">1234</h2>
+                                <h2 class="text-white mb-2" data-toggle="counter-up">{{$customers}}</h2>
                                 <p class="text-white mb-0">{{__("Happy Customers")}}</p>
                             </div>
                             <div class=" p-4 wow fadeIn" style="border-radius: 30px; background-color: #4ac8ff"
                                  data-wow-delay="0.5s">
                                 <x-shiping-car/>
-                                <h2 class="text-white mb-2" data-toggle="counter-up">1234</h2>
+                                <h2 class="text-white mb-2" data-toggle="counter-up">{{$completedPackages}}</h2>
                                 <p class="text-white mb-0">{{__('Completed shipments')}}</p>
                             </div>
                         </div>
@@ -187,7 +187,7 @@
                             <div class=" p-4 wow fadeIn"
                                  style="border-radius: 30px; background-color: #fadd02" data-wow-delay="0.7s">
                                 <x-stars-icon/>
-                                <h2 class="text-white mb-2" data-toggle="counter-up">1234</h2>
+                                <h2 class="text-white mb-2" data-toggle="counter-up">{{$avgRating}}</h2>
                                 <p class="text-white mb-0">{{__('Customer reviews')}}</p>
                             </div>
                         </div>

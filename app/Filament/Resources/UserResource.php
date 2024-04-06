@@ -123,18 +123,7 @@ class UserResource extends Resource
                     ->searchable(),
 
             ])
-            ->filters([
-                Tables\Filters\SelectFilter::make('type')
-                    ->translateLabel()
-                    ->options(
-                        [
-                            'user' => 'User',
-                            'admin' => 'Admin',
-                            'manager' => 'Manager'
-
-                        ]
-                    )
-            ])
+            ->filters([])
             ->actions([
                 Tables\Actions\EditAction::make()->requiresConfirmation(true)->modalWidth('2xl')->modalIcon('heroicon-o-users'),
                 Impersonate::make(),
