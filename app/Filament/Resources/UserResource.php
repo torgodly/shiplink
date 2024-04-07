@@ -79,7 +79,7 @@ class UserResource extends Resource
                     ->password()
                     ->required()
                     ->hiddenOn('edit'),
-            ])->lazy();
+            ]);
     }
 
     public static function table(Table $table): Table
