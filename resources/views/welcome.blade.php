@@ -388,7 +388,7 @@
         <div class="container">
             <div class="row gy-5 gy-lg-0 align-items-lg-center">
                 <div class="col-12 col-lg-6">
-                    <img class="img-fluid rounded" loading="lazy" src="./assets/img/faq-img-1.png"
+                    <img class="img-fluid rounded" loading="lazy" src="{{asset('img/fqa.jpg')}}"
                          alt="How can we help you?">
                 </div>
                 <div class="col-12 col-lg-6">
@@ -550,7 +550,7 @@ When your package is received at our facility, we calculate both the actual weig
                     <h4 class="text-light mb-4">{{ __("Subscribe") }}</h4>
                     <p>{{ __("You can create a new account to use our services in more than one place") }}</p>
                     <div class="position-relative mx-auto" style="max-width: 400px;">
-                        <input class="form-control border-0 w-100 py-3 ps-4 pe-5" type="text" placeholder="Email">
+                        <input class="form-control border-0 w-100 py-3 ps-4 pe-5" type="text" >
                         <a href="/user/register" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">
                             {{ __("Register") }}
                         </a>

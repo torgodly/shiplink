@@ -40,6 +40,8 @@ class PackageResource extends Resource
         return __('Sent Packages');
     }
 
+
+
     public static function table(Table $table): Table
     {
         return $table

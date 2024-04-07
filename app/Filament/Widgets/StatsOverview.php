@@ -56,7 +56,7 @@ class StatsOverview extends BaseWidget
                 ->descriptionIcon('heroicon-o-building-office')
                 ->chart([7, 2, 10, 3, 15, 4, 17]),
 
-            Stat::make(__('Total Revenue'), \Number::currency($revenue, 'LYD', 'ar_LY'))
+            Stat::make(__('Total Revenue'), number_format($revenue) . ' ' . __('LD'))
                 ->color('green')
                 ->description(__('Total revenue generated'))
                 ->descriptionIcon('heroicon-o-banknotes')

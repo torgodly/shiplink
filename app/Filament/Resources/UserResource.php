@@ -59,7 +59,7 @@ class UserResource extends Resource
                     )
                     ->required()
                     ->unique('users', 'phone', ignoreRecord: true),
-                Forms\Components\select::make('type')
+                Forms\Components\Select::make('type')
                     ->translateLabel()
                     ->required()
                     ->options([

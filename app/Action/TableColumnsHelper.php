@@ -78,7 +78,9 @@ class TableColumnsHelper
                 ->formatStateUsing(fn(string $state): string => __($state))
                 ->color(fn(string $state): string => match ($state) {
                     'OutForDelivery' => 'yellow',
-                    'WaitingForPickup' => 'orange',
+                    'Processing' => 'purple',
+                    'InTransit' => 'orange',
+                    'WaitingForPickup' => 'secondary',
                     'Delivered' => 'green',
                     'Returned' => 'danger',
                     default => 'gray',

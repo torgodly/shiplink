@@ -79,7 +79,9 @@ class StatusChart extends ChartWidget
                     'data' => $statusData,
                     'backgroundColor' => [
                         '#cbd5e1',
+                        '#a855f7',
                         '#247DFF',
+                        '#f97316',
                         '#FADD02',
                         '#FF4500',
                         '#22c55e',
