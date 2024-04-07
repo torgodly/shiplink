@@ -23,6 +23,7 @@ class UserResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-users';
 
+
     public static function getNavigationGroup(): ?string
     {
         return __('Management');
@@ -78,7 +79,7 @@ class UserResource extends Resource
                     ->password()
                     ->required()
                     ->hiddenOn('edit'),
-            ]);
+            ])->lazy();
     }
 
     public static function table(Table $table): Table
