@@ -43,7 +43,7 @@ class Login extends BaseLogin
         $user = Filament::auth()->user();
 
         //Check if the user is active
-        if ($user->active === 0) {
+        if ($user->active == 0) {
             Filament::auth()->logout();
             $this->throwInactiveAccountException();
         }
