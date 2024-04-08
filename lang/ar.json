@@ -238,6 +238,8 @@
     "In Transit Packages": "الشحنات في محطة توقف",
     "Processing Packages": "الشحنات قيد المعالجة",
     "Total number of packages processing": "العدد الإجمالي للشحنات قيد المعالجة",
-    "Total number of packages in transit": "العدد الإجمالي للشحنات في محطة توقف"
+    "Total number of packages in transit": "العدد الإجمالي للشحنات في محطة توقف",
+    "DeActivate User": "إلغاء تفعيل المستخدم",
+    "Admin user cannot be deactivated": "لا يمكن إلغاء تفعيل مستخدم المدير"
 }
 

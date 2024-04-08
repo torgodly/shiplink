@@ -5,14 +5,13 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\UserResource\Pages;
 use App\Filament\Resources\UserResource\RelationManagers;
 use App\Models\User;
-use Filament\Actions\Action;
 use Filament\Forms;
-use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use STS\FilamentImpersonate\Tables\Actions\Impersonate;
 use Ysfkaya\FilamentPhoneInput\Forms\PhoneInput;
 use Ysfkaya\FilamentPhoneInput\Tables\PhoneColumn;
@@ -118,6 +117,8 @@ class UserResource extends Resource
                     ->searchable(),
 
                 Tables\Columns\ToggleColumn::make('active')
+                    ->disabled(fn (Model $record) => $record->is_admin && auth()->id() != 1)
+                    ->tooltip(fn (Model $record) => $record->type == 'admin' && auth()->id() != 1 ? __('Admin user cannot be deactivated') : __('DeActivate User'))
                     ->translateLabel()
                     ->sortable()
                     ->searchable(),

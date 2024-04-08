@@ -108,7 +108,7 @@ class User extends Authenticatable implements MustVerifyEmail, FilamentUser, Has
 
     // booted method if created user type is user then add sender code and receiver code
 
-    public function getIsAdminAttribute()
+    public function getIsAdminAttribute():bool
     {
         return $this->type == 'admin';
     }

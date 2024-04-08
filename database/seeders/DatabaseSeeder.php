@@ -23,6 +23,10 @@ class DatabaseSeeder extends Seeder
             'type' => 'admin',
         ]);
 
+        \App\Models\User::factory(2)->create([
+            'type' => 'admin',
+        ]);
+
 
         \App\Models\User::factory(2)->create(
             [
