@@ -384,7 +384,7 @@
 
     {{--  Fqa start  --}}
     <!-- FAQ 1 - Bootstrap Brain Component -->
-    <section class=" py-3 py-md-5" dir="ltr">
+    <section class=" py-3 py-md-5" >
         <div class="container">
             <div class="row gy-5 gy-lg-0 align-items-lg-center">
                 <div class="col-12 col-lg-6">
