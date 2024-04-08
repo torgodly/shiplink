@@ -127,7 +127,7 @@ class UserResource extends Resource
             ->filters([])
             ->actions([
                 Tables\Actions\EditAction::make()->requiresConfirmation(true)->modalWidth('2xl')->modalIcon('heroicon-o-users'),
-                Impersonate::make(),
+//                Impersonate::make(),
             ])
             ->bulkActions([
 //                Tables\Actions\BulkActionGroup::make([
