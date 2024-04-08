@@ -14,7 +14,7 @@ class EditPackage extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
-            Actions\DeleteAction::make()->visible(fn ($record) => $record->status === ShippingStatus::Pending->value or $record->status === ShippingStatus::Processing->value),
+            Actions\DeleteAction::make()->visible(fn ($record) => $record->status == ShippingStatus::Pending->value or $record->status == ShippingStatus::Processing->value),
         ];
     }
 }
