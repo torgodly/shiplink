@@ -118,7 +118,6 @@ class UserResource extends Resource
                     ->searchable(),
 
                 Tables\Columns\ToggleColumn::make('active')
-                    ->visible(fn($record) => $record->type != 'admin')
                     ->translateLabel()
                     ->sortable()
                     ->searchable(),
