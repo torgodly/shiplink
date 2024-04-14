@@ -4,8 +4,8 @@ namespace App\Filament\User\Resources\MessageResource\Pages;
 
 use App\Filament\User\Resources\MessageResource;
 use Filament\Actions;
+use Filament\Notifications\Notification;
 use Filament\Resources\Pages\ListRecords;
-use Illuminate\Support\Str;
 
 class ListMessages extends ListRecords
 {
@@ -14,17 +14,21 @@ class ListMessages extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make()->createAnother(false)->mutateFormDataUsing(
-                function (array $data) {
+            Actions\CreateAction::make()->createAnother(false)
+                ->after(function ($record) {
+                    Notification::make()->title(__("You Have New Message From"). $record->name)->sendToDatabase($record->branch->manager);
+                })
+                ->mutateFormDataUsing(
+                    function (array $data) {
 
-                    $data['user_id'] = auth()->id();
-                    $data['name'] = auth()->user()->name;
-                    $data['email'] = auth()->user()->email;
-                    $data['phone'] = auth()->user()->phone;
+                        $data['user_id'] = auth()->id();
+                        $data['name'] = auth()->user()->name;
+                        $data['email'] = auth()->user()->email;
+                        $data['phone'] = auth()->user()->phone;
 
-                    return $data;
-                }
-            ),
+                        return $data;
+                    }
+                ),
         ];
     }
 }

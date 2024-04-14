@@ -250,6 +250,8 @@
     "The shipment status has been updated and it is now in transit in ": "تم تحديث حالة الشحنة وهي الآن في محطة ترانزيت في مدينة.",
     "The shipment status has been updated and it is now awaiting pickup.": "تم تحديث حالة الشحنة وهي الآن في انتظار الاستلام.",
     "The shipment status has been updated and it has been returned to the sending branch.": "تم تحديث حالة الشحنة وارجاعها الى الفرع المرسل.",
-    "The shipment status has been updated and it has been delivered.": "تم تحديث حالة الشحنة وقد تم استلامها."
+    "The shipment status has been updated and it has been delivered.": "تم تحديث حالة الشحنة وقد تم استلامها.",
+    "You Have New Message From": "توجد لديك رسالة جديدة من ",
+    "Your message has been answered by the branch manager": "لقد تم الرد على رسالتك من قبل مدير فرع "
 }
 

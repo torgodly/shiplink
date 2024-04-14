@@ -102,7 +102,7 @@ class MessageResource extends Resource
                             ->color('success')
                             ->send();
                         Notification::make()
-                            ->title(__('Your Message is Answered'))
+                            ->title(__('Your message has been answered by the branch manager'). $record->branch->name)
                             ->icon('tabler-check')
                             ->iconColor('success')
                             ->color('success')
