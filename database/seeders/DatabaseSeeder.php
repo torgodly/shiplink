@@ -23,28 +23,28 @@ class DatabaseSeeder extends Seeder
             'type' => 'admin',
         ]);
 
-        \App\Models\User::factory(2)->create([
-            'type' => 'admin',
-        ]);
-
-
-        \App\Models\User::factory(2)->create(
-            [
-                'type' => 'user',
-            ]
-        );
-
-        Branch::factory(10)->create();
-
-        \App\Models\User::factory(2)->create(
-            [
-                'type' => 'manager',
-            ]
-        );
-
-
-
-
-        Package::factory(500)->create();
+//        \App\Models\User::factory(2)->create([
+//            'type' => 'admin',
+//        ]);
+//
+//
+//        \App\Models\User::factory(2)->create(
+//            [
+//                'type' => 'user',
+//            ]
+//        );
+//
+//        Branch::factory(10)->create();
+//
+//        \App\Models\User::factory(2)->create(
+//            [
+//                'type' => 'manager',
+//            ]
+//        );
+//
+//
+//
+//
+//        Package::factory(500)->create();
     }
 }
