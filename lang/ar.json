@@ -240,6 +240,16 @@
     "Total number of packages processing": "العدد الإجمالي للشحنات قيد المعالجة",
     "Total number of packages in transit": "العدد الإجمالي للشحنات في محطة توقف",
     "DeActivate User": "إلغاء تفعيل المستخدم",
-    "Admin user cannot be deactivated": "لا يمكن إلغاء تفعيل مستخدم المدير"
+    "Admin user cannot be deactivated": "لا يمكن إلغاء تفعيل مستخدم المدير",
+    "Shipment status has been updated ": "تم تحديث حالة الشحنة ",
+    "and is now ": "وهي الآن",
+    "at a transit station in ": "في محطة توقف في",
+    "The shipment status has been updated and it is now on wait.": "تم تحديث حالة الشحنة وهي الآن قيد الانتظار.",
+    "The shipment status has been updated and is now being processed.": "تم تحديث حالة الشحنة وهي الآن قيد المعالجة.",
+    "The shipment status has been updated and it is now out for delivery.": "تم تحديث حالة الشحنة وهي الآن خارجة للتوصيل.",
+    "The shipment status has been updated and it is now in transit in ": "تم تحديث حالة الشحنة وهي الآن في محطة ترانزيت في مدينة.",
+    "The shipment status has been updated and it is now awaiting pickup.": "تم تحديث حالة الشحنة وهي الآن في انتظار الاستلام.",
+    "The shipment status has been updated and it has been returned to the sending branch.": "تم تحديث حالة الشحنة وارجاعها الى الفرع المرسل.",
+    "The shipment status has been updated and it has been delivered.": "تم تحديث حالة الشحنة وقد تم استلامها."
 }
 

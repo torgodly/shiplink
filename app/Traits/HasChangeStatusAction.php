@@ -5,8 +5,8 @@ namespace App\Traits;
 use App\Models\Package;
 use Filament\Actions\Action;
 use Filament\Forms\Components\Select;
-use Saade\FilamentAutograph\Forms\Components\SignaturePad;
 use Filament\Notifications\Notification;
+use Saade\FilamentAutograph\Forms\Components\SignaturePad;
 
 trait HasChangeStatusAction
 {
@@ -45,8 +45,20 @@ trait HasChangeStatusAction
                 $signature = $data['signature'] ?? null; // Provide a default value (null) if 'signature' is not set
                 $data = ['status' => $selectedOption, 'signature' => $signature];
                 $this->record->update($data);
+                $message = [
+                    'Pending' => 'The shipment status has been updated and it is now on wait.',
+                    'Processing' => 'The shipment status has been updated and is now being processed.',
+                    'OutForDelivery' => 'The shipment status has been updated and it is now out for delivery.',
+                    'InTransit' => 'The shipment status has been updated and it is now in transit in ',
+                    'WaitingForPickup' => 'The shipment status has been updated and it is now awaiting pickup.',
+                    'Returned' => 'The shipment status has been updated and it has been returned to the sending branch.',
+                    'Delivered' => 'The shipment status has been updated and it has been delivered.',
+                ];
                 Notification::make()
-                    ->title(__('The Package '). '"'.$this->record->code.'"' .' is now' . __($selectedOption))
+                    ->title($this->record->code . ' - ' . __($message[$selectedOption]) . ' ' . match ($selectedOption) {
+                            'InTransit' => $this->record->transitBranch->name,
+                            default => '',
+                        })
                     ->icon(fn(): string|null => match ($selectedOption) {
                         'Pending' => 'tabler-clock',
                         'Processing' => 'tabler-settings-cog',
@@ -59,7 +71,7 @@ trait HasChangeStatusAction
                     })
                     ->iconColor(fn(): string|null => match ($selectedOption) {
                         'Processing' => 'blue',
-                        'OutForDelivery' =>  'yellow',
+                        'OutForDelivery' => 'yellow',
                         'InTransit' => 'sky',
                         'WaitingForPickup' => 'orange',
                         'Delivered' => 'green',
@@ -68,7 +80,7 @@ trait HasChangeStatusAction
                     })
                     ->color(fn(): string|null => match ($selectedOption) {
                         'Processing' => 'blue',
-                        'OutForDelivery' =>  'yellow',
+                        'OutForDelivery' => 'yellow',
                         'InTransit' => 'sky',
                         'WaitingForPickup' => 'orange',
                         'Delivered' => 'green',
