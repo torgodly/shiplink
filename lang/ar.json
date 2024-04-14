@@ -252,6 +252,9 @@
     "The shipment status has been updated and it has been returned to the sending branch.": "تم تحديث حالة الشحنة وارجاعها الى الفرع المرسل.",
     "The shipment status has been updated and it has been delivered.": "تم تحديث حالة الشحنة وقد تم استلامها.",
     "You Have New Message From": "توجد لديك رسالة جديدة من ",
-    "Your message has been answered by the branch manager": "لقد تم الرد على رسالتك من قبل مدير فرع "
+    "Your message has been answered by the branch manager": "لقد تم الرد على رسالتك من قبل مدير فرع ",
+    "Out For Shipping": "خارج للشحن",
+    "In Transit": "في محطة ترانزيت",
+    "Waiting For Pickup": "في انتظار الاستلام"
 }
 

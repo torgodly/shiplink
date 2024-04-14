@@ -62,6 +62,7 @@ class OfficePanelProvider extends PanelProvider
                 'yellow' => Color::Yellow,
                 'orange' => Color::Orange,
                 'purple' => Color::Purple,
+                'graysh' => Color::Gray,
 
             ])
             ->discoverResources(in: app_path('Filament/Office/Resources'), for: 'App\\Filament\\Office\\Resources')
