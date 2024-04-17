@@ -22,16 +22,17 @@ class Message extends Model
 
 
     //branch name
-    public function getBranchNameAttribute()
-    {
-       return $this->branch->name;
-    }
+
 
     public function branch()
     {
         return $this->belongsTo(Branch::class);
     }
 
+    public function getBranchNameAttribute()
+    {
+        return $this->branch->name;
+    }
     //user
     public function user()
     {
