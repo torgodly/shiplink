@@ -31,7 +31,7 @@ class Message extends Model
 
     public function getBranchNameAttribute()
     {
-        return $this->branch->name;
+        return $this->branch?->name;
     }
     //user
     public function user()
