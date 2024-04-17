@@ -44,6 +44,7 @@ class MessageResource extends Resource
                 Forms\Components\Select::make('branch_id')
                     ->label('Branch')
                     ->translateLabel()
+                    ->required()
                     ->columnSpanFull()
                     ->options(fn() => \App\Models\Branch::pluck('name', 'id')),
                 Forms\Components\MarkdownEditor::make('message')
